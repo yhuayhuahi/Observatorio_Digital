@@ -1,0 +1,2877 @@
+[
+    {
+        "nombre": "Inicio",
+        "url": "https://www.gob.pe/",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "El Estado",
+        "url": "https://www.gob.pe/estado",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Entidades del Poder Ejecutivo",
+        "url": "https://www.gob.pe/estado/poder-ejecutivo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Entidades del Poder Legislativo",
+        "url": "https://www.gob.pe/estado/poder-legislativo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Entidades del Poder Judicial",
+        "url": "https://www.gob.pe/estado/poder-judicial",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Organismos Autónomos",
+        "url": "https://www.gob.pe/estado/organismos-autonomos",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Entidades de los Gobiernos Regionales",
+        "url": "https://www.gob.pe/estado/gobiernos-regionales",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Entidades de los Gobiernos Locales",
+        "url": "https://www.gob.pe/estado/gobiernos-locales",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Presidencia de la República del Perú (Presidencia)",
+        "url": "https://www.gob.pe/presidencia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Presidencia del Consejo de Ministros (PCM)",
+        "url": "https://www.gob.pe/pcm",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Presidencia del Consejo de Ministros",
+        "url": "http://www.gob.pe/pcm",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Comisión Multisectorial de la Acción del Estado en El Ámbito Marítimo (Comaem)",
+        "url": "https://www.gob.pe/comaem",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Comisión Nacional para El Desarrollo y Vida Sin Drogas (DEVIDA)",
+        "url": "https://www.gob.pe/devida",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección Nacional de Inteligencia (DINI)",
+        "url": "https://www.gob.pe/dini",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Organismo de Supervisión de los Recursos Forestales y de Fauna Silvestre (OSINFOR)",
+        "url": "https://www.gob.pe/osinfor",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Autoridad Nacional de Infraestructura (ANIN)",
+        "url": "https://www.gob.pe/anin",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Organismo Supervisor de Inversión Privada en Telecomunicaciones (OSIPTEL)",
+        "url": "https://www.gob.pe/osiptel",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Organismo Supervisor de la Inversión en Energía y Minería (OSINERGMIN)",
+        "url": "https://www.gob.pe/osinergmin",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Organismo Supervisor de la Inversión en Infraestructura de Transporte de Uso Público (OSITRAN)",
+        "url": "https://www.gob.pe/ositran",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Superintendencia Nacional de Servicios de Saneamiento (SUNASS)",
+        "url": "https://www.gob.pe/sunass",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Municipal Prestadora de Servicios de Saneamiento de las Provincias Alto Andinas S.A. (Empssapal S.A.)",
+        "url": "https://www.gob.pe/empssapal",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Autoridad Nacional del Servicio Civil (SERVIR)",
+        "url": "https://www.gob.pe/servir",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Escuela Nacional de Administración Pública (ENAP)",
+        "url": "https://www.gob.pe/enap",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro Nacional de Planeamiento Estratégico (CEPLAN)",
+        "url": "https://www.gob.pe/ceplan",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consejo Nacional de Ciencia, Tecnología e Innovación (CONCYTEC)",
+        "url": "https://www.gob.pe/concytec",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Investigación Científica y Estudios Avanzados (PROCIENCIA)",
+        "url": "https://www.gob.pe/prociencia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual (Indecopi)",
+        "url": "https://www.gob.pe/indecopi",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Estadística e Informática (INEI)",
+        "url": "https://www.gob.pe/inei",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial Legado (Legado)",
+        "url": "https://www.gob.pe/proyectolegado",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial “secretaría Técnica de Apoyo A la Comisión Ad Hoc, Creada Por El Decreto Supremo Nº 006-2012-ef” (Fonavi-ST)",
+        "url": "https://www.gob.pe/fonavi-st",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Autoridad Nacional Autónoma para El Desarrollo Estratégico e Integral del Terminal Portuario Multipropósito de Chancay (ANA-CHANCAY)",
+        "url": "https://www.gob.pe/anachancay",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto de Transformación Digital con Equidad (PROTDE)",
+        "url": "https://www.gob.pe/protde",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Comisión de Alto Nivel Anticorrupción (CAN)",
+        "url": "https://www.gob.pe/can",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Comisión Encargada de Proponer las Acciones y Medidas de Reforma Administrativa y de Gestión para la Reorganización del Despacho Presidencial (CRDP)",
+        "url": "https://www.gob.pe/comisiondespachopresidencial",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Nacional de la Coca S.A. (ENACO S.A.)",
+        "url": "https://www.gob.pe/enaco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Peruana de Servicios Editoriales S.A. (Editora Perú)",
+        "url": "https://www.gob.pe/editoraperu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa de Mejor Atención Al Ciudadano - Mac (MAC)",
+        "url": "https://www.gob.pe/mac",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Mejoramiento de Servicios A Ciudadanos y Empresas (PROMSACE)",
+        "url": "https://www.gob.pe/promsace",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Relaciones Exteriores (RREE)",
+        "url": "https://www.gob.pe/rree",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Relaciones Exteriores",
+        "url": "http://www.gob.pe/rree",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Agencia Peruana de Cooperación Internacional (APCI)",
+        "url": "https://www.gob.pe/apci",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Alemania (E-Alemania)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-alemania",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Munich (C-Munich)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-munich",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Hamburgo (C-Hamburgo)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-hamburgo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Frankfurt (C-Frankfurt)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-frankfurt",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República Federal de Alemania (C-Alemania)",
+        "url": "https://www.gob.pe/seccion-consular-republica-federal-de-alemania",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Arabia Saudita (E-Arabia Saudita)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-arabia-saudita",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Argelia (E-Argelia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-argelia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Argentina (E-Argentina)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-argentina",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Mendoza (C-Mendoza)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-mendoza",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Buenos Aires (C-BuenosAires)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-buenos-aires",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en la Plata (C-LaPlata)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-la-plata",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Córdoba (C-Córdoba)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-cordoba",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Australia (E-Australia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-australia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Austria (E-Austria)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-austria",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República de Austria (C-Austria)",
+        "url": "https://www.gob.pe/seccion-consular-republica-de-austria",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado del Perú en Sucre (C-Sucre)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-sucre",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Bolivia (E-Bolivia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-bolivia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en la Paz (C-La-Paz)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-la-paz",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Brasil (E-Brasil)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-brasil",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Bélgica y Misión Ante la Unión Europea (E-Belgica)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-belgica",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Canadá (E-Canadá)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-canada",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en Canadá (C-Ottawa)",
+        "url": "https://www.gob.pe/seccion-consular-canada",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Chile (E-Chile)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-chile",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Santiago (C-Santiago)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-santiago",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Arica (C-Arica)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-arica",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Iquique (C-Iquique)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-iquique",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en China (E-China)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-china",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Colombia (E-Colombia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-colombia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Bogotá (C-Bogotá)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-bogota",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Leticia (C-Leticia)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-leticia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Medellín (C-Medellin)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-medellin",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Corea (E-Corea)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-corea",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República de Costa Rica (C-Costa Rica)",
+        "url": "https://www.gob.pe/seccion-consular-republica-de-costa-rica",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Costa Rica (E-CostaRica)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-costa-rica",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Cuba (E-Cuba)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-cuba",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República de Cuba (C-Cuba)",
+        "url": "https://www.gob.pe/seccion-consular-republica-de-cuba",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Ecuador (E-Ecuador)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-ecuador",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Loja (C-Loja)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-loja",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Quito (C-Quito)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-quito",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Guayaquil (C-Guayaquil)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-guayaquil",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Egipto (E-Egipto)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-egipto",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en El Salvador (E-ElSalvador)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-el-salvador",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en España (E-España)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-espana",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Barcelona (C-Barcelona)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-barcelona",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Estados Unidos (E-EstadosUnidos)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-estados-unidos",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en San Francisco (C-San Francisco)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-san-francisco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Paterson (C-Paterson)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-paterson",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Representación Permanente del Perú Ante la Onu (rpponu)",
+        "url": "https://www.gob.pe/rpponu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Chicago (C-Chicago)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-chicago",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Dallas (C-Dallas)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-dallas",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consulado General del Perú en Orlando (C-Orlando)",
+        "url": "https://www.gob.pe/consulado-del-peru-en-orlando",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Francia (E-Francia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-francia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República de Ghana (C-Ghana)",
+        "url": "https://www.gob.pe/seccion-consular-republica-de-ghana",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Ghana (E-Ghana)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-ghana",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Grecia (E-Grecia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-grecia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República de Guatemala (C-Guatemala)",
+        "url": "https://www.gob.pe/seccion-consular-republica-de-guatemala",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Honduras (E-Honduras)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-honduras",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República de Honduras (C-Honduras)",
+        "url": "https://www.gob.pe/seccion-consular-republica-de-honduras",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Hungría (E-Hungría)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-hungria",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en Hungría (C-Hungría)",
+        "url": "https://www.gob.pe/seccion-consular-hungria",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en India (E-India)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-india",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República de la India (C-India)",
+        "url": "https://www.gob.pe/seccion-consular-republica-de-la-india",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Indonesia (E-Indonesia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-indonesia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en Malasia (C-Malasia)",
+        "url": "https://www.gob.pe/seccion-consular-malasia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República de Indonesia (C-Indonesia)",
+        "url": "https://www.gob.pe/seccion-consular-republica-de-indonesia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Irlanda (E-Irlanda)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-irlanda",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en Irlanda (C-Irlanda)",
+        "url": "https://www.gob.pe/seccion-consular-irlanda",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Israel (E-Israel)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-israel",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en El Estado de Israel (C-Israel)",
+        "url": "https://www.gob.pe/seccion-consular-estado-de-israel",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Italia (E-Italia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-italia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Japón (E-Japón)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-japon",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Kuwait (E-Kuwait)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-kuwait",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en El Estado de Kuwait (C-Kuwait)",
+        "url": "https://www.gob.pe/seccion-consular-estado-de-kuwait",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Malasia (E-Malasia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-malasia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Marruecos (E-Marruecos)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-marruecos",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en El Reino de Marruecos (C-Marruecos)",
+        "url": "https://www.gob.pe/seccion-consular-reino-de-marruecos",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en México (E-México)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-mexico",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Nicaragua (E-Nicaragua)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-nicaragua",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República de Nicaragua (C-Nicaragua)",
+        "url": "https://www.gob.pe/seccion-consular-republica-de-nicaragua",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Nueva Zelanda (E-Nueva Zelanda)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-nueva-zelanda",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Panamá (E-Panamá)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-panama",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Paraguay (E-Paraguay)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-paraguay",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República del Paraguay (C-Paraguay)",
+        "url": "https://www.gob.pe/seccion-consular-republica-del-paraguay",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Países Bajos (E-PaisesBajos)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-paises-bajos",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Polonia (E-Polonia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-polonia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Portugal (E-Portugal)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-portugal",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Qatar (E-Qatar)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-qatar",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Reino Unido (E-Reino Unido)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-reino-unido",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en República Checa (E-RepúblicaCheca)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-republica-checa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en República Dominicana (E-RepúblicaDominicana)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-republica-dominicana",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en Rumanía (C-Rumanía)",
+        "url": "https://www.gob.pe/seccion-consular-rumania",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Rumania (E-Rumania)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-rumania",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Rusia (E-Rusia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-rusia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Santa Sede (E-SantaSede)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-santa-sede",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Singapur (E-Singapur)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-singapur",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Sudáfrica (E-Sudáfrica)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-sudafrica",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en la República de Sudáfrica (C-Sudáfrica)",
+        "url": "https://www.gob.pe/seccion-consular-republica-de-sudafrica",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Suecia (E-Suecia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-suecia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en El Reino de Suecia (C-Suecia)",
+        "url": "https://www.gob.pe/seccion-consular-reino-de-suecia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Suiza (E-Suiza)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-suiza",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Representación Permanente del Perú Ante los Organismos Internacionales con Sede en Ginebra (RPPOOII)",
+        "url": "https://www.gob.pe/rppooii",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Tailandia (E-Tailandia)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-tailandia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sección Consular de la Embajada del Perú en El Reino de Tailandia (C-Tailandia)",
+        "url": "https://www.gob.pe/seccion-consular-reino-de-tailandia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Trinidad y Tobago (E-Trinidad y Tobago)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-trinidad-y-tobago",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Türkiye (E-Türkiye)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-turquia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Venezuela (E-Venezuela)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-venezuela",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Embajada del Perú en Vietnam (E-Vietnam)",
+        "url": "https://www.gob.pe/embajada-del-peru-en-vietnam",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Defensa (MINDEF)",
+        "url": "https://www.gob.pe/mindef",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Defensa",
+        "url": "http://www.gob.pe/mindef",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Agencia de Compras de las Fuerzas Armadas (ACFFAA)",
+        "url": "https://www.gob.pe/acffaa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro Nacional de Estimación, Prevención y Reducción del Riesgo de Desastres (CENEPRED)",
+        "url": "https://www.gob.pe/cenepred",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Comisión Nacional de Investigación y Desarrollo Aeroespacial (CONIDA)",
+        "url": "https://www.gob.pe/conida",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Escuela Nacional de Marina Mercante (ENAMM)",
+        "url": "https://www.gob.pe/enamm",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Geográfico Nacional (IGN)",
+        "url": "https://www.gob.pe/ign",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Defensa Civil (INDECI)",
+        "url": "https://www.gob.pe/indeci",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto de Trasplantes de Órganos y Tejidos de las Fuerzas Armadas y Policía Nacional del Perú (ITOT)",
+        "url": "https://www.gob.pe/itot",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Oficina Previsional de las Fuerzas Armadas (OPREFA)",
+        "url": "https://www.gob.pe/oprefa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Comando Conjunto de las Fuerzas Armadas (CCFFAA)",
+        "url": "https://www.gob.pe/ccffaa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ejército del Perú (EP)",
+        "url": "https://www.gob.pe/ejercito",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Militar Central Luis Arias Schreiber (HMC)",
+        "url": "https://www.gob.pe/hmc",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Fuerza Aérea del Perú (FAP)",
+        "url": "https://www.gob.pe/fap",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Marina de Guerra del Perú (MGP)",
+        "url": "https://www.gob.pe/marina",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Comité de Prevención y Control VIH/SIDA FFAA y PNP (COPRECOS)",
+        "url": "https://www.gob.pe/comite-de-prevencion-y-control-vih-sida-ffaa-y-pnp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Benemérita Sociedad Fundadores de la Independencia (BSFI)",
+        "url": "https://www.gob.pe/bsfi",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Servicios Industriales de la Marina Iquitos S.R.L. (SIMA-Iquitos S.R.L.)",
+        "url": "https://www.gob.pe/simaiquitos",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Servicios Industriales de la Marina S.A. (SIMA-PERÚ S.A.)",
+        "url": "https://www.gob.pe/servicios-industriales-de-la-marina-s-a",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Economía y Finanzas (MEF)",
+        "url": "https://www.gob.pe/mef",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Economía y Finanzas",
+        "url": "https://www.mef.gob.pe/es",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Agencia de Promoción de la Inversión Privada (PROINVERSION)",
+        "url": "https://www.gob.pe/proinversion",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Central de Compras Públicas (PERÚ COMPRAS)",
+        "url": "https://www.gob.pe/perucompras",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Oficina de Normalización Previsional (ONP)",
+        "url": "https://www.gob.pe/onp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 003 Proyecto de Transformacion Digital de la Onp (ONP Digital )",
+        "url": "https://www.gob.pe/https:%2F%2Fwww.gob.pe%2Fue003-onp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 003:proyecto de Transformacion Digital de la Onp (ONP Dgital)",
+        "url": "https://www.gob.pe/onpdigital",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Organismo Especializado para las Contrataciones Públicas Eficientes (OECE)",
+        "url": "https://www.gob.pe/oece",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Superintendencia Nacional de Aduanas y de Administración Tributaria (SUNAT)",
+        "url": "https://www.gob.pe/sunat",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Superintendencia del Mercado de Valores (SMV)",
+        "url": "https://www.gob.pe/smv",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Fondo Nacional de Financiamiento de la Actividad Empresarial del Estado (FONAFE)",
+        "url": "https://www.gob.pe/fondo-nacional-de-financiamiento-de-la-actividad-empresarial-del-estado",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Banco Agropecuario (Agrobanco)",
+        "url": "https://www.gob.pe/agrobanco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Banco de la Nación (BN)",
+        "url": "https://www.gob.pe/bn",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Corporación Financiera de Desarrollo S.A. (COFIDE)",
+        "url": "https://www.gob.pe/cofide",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio del Interior (MININTER)",
+        "url": "https://www.gob.pe/mininter",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Cuerpo General de Bomberos Voluntarios del Perú (CGBVP)",
+        "url": "https://www.gob.pe/cuerpo-general-de-bomberos-voluntarios-del-peru",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección General de Gobierno Interior (DGIN)",
+        "url": "https://www.gob.pe/dgin",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Intendencia Nacional de Bomberos del Perú (INBP)",
+        "url": "https://www.gob.pe/inbp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Superintendencia Nacional de Control de Servicios de Seguridad, Armas, Municiones y Explosivos de Uso Civil (SUCAMEC)",
+        "url": "https://www.gob.pe/sucamec",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Superintendencia Nacional de Migraciones (MIGRACIONES)",
+        "url": "https://www.gob.pe/migraciones",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Fondo de Aseguramiento en Salud de la Policía Nacional del Perú (SALUDPOL)",
+        "url": "https://www.gob.pe/saludpol",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Fondo de Vivienda Policial (FOVIPOL)",
+        "url": "https://www.gob.pe/fovipol",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Policía Nacional del Perú (PNP)",
+        "url": "https://www.gob.pe/pnp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora N° 037: Perú Seguro 2025 (PS2025)",
+        "url": "https://www.gob.pe/peruseguro2025",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Justicia y Derechos Humanos (MINJUSDH)",
+        "url": "https://www.gob.pe/minjus",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Justicia y Derechos Humanos",
+        "url": "http://www.gob.pe/minjus",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consejo para la Reforma del Sistema de Justicia (CRSJ)",
+        "url": "https://www.gob.pe/consejo-de-justicia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Procuraduría General del Estado (Procuraduría)",
+        "url": "https://www.gob.pe/procuraduria",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Superintendencia Nacional de los Registros Públicos (SUNARP)",
+        "url": "https://www.gob.pe/sunarp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional Penitenciario - Dirección Regional Altiplano Puno (INPE - DRAP)",
+        "url": "https://www.gob.pe/inpe-drap",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional Penitenciario - Dirección Regional Centro (INPE-DRC)",
+        "url": "https://www.gob.pe/inpe-drc",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional Penitenciario - Dirección Regional Nor Oriente San Martín (INPE-DRNOSM)",
+        "url": "https://www.gob.pe/inpe-drnosm",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional Penitenciario - Dirección Regional Oriente Pucallpa (INPE-OROP)",
+        "url": "https://www.gob.pe/inpe-orop",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "INPE - Oficina Regional Sur (INPE - ORS)",
+        "url": "https://www.gob.pe/inpe-oficina-regional-sur",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional Penitenciario - Oficina Regional Sur Oriente Cusco (INPE - ORSO - CUSCO)",
+        "url": "https://www.gob.pe/instituto-nacional-penitenciario-oficina-regional-sur-oriente-cusco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional Penitenciario (INPE)",
+        "url": "https://www.gob.pe/inpe",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Oficina de Infraestructura Penitenciaria (OIP)",
+        "url": "https://www.gob.pe/inpe-oip",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Oficina Regional Norte Chiclayo - INPE (INPE - DRN CHICLAYO)",
+        "url": "https://www.gob.pe/oficina-regional-norte-chiclayo-inpe",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional Penitenciario - Oficina Regional Lima (INPE-ORL)",
+        "url": "https://www.gob.pe/inpe-orl",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Modernización del Sistema de Administración de Justicia No Penal - Minjusdh (PMSAJ - MINJUSDH)",
+        "url": "https://www.gob.pe/pmsaj-minjusdh",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Enseñanza Legal para la Inclusión Social (PRONELIS)",
+        "url": "https://www.gob.pe/programa-nacional-de-ensenanza-legal-para-la-inclusion-social",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Bienes Incautados (PRONABI)",
+        "url": "https://www.gob.pe/pronabi",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Centros Juveniles (PRONACEJ)",
+        "url": "https://www.gob.pe/pronacej",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa de Mejoramiento de los Servicios de Justicia en Materia Penal en El Perú - Minjusdh (PMSJPP Minjusdh)",
+        "url": "https://www.gob.pe/pmsjp-minjusdh",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Autoridad Nacional de Protección de Datos Personales (ANPD)",
+        "url": "https://www.gob.pe/anpd",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Autoridad Nacional de Transparencia y Acceso A la Información Pública (ANTAIP)",
+        "url": "https://www.gob.pe/antaip",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Tribunal de Transparencia y Acceso A la Información Pública (TTAIP)",
+        "url": "https://www.gob.pe/ttaip",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Educación (MINEDU)",
+        "url": "https://www.gob.pe/minedu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Educación",
+        "url": "http://www.gob.pe/minedu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Iest de Investigaciones Industriales (INDII)",
+        "url": "https://www.gob.pe/istdeinvestigacionesindustriales",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Secretaría Nacional de la Juventud (Senaju)",
+        "url": "https://www.gob.pe/senaju",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Peruano del Deporte (IPD)",
+        "url": "https://www.gob.pe/ipd",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Superintendencia Nacional de Educación Superior Universitaria (SUNEDU)",
+        "url": "https://www.gob.pe/sunedu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro Vacacional Huampani (CV HUAMPANI)",
+        "url": "https://www.gob.pe/huampani",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección Regional de Educación Lima Metropolitana (DRE Lima Metropolitana)",
+        "url": "https://www.gob.pe/regionlima-drelm",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local N° 01 San Juan de Miraflores (UGEL San Juan de Miraflores)",
+        "url": "https://www.gob.pe/ugelsanjuandemiraflores",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Nº 05 (UGEL 05)",
+        "url": "https://www.gob.pe/ugel05",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local N° 02 (UGEL 02)",
+        "url": "https://www.gob.pe/ugel02",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Nº 03 (UGEL Nº 03)",
+        "url": "https://www.gob.pe/ugel03",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Nº 04 (UGEL 04)",
+        "url": "https://www.gob.pe/ugel04",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Nº 07 (UGEL 07)",
+        "url": "https://www.gob.pe/ugel07",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Nº 06 (UGEL 06)",
+        "url": "https://www.gob.pe/ugel06",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sistema Nacional de Evaluación, Acreditación y Certificación de la Calidad Educativa (SINEACE)",
+        "url": "https://www.gob.pe/sineace",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección de Gestión de Recursos Educativos (DIGERE)",
+        "url": "https://www.gob.pe/digere",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial de Inversión Pública Escuelas Bicentenario (PEIP Escuelas Bicentenario)",
+        "url": "https://www.gob.pe/escuelasbicentenario",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Universidad Nacional Autónoma de Bellas Artes del Perú (UNABAP)",
+        "url": "https://www.gob.pe/unabap",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Escuela Nacional Superior de Ballet (ENSB)",
+        "url": "https://www.gob.pe/ensb",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 118: Mejoramiento de la Calidad de la Educación Básica y Superior (UE118)",
+        "url": "https://www.gob.pe/ue118",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 304 Educación Pachitea (UGEL Pachitea)",
+        "url": "https://www.gob.pe/unidad-ejecutora-304-educacion-pachitea-ugel-pachitea",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Huamalíes (UGEL Huamalíes)",
+        "url": "https://www.gob.pe/ugelhuamalies",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 309 Educación UGEL Sucre (UGEL Sucre)",
+        "url": "https://www.gob.pe/ugelsucre",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consejo Nacional de Educación (CNE)",
+        "url": "https://www.gob.pe/cne",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Fondo Nacional de Desarrollo de la Educación Peruana (FONDEP)",
+        "url": "https://www.gob.pe/fondep",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Alfabetización (PNA)",
+        "url": "https://www.gob.pe/programa-nacional-de-alfabetizacion",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Becas y Crédito Educativo (PRONABEC)",
+        "url": "https://www.gob.pe/pronabec",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Infraestructura Educativa (PRONIED)",
+        "url": "https://www.gob.pe/pronied",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local - Huancayo",
+        "url": "https://www.gob.pe/unidad-de-gestion-educativa-local-huancayo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Azángaro",
+        "url": "https://www.gob.pe/unidad-de-gestion-educativa-local-azangaro",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local de Moho",
+        "url": "https://www.gob.pe/unidad-de-gestion-educativa-local-de-moho",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local General Sánchez Cerro (UGEL Gral. SC)",
+        "url": "https://www.gob.pe/ugel-general-sanchez-cerro",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local San Pablo (UGEL San Pablo)",
+        "url": "https://www.gob.pe/ugelsanpablo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Tarma (UGEL Tarma)",
+        "url": "https://www.gob.pe/ugeltarma",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Bolívar (UGEL   Bolívar)",
+        "url": "https://www.gob.pe/unidad-de-gestion-educativa-local-bolivar-ugel-bolivar",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Casma (UGEL Casma)",
+        "url": "https://www.gob.pe/ugelcasma",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Cutervo (UGEL Cutervo)",
+        "url": "https://www.gob.pe/ugelcutervo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local la Mar (UGEL La Mar VRAE)",
+        "url": "https://www.gob.pe/ugellamar-vrae",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Mariscal Cáceres - Juanjui (UGEL MCJ)",
+        "url": "https://www.gob.pe/ugelmariscalcaceres",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local N° 14 (UGEL 14 Oyón)",
+        "url": "https://www.gob.pe/unidad-de-gestion-educativa-local-n-14-ugel14-oyon",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local N°04 Trujillo Sur Este (UGEL 04 TSE)",
+        "url": "https://www.gob.pe/ugel04tse",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Pallasca (UGEL Pallasca)",
+        "url": "https://www.gob.pe/unidad-de-gestion-educativa-local-pallasca-ugel-pallasca",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Pangoa (UGEL Pangoa)",
+        "url": "https://www.gob.pe/ugelpangoa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Paucartambo (UGEL - Paucartambo)",
+        "url": "https://www.gob.pe/ugelpaucartambo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Sandia (UGEL Sandia)",
+        "url": "https://www.gob.pe/ugelsandia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Virú (UGEL Virú)",
+        "url": "https://www.gob.pe/ugelviru",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local de Atalaya (UGEL   Atalaya)",
+        "url": "https://www.gob.pe/ugelatalaya",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local de Julcan (UGEL Julcan)",
+        "url": "https://www.gob.pe/ugeljulcan",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local de Pacasmayo (UGEL Pacasmayo)",
+        "url": "https://www.gob.pe/unidad-de-gestion-educativa-local-de-pacasmayo-ugel-pacasmayo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local de Sánchez Carrión (UGEL Sánchez Carrión)",
+        "url": "https://www.gob.pe/unidad-de-gestion-educativa-local-de-sanchez-carrion-ugel-sanchez-carrion",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad de Gestión Educativa Local Chucuito (UGEL Ch)",
+        "url": "https://www.gob.pe/ugelchucuito",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Educación UGEL Huancané (UGEL Huancané)",
+        "url": "https://www.gob.pe/ugelhuancane",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Salud (MINSA)",
+        "url": "https://www.gob.pe/minsa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Salud",
+        "url": "http://www.gob.pe/minsa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Enfermedades Neoplásicas (INEN)",
+        "url": "https://www.gob.pe/inen",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Salud (INS)",
+        "url": "https://www.gob.pe/ins",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ue 004 - Fortalecimiento del Sistema Nacional de Vigilancia en Salud Pública (UE004)",
+        "url": "https://www.gob.pe/fsnvs",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Seguro Integral de Salud (SIS)",
+        "url": "https://www.gob.pe/sis",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Superintendencia Nacional de Salud (SUSALUD)",
+        "url": "https://www.gob.pe/susalud",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Fondo Intangible Solidario de Salud (FISSAL)",
+        "url": "https://www.gob.pe/fissal",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro Nacional de Abastecimiento de Recursos Estratégicos en Salud (CENARES)",
+        "url": "https://www.gob.pe/cenares",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección de Redes Integradas de Salud Lima Centro (DIRIS LC)",
+        "url": "https://www.gob.pe/dirislimacentro",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección de Redes Integradas de Salud Lima Norte (DIRIS LN)",
+        "url": "https://www.gob.pe/dirislimanorte",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección de Redes Integradas de Salud Lima Sur (DIRIS LS)",
+        "url": "https://www.gob.pe/dirislimasur",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección de Redes Integradas de Salud Lima Este (DIRIS LE)",
+        "url": "https://www.gob.pe/dirislimaeste",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Escuela Nacional de Salud Pública (ENSAP)",
+        "url": "https://www.gob.pe/ensap",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Integrada de Salud Pataz (RS Pataz)",
+        "url": "https://www.gob.pe/rspataz",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional Materno Perinatal (INMP)",
+        "url": "https://www.gob.pe/inmp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Ciencias Neurológicas (INCN)",
+        "url": "https://www.gob.pe/instituto-nacional-de-ciencias-neurologicas",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Oftalmología (INO)",
+        "url": "https://www.gob.pe/ino",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Rehabilitación (INR)",
+        "url": "https://www.gob.pe/inr",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Salud Mental Honorio Delgado-hideyo Noguchi (INSMHDHN)",
+        "url": "https://www.gob.pe/insm",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Salud del Niño de Breña (INSN)",
+        "url": "https://www.gob.pe/insn",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Salud del Niño de San Borja (INSNSB)",
+        "url": "https://www.gob.pe/insnsb",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital de Emergencias Villa El Salvador (HEVES)",
+        "url": "https://www.gob.pe/heves",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital de Huaycán (HH)",
+        "url": "https://www.gob.pe/hospitalhuaycan",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Regional José Alfredo Mendoza Olavarría Ii-2 (Hospital JAMO II-2)",
+        "url": "https://www.gob.pe/hrjt",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Antonio Lorena Cusco (HAL CUSCO)",
+        "url": "https://www.gob.pe/hospital-antonio-lorena-cusco-hal-cusco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Belén de Trujillo (HBT)",
+        "url": "https://www.gob.pe/hbt",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Carlos Lanfranco la Hoz (HCLLH)",
+        "url": "https://www.gob.pe/hcllh",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Nacional Cayetano Heredia (HNCH)",
+        "url": "https://www.gob.pe/hnch",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital de Chancay y Sbs Dr. Hidalgo Atoche López (HCHC)",
+        "url": "https://www.gob.pe/hchancay",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Departamental de Huancavelica (HDH)",
+        "url": "https://www.gob.pe/hdhvca",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Emergencia Ate Vitarte (HEAV)",
+        "url": "https://www.gob.pe/heav",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Huacho y Red de Salud Huaura Oyón (HHRSHO)",
+        "url": "https://www.gob.pe/hdhuacho",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Iii Regional Honorio Delgado (HRHD)",
+        "url": "https://www.gob.pe/hrhd",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Iquitos César Garayar García (HAI)",
+        "url": "https://www.gob.pe/hospital-iquitos-cesar-garayar-garcia-h-a-i",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital José Agurto Tello de Chosica (HJATCH)",
+        "url": "https://www.gob.pe/hjatch",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital la Caleta (HLC)",
+        "url": "https://www.gob.pe/hospital-la-caleta-hlc-hlc",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital María Auxiliadora (HMA)",
+        "url": "https://www.gob.pe/hma",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Nacional Arzobispo Loayza (HNAL)",
+        "url": "https://www.gob.pe/hospitalloayza",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Nacional Daniel Alcides Carrión (HNDAC)",
+        "url": "https://www.gob.pe/hndac",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Nacional Docente Madre Niño San Bartolomé (HNDMNSB)",
+        "url": "https://www.gob.pe/honadomani-sb",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Nacional Dos de Mayo (HNDM)",
+        "url": "https://www.gob.pe/hndosdemayo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Nacional General (Hospital General)",
+        "url": "https://www.gob.pe/hngeneral",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Nacional Hipólito Unanue (HNHU)",
+        "url": "https://www.gob.pe/hnhu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Nacional Sergio E. Bernales (HNSEB - MINSA)",
+        "url": "https://www.gob.pe/hnseb",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Nacional Víctor Larco Herrera (HVLH)",
+        "url": "https://www.gob.pe/hnlarcoherrera",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Regional Docente de Trujillo (HRDT)",
+        "url": "https://www.gob.pe/hrdocente-trujillo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Regional Eleazar Guzmán Barrón (HEGB)",
+        "url": "https://www.gob.pe/hospital-regional-eleazar-guzman-barron",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Regional Guillermo Díaz de la Vega (HRGDV)",
+        "url": "https://www.gob.pe/hospital-regional-guillermo-diaz-de-la-vega-hrgdv",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Regional de Moquegua (HRM)",
+        "url": "https://www.gob.pe/hospitalmoquegua",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Regional Virgen de Fátima - Chachapoyas (HRVFCH)",
+        "url": "https://www.gob.pe/hrvfch",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Regional de Ayacucho (HRA)",
+        "url": "https://www.gob.pe/hrayacucho",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Regional de Ica (HRICA)",
+        "url": "https://www.gob.pe/hrica",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Regional de Loreto Fsai (HRL)",
+        "url": "https://www.gob.pe/hospital-regional-de-loreto",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Rezola Cañete (HRC)",
+        "url": "https://www.gob.pe/hospital-rezola-canete-hrc",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital San Juan de Lurigancho (HSJL)",
+        "url": "https://www.gob.pe/hsjl",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Santa Rosa (HSR)",
+        "url": "https://www.gob.pe/hsr",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital de Apoyo de Nasca (HAN)",
+        "url": "https://www.gob.pe/hospital-de-apoyo-de-nasca-han",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital de Baja Complejidad Vitarte (HBCV)",
+        "url": "https://www.gob.pe/hbcv",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital de Emergencias José Casimiro Ulloa (HEJCU)",
+        "url": "https://www.gob.pe/hejcu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital de Emergencias Pediátricas (HEP)",
+        "url": "https://www.gob.pe/hep",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital de Tingo María (HTM)",
+        "url": "https://www.gob.pe/hospitaltingomaria",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Ii-1 Moyobamba (HII-1M)",
+        "url": "https://www.gob.pe/hospitalmoyobamba",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital de Apoyo de Yungay (HAYU)",
+        "url": "https://www.gob.pe/hayungay",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Hermilio Valdizán (HHV)",
+        "url": "https://www.gob.pe/hhv",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Regional Daniel Alcides Carrión (HRDAC)",
+        "url": "https://www.gob.pe/hrdac-cerrodepasco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital de Lima Este - Vitarte (HLEV)",
+        "url": "https://www.gob.pe/hlev",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Minsa Móvil (MINSAM)",
+        "url": "https://www.gob.pe/minsamovil",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red de Servicios de Salud Cusco Norte (RSSCN)",
+        "url": "https://www.gob.pe/redcusconorte",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora Red de Salud de San Miguel (UERSSAMI)",
+        "url": "https://www.gob.pe/uerssanmiguel",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Inversiones en Salud (PRONIS)",
+        "url": "https://www.gob.pe/pronis",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Creación de Redes Integradas de Salud (PCRIS)",
+        "url": "https://www.gob.pe/pcris",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Desarrollo Agrario y Riego (MIDAGRI)",
+        "url": "https://www.gob.pe/midagri",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Desarrollo Agrario y Riego",
+        "url": "http://www.gob.pe/minagri",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Autoridad Nacional del Agua (ANA)",
+        "url": "https://www.gob.pe/ana",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 002 - Modernización de la Gestión de los Recursos Hídricos (UE002-MGRH)",
+        "url": "https://www.gob.pe/ue002-recursoshidricos",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Innovación Agraria (INIA)",
+        "url": "https://www.gob.pe/inia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Servicio Nacional Forestal y de Fauna Silvestre (SERFOR)",
+        "url": "https://www.gob.pe/serfor",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 003: Fomento y Gestión Sostenible de la Producción Forestal en El Perú (KFW)",
+        "url": "https://www.gob.pe/kfw",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Servicio Nacional de Sanidad Agraria del Perú (SENASA)",
+        "url": "https://www.gob.pe/senasa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Agromercado (Agromercado)",
+        "url": "https://www.gob.pe/agromercado",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial Alto Huallaga (PEAH)",
+        "url": "https://www.gob.pe/peah",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial Binacional Lago Titicaca (PEBLT)",
+        "url": "https://www.gob.pe/peblt",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial Binacional Puyango Tumbes (PEBPT)",
+        "url": "https://www.gob.pe/pebpt",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial Datem del Marañón Alto Amazonas Loreto Condorcanqui (PEDAMAALC)",
+        "url": "https://www.gob.pe/pedamaalc",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial Binacional Desarrollo Integral de la Cuenca del Río Putumayo (PEBDICP)",
+        "url": "https://www.gob.pe/pebdicp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial Jaén San Ignacio Bagua (PEJSIB)",
+        "url": "https://www.gob.pe/pejsib",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial Jequetepeque Zaña (PEJEZA)",
+        "url": "https://www.gob.pe/pejeza",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial Pichis Palcazú (PEPP)",
+        "url": "https://www.gob.pe/pepp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial Sierra Centro Sur (PESCS)",
+        "url": "https://www.gob.pe/pescs",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial de Desarrollo del Valle de los Ríos Apurímac, Ene y Mantaro (PROVRAEM)",
+        "url": "https://www.gob.pe/provraem",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora Fondo Sierra Azul (UEFSA)",
+        "url": "https://www.gob.pe/sierraazul",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora de Gestión de Proyectos Sectoriales (UEGPS)",
+        "url": "https://www.gob.pe/uegps",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Innovación Agraria (PNIA)",
+        "url": "https://www.gob.pe/pnia",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Subsectorial de Irrigaciones (PSI)",
+        "url": "https://www.gob.pe/psi",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa de Compensaciones para la Competitividad (AGROIDEAS)",
+        "url": "https://www.gob.pe/agroideas",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa de Desarrollo Productivo Agrario Rural (AGRO RURAL)",
+        "url": "https://www.gob.pe/agrorural",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Nec - Proyecto Avanzar Rural (NECAR)",
+        "url": "https://www.gob.pe/avanzarrural",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Trabajo y Promoción del Empleo (MTPE)",
+        "url": "https://www.gob.pe/mtpe",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Trabajo y Promoción del Empleo",
+        "url": "http://www.gob.pe/mtpe",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Superintendencia Nacional de Fiscalización Laboral (SUNAFIL)",
+        "url": "https://www.gob.pe/sunafil",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Seguro Social de Salud (EsSalud)",
+        "url": "https://www.gob.pe/essalud",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Ayacucho (RAAY)",
+        "url": "https://www.gob.pe/red-asistencial-ayacucho",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Central de Abastecimiento de Bienes Estratégicos (CEABE)",
+        "url": "https://www.gob.pe/ceabe",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro Nacional de Salud Renal (CNSR)",
+        "url": "https://www.gob.pe/cnsr",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro Nacional de Telemedicina (CENATE)",
+        "url": "https://www.gob.pe/cenate",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Direccion de Red de Salud Lima Ciudad (DRSLC)",
+        "url": "https://www.gob.pe/direccion-de-red-de-salud-lima-ciudad",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección de Red de Salud Lima Este Metropolitana (DRSLEM)",
+        "url": "https://www.gob.pe/direccion-de-red-de-salud-lima-este-metropolitana",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección de Red de Salud Lima Norte V Rímac- Smp- los Olivos (Red Rimac L.N.V)",
+        "url": "http://www.reddesaludrimac.gob.pe/transparencia/transparencia.html",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección de Salud Ii Lima Sur (DISA II L.S.)",
+        "url": "https://www.gob.pe/direccion-de-salud-ii-lima-sur",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección de Salud Iv Lima Este (DISA IV LIMA ESTE)",
+        "url": "https://www.gob.pe/direccion-de-salud-iv-lima-este",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección de Salud V Lima Ciudad (DISA V LC)",
+        "url": "https://www.gob.pe/direccion-de-salud-v-lima-ciudad",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Amazonas (DRAAM- AMAZONAS)",
+        "url": "https://www.gob.pe/red-asistencial-amazonas",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Ancash (RA - ANCASH)",
+        "url": "https://www.gob.pe/red-asistencial-ancash",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Apurimac (RAC - APURIMAC)",
+        "url": "https://www.gob.pe/red-asistencial-apurimac",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Arequipa (RAAR - AREQUIPA)",
+        "url": "https://www.gob.pe/red-asistencial-arequipa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Cajamarca (RA - CAJAMARCA)",
+        "url": "https://www.gob.pe/red-asistencial-cajamarca",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Cusco (RACU - CUSCO)",
+        "url": "https://www.gob.pe/red-asistencial-cusco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Huancavelica (RAHVC - HUANCAVELICA)",
+        "url": "https://www.gob.pe/red-asistencial-huancavelica",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Huánuco (RAHU - HUANUCO)",
+        "url": "https://www.gob.pe/red-asistencial-huanuco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Huaraz (RA Huaraz)",
+        "url": "https://www.gob.pe/rahuaraz",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Ica (RAICA)",
+        "url": "https://www.gob.pe/red-asistencial-ica",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Juliaca (RAJUL)",
+        "url": "https://www.gob.pe/red-asistencial-juliaca",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Junin (RAJUN)",
+        "url": "https://www.gob.pe/red-asistencial-junin",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial la Libertad (RALI)",
+        "url": "https://www.gob.pe/red-asistencial-la-libertad",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Lambayeque (RAL)",
+        "url": "https://www.gob.pe/ral",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Loreto (RALO)",
+        "url": "https://www.gob.pe/red-asistencial-loreto",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Madre de Dios (RAMD)",
+        "url": "https://www.gob.pe/red-asistencial-madre-de-dios",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Moquegua (RAMOQ)",
+        "url": "https://www.gob.pe/red-asistencial-moquegua",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Moyobamba (RAM- MOYOBAMBA)",
+        "url": "https://www.gob.pe/red-asistencial-moyobamba",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Pasco (RAP - PASCO)",
+        "url": "https://www.gob.pe/red-asistencial-pasco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Piura (RAPI- PIURA)",
+        "url": "https://www.gob.pe/red-asistencial-piura",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Puno (RAPU- PUNO)",
+        "url": "https://www.gob.pe/red-asistencial-puno",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Tacna (RAT - TACNA)",
+        "url": "https://www.gob.pe/red-asistencial-tacna",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Tarapoto (RATAR - TARAPOTO)",
+        "url": "https://www.gob.pe/red-asistencial-tarapoto",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Tumbes (RAT - TUMBES)",
+        "url": "https://www.gob.pe/red-asistencial-tumbes",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Asistencial Ucayali (RAUC - UCAYALI)",
+        "url": "https://www.gob.pe/red-asistencial-ucayali",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red de Salud Barranco Chorrillos Surco (RSS BCO.CHO.SCO.)",
+        "url": "https://www.gob.pe/red-de-salud-barranco-chorrillos-surco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red de Salud San Juan de Lurigancho - Minsa (RSSJL- MINSA)",
+        "url": "https://www.gob.pe/red-de-salud-san-juan-de-lurigancho-minsa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red de Salud Villa El Salvador Lurin Pachacamac Pucusana (RSS.VES.LPP)",
+        "url": "https://www.gob.pe/red-de-salud-villa-el-salvador-lurin-pachacamac-pucusana",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Prestacional Almenara (RPA)",
+        "url": "https://www.gob.pe/rpalmenara",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Desconcentrada Rebagliati (RAS Rebagliati)",
+        "url": "https://www.gob.pe/rasrebagliati",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Desconcentrada Sabogal (RAS Sabogal)",
+        "url": "https://www.gob.pe/rassabogal",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Huacho (RH)",
+        "url": "https://www.gob.pe/red-huacho",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Direccion Red de Salud - San Juan de Miraflores - Villa Maria del Triunfo (DRS SJM VMT)",
+        "url": "https://www.gob.pe/direccion-red-de-salud-san-juan-de-miraflores-villa-maria-del-triunfo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto de Evaluación de Tecnologías en Salud e Investigación (IETSI)",
+        "url": "https://www.gob.pe/ietsi",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto de Medicina Tradicional (IMET)",
+        "url": "https://www.gob.pe/imet",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional Cardiovascular (INCOR - ESSALUD)",
+        "url": "https://www.gob.pe/incor",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Hospital Nacional Alberto Sabogal Sologuren (Hospital Sabogal)",
+        "url": "https://www.gob.pe/hnsabogal",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Salud San Juan Bautista (CSSJB)",
+        "url": "https://www.gob.pe/centrosaludsanjuanbautista",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Empleo \"jóvenes Productivos\" (Jóvenes Productivos)",
+        "url": "https://www.gob.pe/jovenes-productivos",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa para El Mejoramiento y Ampliación de los Servicios del Centro de Empleo (FORTALECE PERÚ)",
+        "url": "https://www.gob.pe/fortaleceperu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa de Empleo Temporal - Llamkasun Perú (Llamkasun Perú)",
+        "url": "https://www.gob.pe/llamkasunperu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de la Producción (PRODUCE)",
+        "url": "https://www.gob.pe/produce",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de la Producción",
+        "url": "http://www.gob.pe/produce",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Fondo Nacional de Desarrollo Pesquero (FONDEPES)",
+        "url": "https://www.gob.pe/fondepes",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Calidad (INACAL)",
+        "url": "https://www.gob.pe/inacal",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Tecnológico de la Producción (ITP)",
+        "url": "https://www.gob.pe/itp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica de la Madera (CITEmadera)",
+        "url": "https://www.gob.pe/citemadera",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Agroindustrial Ica (CITEagroindustrial Ica)",
+        "url": "https://www.gob.pe/citeagroindustrialica",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica del Cuero, Calzado, Textil, Confecciones e Industrias Conexas (CITEccal Lima)",
+        "url": "https://www.gob.pe/citeccal",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica de Cuero y Calzado de Trujillo (CITEccal Trujillo)",
+        "url": "https://www.gob.pe/citeccal-trujillo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Acuícola Puno (CITEacuícola Puno )",
+        "url": "https://www.gob.pe/citeacuicola_puno",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Pesquero Ilo (CITEpesquero Ilo)",
+        "url": "https://www.gob.pe/citepesquero_ilo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Agroindustrial Majes ( CITEagroindustrial Majes)",
+        "url": "https://www.gob.pe/citeagroindustrial_majes",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Agroindustrial Huallaga (CITEagroindustrial Huallaga)",
+        "url": "https://www.gob.pe/citeagroindustrial_huallaga",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Agroindustrial Chavimochic (CITEagroindustrial Chavimochic)",
+        "url": "https://www.gob.pe/citeagroindustrial-chavimochic",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Agroindustrial Oxapampa (CITEagroindustrial Oxapampa)",
+        "url": "https://www.gob.pe/citeagroindustrial-oxapampa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Textil Camélidos Arequipa (CITEtextil Camélidos Arequipa)",
+        "url": "https://www.gob.pe/citetextilcamelidos-arequipa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica de Cuero y Calzado Arequipa (CITEccal Arequipa)",
+        "url": "https://www.gob.pe/citeccal-arequipa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Textil Camélidos Puno (CITEtextil Camélidos Puno)",
+        "url": "https://www.gob.pe/citetextilcamelidos-puno",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Forestal Maynas (CITEforestal)",
+        "url": "https://www.gob.pe/citeforestal",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Pesquero Piura (CITEpesquero)",
+        "url": "https://www.gob.pe/citepesquero",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Productivo Maynas (CITEproductivo Maynas)",
+        "url": "https://www.gob.pe/citeproductivo-maynas",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Productivo San Martín (CITEproductivo San Martín)",
+        "url": "https://www.gob.pe/citeproductivo-sanmartin",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Agroindustrial Moquegua (CITEagroindustrial Moquegua)",
+        "url": "https://www.gob.pe/citeagroindustrialmoquegua",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Productivo Pucallpa (CITEproductivo Pucallpa)",
+        "url": "https://www.gob.pe/citeproductivo-pucallpa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Textil Camélidos Cusco (CITEtextil Camélidos Cusco)",
+        "url": "https://www.gob.pe/citetextilcamelidos-cusco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Productivo Madre de Dios (CITEproductivo Madre de Dios)",
+        "url": "https://www.gob.pe/citeproductivo-madrededios",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Forestal Pucallpa (CITEFP)",
+        "url": "https://www.gob.pe/citeforestal-pucallpa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Agroindustrial Vraem (CITEagroindustrial Vraem)",
+        "url": "https://www.gob.pe/citeagroindustrial-vraem",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Innovación Productiva y Transferencia Tecnológica Pesquero, Acuícola y Agroindustrial Callao (CITE Callao)",
+        "url": "https://www.gob.pe/citecallao",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto del Mar del Perú (IMARPE)",
+        "url": "https://www.gob.pe/imarpe",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Autoridad Nacional de Sanidad e Inocuidad en Pesca y Acuicultura (Sanipes)",
+        "url": "https://www.gob.pe/sanipes",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional \"tu Empresa\" (PNTE)",
+        "url": "https://www.gob.pe/tuempresa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional A Comer Pescado (PNACP)",
+        "url": "https://www.gob.pe/acomerpescado",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Innovación y Desarrollo Productivo - Proinnóvate (PROINNOVATE)",
+        "url": "https://www.gob.pe/proinnovate",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Diversificación Productiva (PNDP)",
+        "url": "https://www.gob.pe/programa-nacional-de-diversificacion-productiva",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional Compras A Myperú (Compras a MYPErú)",
+        "url": "https://www.gob.pe/comprasamyperu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Comercio Exterior y Turismo (MINCETUR)",
+        "url": "https://www.gob.pe/mincetur",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Comercio Exterior y Turismo",
+        "url": "http://www.gob.pe/mincetur",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Centro de Formación en Turismo (CENFOTUR)",
+        "url": "https://www.gob.pe/cenfotur",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Comisión de Promoción del Perú para la Exportación y El Turismo (PROMPERÚ)",
+        "url": "https://www.gob.pe/promperu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora de Inversión en Comercio Exterior y Turismo (UICET)",
+        "url": "https://www.gob.pe/uicet",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Energía y Minas (MINEM)",
+        "url": "https://www.gob.pe/minem",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Energía y Minas",
+        "url": "https://www.minem.gob.pe/index2.php",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Peruano de Energía Nuclear (IPEN)",
+        "url": "https://www.gob.pe/ipen",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consejo de Administración de Recursos para la Capacitación en Electricidad (CARELEC)",
+        "url": "https://www.gob.pe/consejo-de-administracion-de-recursos-para-la-capacitacion-en-electricidad",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Geológico, Minero y Metalúrgico (INGEMMET)",
+        "url": "https://www.gob.pe/ingemmet",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección General de Electrificación Rural (DGER)",
+        "url": "https://www.gob.pe/dger",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Activos Mineros S.a.c (AMSAC)",
+        "url": "https://www.gob.pe/amsac",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Regional de Servicio Publico de Electricidad de Puno S.a.a. (ELECTRO PUNO)",
+        "url": "https://www.gob.pe/electropuno",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Concesionaria de Electricidad de Ucayali S.A. (Electro Ucayali)",
+        "url": "https://www.gob.pe/electroucayali",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Regional de Servicio Público de Electricidad del Centro S.A. (ELECTROCENTRO)",
+        "url": "https://www.gob.pe/electrocentro",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Regional de Servicio Público de Electricidad del Norte S.A. (Electronorte S.A.)",
+        "url": "https://www.gob.pe/ensa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Regional de Servicio Público de Electricidad del Oriente S.A. (Electro Oriente S.A.)",
+        "url": "https://www.gob.pe/elor",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Electro Sur Este S.a.a. (ELSE)",
+        "url": "https://www.gob.pe/electrosureste",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Regional de Servicio Público de Electricidad - Electrosur S.a (Electrosur S.A.)",
+        "url": "https://www.gob.pe/electrosur",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa de Administración de Infraestructura Eléctrica S.A. (ADINELSA)",
+        "url": "https://www.gob.pe/adinelsa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa de Electricidad del Perú S.A. (ELECTROPERU)",
+        "url": "https://www.gob.pe/electroperu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa de Generación Eléctrica Machupicchu S.A. (EGEMSA)",
+        "url": "https://www.gob.pe/egemsa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa de Generación Eléctrica San Gabán S.A. (EGESG)",
+        "url": "https://www.gob.pe/egesg",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa de Generación Eléctrica de Arequipa S.A. (EGASA)",
+        "url": "https://www.gob.pe/egasa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa de Generación Eléctrica del Sur S.A. (EGESUR)",
+        "url": "https://www.gob.pe/egesur",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Regional de Servicio Público de Electricidad Electronortemedio S.a (Hidrandina)",
+        "url": "https://www.gob.pe/hidrandina",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Regional de Servicio Público de Electricidad Electronoroeste Sociedad Anonima (ENOSA)",
+        "url": "https://www.gob.pe/enosa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Petróleos del Perú (PETROPERU)",
+        "url": "https://www.gob.pe/petroperu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Sociedad Eléctrica del Sur Oeste S.A. (SEAL)",
+        "url": "https://www.gob.pe/seal",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Minera del Centro del Perú S.A. (CENTROMIN)",
+        "url": "https://www.gob.pe/empresa-minera-del-centro-del-peru-s-a",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Perúpetro S.A. (PERUPETRO)",
+        "url": "https://www.gob.pe/perupetro",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Transportes y Comunicaciones (MTC)",
+        "url": "https://www.gob.pe/mtc",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Transportes y Comunicaciones",
+        "url": "http://www.gob.pe/mtc",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Superintendencia de Transporte Terrestre de Personas, Carga y Mercancías (SUTRAN)",
+        "url": "https://www.gob.pe/sutran",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Autoridad Portuaria Nacional (APN)",
+        "url": "https://www.gob.pe/apn",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial de Infraestructura de Transporte Descentralizado (Provías Descentralizado)",
+        "url": "https://www.gob.pe/pvd",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial de Infraestructura de Transporte Nacional (Provías Nacional)",
+        "url": "https://www.gob.pe/pvn",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Transporte Urbano Sostenible (PROMOVILIDAD)",
+        "url": "https://www.gob.pe/promovilidad",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Telecomunicaciones (Pronatel)",
+        "url": "https://www.gob.pe/pronatel",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Corporación Peruana de Aeropuertos y Aviación Comercial S.A. (CORPAC S.A.)",
+        "url": "https://www.gob.pe/corpac",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Nacional de Puertos S.A. (ENAPU S.A.)",
+        "url": "https://www.gob.pe/empresa-nacional-de-puertos-s-a",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Servicios Postales del Perú (SERPOST S.A.)",
+        "url": "https://www.gob.pe/serpost",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Autoridad de Transporte Urbano para Lima y Callao (ATU)",
+        "url": "https://www.gob.pe/atu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Vivienda, Construcción y Saneamiento (VIVIENDA)",
+        "url": "https://www.gob.pe/vivienda",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Vivienda, Construcción y Saneamiento",
+        "url": "http://www.gob.pe/vivienda",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Organismo de Formalización de la Propiedad Informal (COFOPRI)",
+        "url": "https://www.gob.pe/cofopri",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Servicio Nacional de Capacitación para la Industria de la Construcción (SENCICO)",
+        "url": "https://www.gob.pe/sencico",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Superintendencia Nacional de Bienes Estatales (SBN)",
+        "url": "https://www.gob.pe/sbn",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Organismo Técnico de la Administración de los Servicios de Saneamiento (OTASS)",
+        "url": "https://www.gob.pe/otass",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Prestadora de Servicios de Saneamiento Municipal de Utcubamba S.R.L. (EPSSMU S. A.)",
+        "url": "https://www.gob.pe/epssmusa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Entidad Prestadora de Servicios de Saneamiento de Lambayeque (Epsel S.A.)",
+        "url": "https://www.gob.pe/epsel",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Empresa Prestadora de Servicios de Saneamiento Marañón (EPS Marañón S.A.)",
+        "url": "https://www.gob.pe/epsmaranon",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Entidad Prestadora de Servicios de Saneamiento Moquegua (EPS Moquegua S.A.)",
+        "url": "https://www.gob.pe/epsmoquegua",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Entidad Prestadora de Servicios de Saneamiento de Agua Potable y Alcantarillado de Loreto (EPS Sedaloreto S.A.)",
+        "url": "https://www.gob.pe/sedaloreto",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa de Modernización de la Prestación de los Servicios de Agua Potable y Saneamiento de las Eps (Promotass)",
+        "url": "https://www.gob.pe/promotass",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Agua Segura para Lima y Callao (PASLC)",
+        "url": "https://www.gob.pe/programa-agua-segura-para-lima-y-callao",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Saneamiento Rural (PNSR)",
+        "url": "https://www.gob.pe/pnsr",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Saneamiento Urbano (PNSU)",
+        "url": "https://www.gob.pe/pnsu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Generación de Suelo Urbano (PGSU)",
+        "url": "https://www.gob.pe/pgsu",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Mejoramiento Integral de Barrios (PMIB)",
+        "url": "https://www.gob.pe/pmib",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Vivienda Rural (PNVR)",
+        "url": "https://www.gob.pe/pnvr",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nuestras Ciudades (PNC)",
+        "url": "https://www.gob.pe/programa-nuestras-ciudades",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Fondo Mivivienda S.A. (FMV)",
+        "url": "https://www.gob.pe/fondomivivienda",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Servicio de Agua Potable y Alcantarillado de Lima (Sedapal)",
+        "url": "https://www.gob.pe/sedapal",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de la Mujer y Poblaciones Vulnerables (MIMP)",
+        "url": "https://www.gob.pe/mimp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de la Mujer y Poblaciones Vulnerables",
+        "url": "http://www.gob.pe/mimp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consejo Nacional para la Integración de la Persona con Discapacidad (CONADIS)",
+        "url": "https://www.gob.pe/conadis",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Integral Nacional para El Bienestar Familiar - Inabif (INABIF)",
+        "url": "https://www.gob.pe/inabif",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional para la Prevención y Erradicación de la Violencia Contra las Mujeres e Integrantes del Grupo Familiar (WarmiÑan)",
+        "url": "https://www.gob.pe/warmi%C3%B1an",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio del Ambiente (MINAM)",
+        "url": "https://www.gob.pe/minam",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio del Ambiente",
+        "url": "http://www.gob.pe/minam",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Geofísico del Perú (IGP)",
+        "url": "https://www.gob.pe/igp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Servicio Nacional de Meteorología e Hidrología del Perú (SENAMHI)",
+        "url": "https://www.gob.pe/senamhi",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Investigación en Glaciares y Ecosistemas de Montaña (INAIGEM)",
+        "url": "https://www.gob.pe/inaigem",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto de Investigaciones de la Amazonía Peruana (IIAP)",
+        "url": "https://www.gob.pe/iiap",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Organismo de Evaluación y Fiscalización Ambiental (OEFA)",
+        "url": "https://www.gob.pe/oefa",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Servicio Nacional de Certificación Ambiental para las Inversiones Sostenibles (Senace)",
+        "url": "https://www.gob.pe/senace",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Servicio Nacional de Áreas Naturales Protegidas Por El Estado (SERNANP)",
+        "url": "https://www.gob.pe/sernanp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 003 Gestión Integral de la Calidad Ambiental (UE003: GICA)",
+        "url": "https://www.gob.pe/gica",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Minam+caf (PROGRAMA MINAM+CAF)",
+        "url": "https://www.gob.pe/unidad-ejecutora-004-gestion-de-los-recursos-naturales",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Conservación de Bosques para la Mitigación del Cambio Climático (PNCBMCC)",
+        "url": "https://www.gob.pe/bosques",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Cultura (Cultura)",
+        "url": "https://www.gob.pe/cultura",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Cultura",
+        "url": "http://www.gob.pe/cultura",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Archivo General de la Nación (AGN)",
+        "url": "https://www.gob.pe/agn",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Biblioteca Nacional del Perú (BNP)",
+        "url": "https://www.gob.pe/bnp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto Nacional de Radio y Televisión del Perú (IRTP)",
+        "url": "https://www.gob.pe/irtp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Especial Naylamp - Lambayeque (U.E. 005)",
+        "url": "https://www.gob.pe/naylamp",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 002 Mc-cusco (DDC-Cusco)",
+        "url": "https://www.gob.pe/culturacusco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 003 - Zona Arqueológica Caral (UE003-ZAC/MC)",
+        "url": "https://www.gob.pe/caral",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 007: Marcahuamachuco (UE007)",
+        "url": "https://www.gob.pe/marcahuamachuco",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 008 Proyectos Especiales (UE008: PE)",
+        "url": "https://www.gob.pe/proyectosespeciales",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Dirección Desconcentrada de Cultura la Libertad (UE 009 - La Libertad)",
+        "url": "https://www.gob.pe/ddclalibertad",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 012: Chavín de Huántar (UE012-CDH)",
+        "url": "https://www.gob.pe/chavindehuantar",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ue 010 Chankillo, Cuna de la Astronomía en Casma y Nepeña (UE010-CHCACN)",
+        "url": "https://www.gob.pe/chankillo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Puntos de Cultura",
+        "url": "https://www.gob.pe/programa-puntos-de-cultura",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Proyecto Qhapaq - Sede Nacional (Qhapaqnan)",
+        "url": "https://www.gob.pe/proyecto-qhapaq-sede-nacional",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Ministerio de Desarrollo e Inclusión Social (MIDIS)",
+        "url": "https://www.gob.pe/midis",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Web de Ministerio de Desarrollo e Inclusión Social",
+        "url": "http://www.gob.pe/midis",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Organismo de Focalización e Información Social (OFIS)",
+        "url": "https://www.gob.pe/ofis",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Unidad Ejecutora 002: Programa para El Fortalecimiento del Sistema Nacional de Focalización (UE02-PFSNF)",
+        "url": "https://www.gob.pe/ue02-pfsnf",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Fondo de Cooperación para El Desarrollo Social (FONCODES)",
+        "url": "https://www.gob.pe/foncodes",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional Cuna Más (PNCM)",
+        "url": "https://www.gob.pe/cunamas",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional Plataformas de Acción para la Inclusión Social (PAIS)",
+        "url": "https://www.gob.pe/pais",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Apoyo Directo A los Más Pobres - Juntos (JUNTOS)",
+        "url": "https://www.gob.pe/juntos",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Asistencia Solidaria Pensión 65 (PENSION 65)",
+        "url": "https://www.gob.pe/pension65",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa Nacional de Entrega de la Pensión No Contributiva A Personas con Discapacidad Severa en Situación de Pobreza - Contigo (CONTIGO)",
+        "url": "https://www.gob.pe/contigo",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa de Alimentación Escolar - Pae (PAE)",
+        "url": "https://www.gob.pe/pae",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Programa de Apoyo A la Internacionalización (PAI)",
+        "url": "https://www.gob.pe/programa-de-apoyo-a-la-internacionalizacion",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Instituto de Educacion Superior Pedagogico Publico \"mercedes Cabello de Carbonera\" (IESPPMCC)",
+        "url": "https://www.gob.pe/iesppmercedescabellodecarbonera",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Consolida Brasil",
+        "url": "https://www.gob.pe/consolida-brasil",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Red Integrada de Salud Tarma (RIS Tarma)",
+        "url": "https://www.gob.pe/ristarma",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Universidad Nacional del Vraem (UNAVRAEM)",
+        "url": "https://www.gob.pe/unavraem",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Universidad Nacional Tecnológica de Chincha (UNATECH)",
+        "url": "https://www.gob.pe/unatech",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "¿Qué es Gob.pe?",
+        "url": "https://www.gob.pe/1021-que-es-gob-pe",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Política de privacidad para el manejo de datos en Gob.pe",
+        "url": "https://www.gob.pe/institucion/pcm/informes-publicaciones/698037-politica-de-privacidad-de-gob-pe",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Directorio Nacional de Funcionarios Públicos",
+        "url": "https://www.gob.pe/funcionariospublicos",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Directorio Nacional de Redes Sociales",
+        "url": "https://www.gob.pe/redessociales",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Directorio de Establecimientos de Salud",
+        "url": "https://www.gob.pe/establecimientosdesalud",
+        "categoria": "Por clasificar"
+    },
+    {
+        "nombre": "Directorio Nacional de Aeropuertos",
+        "url": "https://www.gob.pe/aeropuertosperu",
+        "categoria": "Por clasificar"
+    }
+]
