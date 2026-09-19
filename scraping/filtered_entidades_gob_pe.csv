@@ -1,0 +1,151 @@
+nombre,url,categoria
+Inicio,https://www.gob.pe/,OTROS
+El Estado,https://www.gob.pe/estado,OTROS
+Entidades del Poder Ejecutivo,https://www.gob.pe/estado/poder-ejecutivo,OTROS
+Entidades del Poder Legislativo,https://www.gob.pe/estado/poder-legislativo,OTROS
+Entidades del Poder Judicial,https://www.gob.pe/estado/poder-judicial,OTROS
+Organismos Autónomos,https://www.gob.pe/estado/organismos-autonomos,OTROS
+Entidades de los Gobiernos Regionales,https://www.gob.pe/estado/gobiernos-regionales,OTROS
+Entidades de los Gobiernos Locales,https://www.gob.pe/estado/gobiernos-locales,OTROS
+Presidencia de la República del Perú (Presidencia),https://www.gob.pe/presidencia,OTROS
+Presidencia del Consejo de Ministros (PCM),https://www.gob.pe/pcm,OTROS
+Comisión Multisectorial de la Acción del Estado en El Ámbito Marítimo (Comaem),https://www.gob.pe/comaem,OTROS
+Comisión Nacional para El Desarrollo y Vida Sin Drogas (DEVIDA),https://www.gob.pe/devida,OTROS
+Dirección Nacional de Inteligencia (DINI),https://www.gob.pe/dini,OTROS
+Organismo de Supervisión de los Recursos Forestales y de Fauna Silvestre (OSINFOR),https://www.gob.pe/osinfor,ORGANISMO
+Organismo Supervisor de Inversión Privada en Telecomunicaciones (OSIPTEL),https://www.gob.pe/osiptel,ORGANISMO
+Organismo Supervisor de la Inversión en Energía y Minería (OSINERGMIN),https://www.gob.pe/osinergmin,ORGANISMO
+Organismo Supervisor de la Inversión en Infraestructura de Transporte de Uso Público (OSITRAN),https://www.gob.pe/ositran,ORGANISMO
+Superintendencia Nacional de Servicios de Saneamiento (SUNASS),https://www.gob.pe/sunass,SUPERINTENDENCIA
+Centro Nacional de Planeamiento Estratégico (CEPLAN),https://www.gob.pe/ceplan,CENTRO
+"Consejo Nacional de Ciencia, Tecnología e Innovación (CONCYTEC)",https://www.gob.pe/concytec,OTROS
+Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual (Indecopi),https://www.gob.pe/indecopi,INSTITUTO
+Instituto Nacional de Estadística e Informática (INEI),https://www.gob.pe/inei,INSTITUTO
+Proyecto de Transformación Digital con Equidad (PROTDE),https://www.gob.pe/protde,OTROS
+Comisión de Alto Nivel Anticorrupción (CAN),https://www.gob.pe/can,OTROS
+Comisión Encargada de Proponer las Acciones y Medidas de Reforma Administrativa y de Gestión para la Reorganización del Despacho Presidencial (CRDP),https://www.gob.pe/comisiondespachopresidencial,OTROS
+Mejoramiento de Servicios A Ciudadanos y Empresas (PROMSACE),https://www.gob.pe/promsace,OTROS
+Ministerio de Relaciones Exteriores (RREE),https://www.gob.pe/rree,MINISTERIO
+Representación Permanente del Perú Ante la Onu (rpponu),https://www.gob.pe/rpponu,OTROS
+Representación Permanente del Perú Ante los Organismos Internacionales con Sede en Ginebra (RPPOOII),https://www.gob.pe/rppooii,OTROS
+Ministerio de Defensa (MINDEF),https://www.gob.pe/mindef,MINISTERIO
+Comisión Nacional de Investigación y Desarrollo Aeroespacial (CONIDA),https://www.gob.pe/conida,OTROS
+Instituto Geográfico Nacional (IGN),https://www.gob.pe/ign,INSTITUTO
+Instituto Nacional de Defensa Civil (INDECI),https://www.gob.pe/indeci,INSTITUTO
+Instituto de Trasplantes de Órganos y Tejidos de las Fuerzas Armadas y Policía Nacional del Perú (ITOT),https://www.gob.pe/itot,INSTITUTO
+Oficina Previsional de las Fuerzas Armadas (OPREFA),https://www.gob.pe/oprefa,OTROS
+Comando Conjunto de las Fuerzas Armadas (CCFFAA),https://www.gob.pe/ccffaa,OTROS
+Ejército del Perú (EP),https://www.gob.pe/ejercito,OTROS
+Fuerza Aérea del Perú (FAP),https://www.gob.pe/fap,OTROS
+Marina de Guerra del Perú (MGP),https://www.gob.pe/marina,OTROS
+Comité de Prevención y Control VIH/SIDA FFAA y PNP (COPRECOS),https://www.gob.pe/comite-de-prevencion-y-control-vih-sida-ffaa-y-pnp,OTROS
+Servicios Industriales de la Marina Iquitos S.R.L. (SIMA-Iquitos S.R.L.),https://www.gob.pe/simaiquitos,OTROS
+Servicios Industriales de la Marina S.A. (SIMA-PERÚ S.A.),https://www.gob.pe/servicios-industriales-de-la-marina-s-a,OTROS
+Ministerio de Economía y Finanzas (MEF),https://www.gob.pe/mef,MINISTERIO
+Central de Compras Públicas (PERÚ COMPRAS),https://www.gob.pe/perucompras,OTROS
+Oficina de Normalización Previsional (ONP),https://www.gob.pe/onp,OTROS
+Organismo Especializado para las Contrataciones Públicas Eficientes (OECE),https://www.gob.pe/oece,ORGANISMO
+Superintendencia Nacional de Aduanas y de Administración Tributaria (SUNAT),https://www.gob.pe/sunat,SUPERINTENDENCIA
+Superintendencia del Mercado de Valores (SMV),https://www.gob.pe/smv,SUPERINTENDENCIA
+Banco Agropecuario (Agrobanco),https://www.gob.pe/agrobanco,OTROS
+Banco de la Nación (BN),https://www.gob.pe/bn,OTROS
+Corporación Financiera de Desarrollo S.A. (COFIDE),https://www.gob.pe/cofide,OTROS
+Ministerio del Interior (MININTER),https://www.gob.pe/mininter,MINISTERIO
+Cuerpo General de Bomberos Voluntarios del Perú (CGBVP),https://www.gob.pe/cuerpo-general-de-bomberos-voluntarios-del-peru,OTROS
+Dirección General de Gobierno Interior (DGIN),https://www.gob.pe/dgin,OTROS
+Intendencia Nacional de Bomberos del Perú (INBP),https://www.gob.pe/inbp,OTROS
+"Superintendencia Nacional de Control de Servicios de Seguridad, Armas, Municiones y Explosivos de Uso Civil (SUCAMEC)",https://www.gob.pe/sucamec,SUPERINTENDENCIA
+Superintendencia Nacional de Migraciones (MIGRACIONES),https://www.gob.pe/migraciones,SUPERINTENDENCIA
+Policía Nacional del Perú (PNP),https://www.gob.pe/pnp,OTROS
+Ministerio de Justicia y Derechos Humanos (MINJUSDH),https://www.gob.pe/minjus,MINISTERIO
+Consejo para la Reforma del Sistema de Justicia (CRSJ),https://www.gob.pe/consejo-de-justicia,OTROS
+Procuraduría General del Estado (Procuraduría),https://www.gob.pe/procuraduria,OTROS
+Superintendencia Nacional de los Registros Públicos (SUNARP),https://www.gob.pe/sunarp,SUPERINTENDENCIA
+Instituto Nacional Penitenciario (INPE),https://www.gob.pe/inpe,INSTITUTO
+Oficina de Infraestructura Penitenciaria (OIP),https://www.gob.pe/inpe-oip,OTROS
+Tribunal de Transparencia y Acceso A la Información Pública (TTAIP),https://www.gob.pe/ttaip,OTROS
+Ministerio de Educación (MINEDU),https://www.gob.pe/minedu,MINISTERIO
+Iest de Investigaciones Industriales (INDII),https://www.gob.pe/istdeinvestigacionesindustriales,OTROS
+Secretaría Nacional de la Juventud (Senaju),https://www.gob.pe/senaju,OTROS
+Instituto Peruano del Deporte (IPD),https://www.gob.pe/ipd,INSTITUTO
+Superintendencia Nacional de Educación Superior Universitaria (SUNEDU),https://www.gob.pe/sunedu,SUPERINTENDENCIA
+Centro Vacacional Huampani (CV HUAMPANI),https://www.gob.pe/huampani,CENTRO
+Dirección de Gestión de Recursos Educativos (DIGERE),https://www.gob.pe/digere,OTROS
+Consejo Nacional de Educación (CNE),https://www.gob.pe/cne,OTROS
+Ministerio de Salud (MINSA),https://www.gob.pe/minsa,MINISTERIO
+Instituto Nacional de Enfermedades Neoplásicas (INEN),https://www.gob.pe/inen,INSTITUTO
+Instituto Nacional de Salud (INS),https://www.gob.pe/ins,INSTITUTO
+Seguro Integral de Salud (SIS),https://www.gob.pe/sis,OTROS
+Superintendencia Nacional de Salud (SUSALUD),https://www.gob.pe/susalud,SUPERINTENDENCIA
+Centro Nacional de Abastecimiento de Recursos Estratégicos en Salud (CENARES),https://www.gob.pe/cenares,CENTRO
+Instituto Nacional Materno Perinatal (INMP),https://www.gob.pe/inmp,INSTITUTO
+Instituto Nacional de Ciencias Neurológicas (INCN),https://www.gob.pe/instituto-nacional-de-ciencias-neurologicas,INSTITUTO
+Instituto Nacional de Oftalmología (INO),https://www.gob.pe/ino,INSTITUTO
+Instituto Nacional de Rehabilitación (INR),https://www.gob.pe/inr,INSTITUTO
+Instituto Nacional de Salud Mental Honorio Delgado-hideyo Noguchi (INSMHDHN),https://www.gob.pe/insm,INSTITUTO
+Instituto Nacional de Salud del Niño de Breña (INSN),https://www.gob.pe/insn,INSTITUTO
+Instituto Nacional de Salud del Niño de San Borja (INSNSB),https://www.gob.pe/insnsb,INSTITUTO
+Minsa Móvil (MINSAM),https://www.gob.pe/minsamovil,OTROS
+Ministerio de Desarrollo Agrario y Riego (MIDAGRI),https://www.gob.pe/midagri,MINISTERIO
+Instituto Nacional de Innovación Agraria (INIA),https://www.gob.pe/inia,INSTITUTO
+Servicio Nacional Forestal y de Fauna Silvestre (SERFOR),https://www.gob.pe/serfor,SERVICIO
+Servicio Nacional de Sanidad Agraria del Perú (SENASA),https://www.gob.pe/senasa,SERVICIO
+Agromercado (Agromercado),https://www.gob.pe/agromercado,OTROS
+Nec - Proyecto Avanzar Rural (NECAR),https://www.gob.pe/avanzarrural,OTROS
+Ministerio de Trabajo y Promoción del Empleo (MTPE),https://www.gob.pe/mtpe,MINISTERIO
+Superintendencia Nacional de Fiscalización Laboral (SUNAFIL),https://www.gob.pe/sunafil,SUPERINTENDENCIA
+Seguro Social de Salud (EsSalud),https://www.gob.pe/essalud,OTROS
+Central de Abastecimiento de Bienes Estratégicos (CEABE),https://www.gob.pe/ceabe,OTROS
+Centro Nacional de Salud Renal (CNSR),https://www.gob.pe/cnsr,CENTRO
+Centro Nacional de Telemedicina (CENATE),https://www.gob.pe/cenate,CENTRO
+Instituto de Evaluación de Tecnologías en Salud e Investigación (IETSI),https://www.gob.pe/ietsi,INSTITUTO
+Instituto de Medicina Tradicional (IMET),https://www.gob.pe/imet,INSTITUTO
+Instituto Nacional Cardiovascular (INCOR - ESSALUD),https://www.gob.pe/incor,INSTITUTO
+Ministerio de la Producción (PRODUCE),https://www.gob.pe/produce,MINISTERIO
+Instituto Nacional de Calidad (INACAL),https://www.gob.pe/inacal,INSTITUTO
+Instituto Tecnológico de la Producción (ITP),https://www.gob.pe/itp,INSTITUTO
+Instituto del Mar del Perú (IMARPE),https://www.gob.pe/imarpe,INSTITUTO
+Ministerio de Comercio Exterior y Turismo (MINCETUR),https://www.gob.pe/mincetur,MINISTERIO
+Centro de Formación en Turismo (CENFOTUR),https://www.gob.pe/cenfotur,CENTRO
+Comisión de Promoción del Perú para la Exportación y El Turismo (PROMPERÚ),https://www.gob.pe/promperu,OTROS
+Ministerio de Energía y Minas (MINEM),https://www.gob.pe/minem,MINISTERIO
+Instituto Peruano de Energía Nuclear (IPEN),https://www.gob.pe/ipen,INSTITUTO
+Consejo de Administración de Recursos para la Capacitación en Electricidad (CARELEC),https://www.gob.pe/consejo-de-administracion-de-recursos-para-la-capacitacion-en-electricidad,OTROS
+"Instituto Geológico, Minero y Metalúrgico (INGEMMET)",https://www.gob.pe/ingemmet,INSTITUTO
+Dirección General de Electrificación Rural (DGER),https://www.gob.pe/dger,OTROS
+Activos Mineros S.a.c (AMSAC),https://www.gob.pe/amsac,OTROS
+Electro Sur Este S.a.a. (ELSE),https://www.gob.pe/electrosureste,OTROS
+Petróleos del Perú (PETROPERU),https://www.gob.pe/petroperu,OTROS
+Sociedad Eléctrica del Sur Oeste S.A. (SEAL),https://www.gob.pe/seal,OTROS
+Perúpetro S.A. (PERUPETRO),https://www.gob.pe/perupetro,OTROS
+Ministerio de Transportes y Comunicaciones (MTC),https://www.gob.pe/mtc,MINISTERIO
+"Superintendencia de Transporte Terrestre de Personas, Carga y Mercancías (SUTRAN)",https://www.gob.pe/sutran,SUPERINTENDENCIA
+Corporación Peruana de Aeropuertos y Aviación Comercial S.A. (CORPAC S.A.),https://www.gob.pe/corpac,OTROS
+Servicios Postales del Perú (SERPOST S.A.),https://www.gob.pe/serpost,OTROS
+"Ministerio de Vivienda, Construcción y Saneamiento (VIVIENDA)",https://www.gob.pe/vivienda,MINISTERIO
+Organismo de Formalización de la Propiedad Informal (COFOPRI),https://www.gob.pe/cofopri,ORGANISMO
+Servicio Nacional de Capacitación para la Industria de la Construcción (SENCICO),https://www.gob.pe/sencico,SERVICIO
+Superintendencia Nacional de Bienes Estatales (SBN),https://www.gob.pe/sbn,SUPERINTENDENCIA
+Organismo Técnico de la Administración de los Servicios de Saneamiento (OTASS),https://www.gob.pe/otass,ORGANISMO
+Servicio de Agua Potable y Alcantarillado de Lima (Sedapal),https://www.gob.pe/sedapal,SERVICIO
+Ministerio de la Mujer y Poblaciones Vulnerables (MIMP),https://www.gob.pe/mimp,MINISTERIO
+Consejo Nacional para la Integración de la Persona con Discapacidad (CONADIS),https://www.gob.pe/conadis,OTROS
+Ministerio del Ambiente (MINAM),https://www.gob.pe/minam,MINISTERIO
+Instituto Geofísico del Perú (IGP),https://www.gob.pe/igp,INSTITUTO
+Servicio Nacional de Meteorología e Hidrología del Perú (SENAMHI),https://www.gob.pe/senamhi,SERVICIO
+Instituto Nacional de Investigación en Glaciares y Ecosistemas de Montaña (INAIGEM),https://www.gob.pe/inaigem,INSTITUTO
+Instituto de Investigaciones de la Amazonía Peruana (IIAP),https://www.gob.pe/iiap,INSTITUTO
+Organismo de Evaluación y Fiscalización Ambiental (OEFA),https://www.gob.pe/oefa,ORGANISMO
+Servicio Nacional de Certificación Ambiental para las Inversiones Sostenibles (Senace),https://www.gob.pe/senace,SERVICIO
+Servicio Nacional de Áreas Naturales Protegidas Por El Estado (SERNANP),https://www.gob.pe/sernanp,SERVICIO
+Ministerio de Cultura (Cultura),https://www.gob.pe/cultura,MINISTERIO
+Archivo General de la Nación (AGN),https://www.gob.pe/agn,OTROS
+Biblioteca Nacional del Perú (BNP),https://www.gob.pe/bnp,OTROS
+Instituto Nacional de Radio y Televisión del Perú (IRTP),https://www.gob.pe/irtp,INSTITUTO
+Proyecto Qhapaq - Sede Nacional (Qhapaqnan),https://www.gob.pe/proyecto-qhapaq-sede-nacional,OTROS
+Ministerio de Desarrollo e Inclusión Social (MIDIS),https://www.gob.pe/midis,MINISTERIO
+Organismo de Focalización e Información Social (OFIS),https://www.gob.pe/ofis,ORGANISMO
+"Instituto de Educacion Superior Pedagogico Publico ""mercedes Cabello de Carbonera"" (IESPPMCC)",https://www.gob.pe/iesppmercedescabellodecarbonera,INSTITUTO
+Directorio Nacional de Funcionarios Públicos,https://www.gob.pe/funcionariospublicos,OTROS
+Directorio de Establecimientos de Salud,https://www.gob.pe/establecimientosdesalud,OTROS
+Directorio Nacional de Aeropuertos,https://www.gob.pe/aeropuertosperu,OTROS
