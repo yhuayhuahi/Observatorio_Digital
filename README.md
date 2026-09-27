@@ -2,62 +2,97 @@
 
 ## Descripción del Proyecto
 
-El **Observatorio de Calidad Digital Pública** es un software interactivo que captura, procesa y visualiza automáticamente métricas de desempeño tecnológico de los portales gubernamentales del Estado peruano[cite: 2]. 
+El **Observatorio de Calidad Digital Pública** es una solución para monitorear la calidad técnica de los portales gubernamentales del Estado peruano. Captura métricas de disponibilidad, rendimiento y accesibilidad para generar evidencia sobre la experiencia digital de la ciudadanía.
 
-El proyecto aborda la desconexión entre el marco normativo de transformación digital (Ley de Gobierno Digital - D.L. 1412) y la experiencia real del ciudadano al realizar trámites digitales[cite: 2].
+El proyecto relaciona la calidad de los servicios digitales con el marco de gestión **ITIL v4**, los **Core Web Vitals** y las pautas de accesibilidad **WCAG 2.1**.
 
 ### Objetivos
-* **Objetivo del Producto:** Implementar un dashboard interactivo que monitoree continuamente la disponibilidad (*uptime*), velocidad de carga y nivel de accesibilidad (WCAG 2.1) de las plataformas estatales[cite: 2].
-* **Objetivo de Investigación:** Proponer un marco de gestión de calidad basado en **ITIL v4** (Gestión de Eventos y SLAs)[cite: 2] para reducir la ceguera operativa y reemplazar auditorías manuales costosas[cite: 2].
 
----
+* **Objetivo del producto:** Construir un dashboard público que muestre la disponibilidad (*uptime*), el rendimiento y la accesibilidad de los portales estatales.
+* **Objetivo de investigación:** Proponer un marco de gestión de calidad basado en ITIL v4 para identificar incidentes, evaluar niveles de servicio y reducir la dependencia de auditorías manuales.
 
-## Estado Actual del Proyecto: Recolección y Procesamiento de Datos
+## Estado Actual del Proyecto
 
-Actualmente se completó con éxito la fase de **extracción de datos (*web scraping*)** desde el portal oficial `gob.pe/estado`[cite: 2]:
+La **Fase 1 — Captura Cruda de Telemetría** está completada y operativa:
 
-* **Directorio Base Extraído:** Se capturaron **575 entidades públicas** estructuradas en formatos JSON y CSV[cite: 2].
-* **Selección de la Muestra:** A partir del universo extraído, se está depurando una muestra científicamente representativa de **89 entidades clave**[cite: 2]:
-  * **19** Ministerios (Poder Ejecutivo)[cite: 2].
-  * **25** Gobiernos Regionales (GOREs)[cite: 2].
-  * **30** Municipalidades provinciales estratégicas[cite: 2].
-  * **15** Organismos Autónomos (SUNAT, RENIEC, EsSalud, etc.)[cite: 2].
+* Se seleccionaron **90 entidades públicas**: 20 del Poder Ejecutivo, 25 Gobiernos Regionales, 30 municipalidades provinciales y 15 organismos autónomos.
+* El módulo [`packages/collector`](./packages/collector/) está implementado en Bun + TypeScript con arquitectura hexagonal.
+* La información se almacena en Supabase PostgreSQL: catálogo de entidades y mediciones crudas.
+* La auditoría consulta disponibilidad HTTP, Core Web Vitals y métricas de accesibilidad mediante Google PageSpeed.
+* GitHub Actions ejecuta una auditoría diaria a las **13:00 hora del Perú (18:00 UTC)**.
 
----
+La primera ejecución real fue validada correctamente y registró telemetría de los 90 portales. La **Fase 2** implementará el backend analítico y el dashboard.
 
-## Funcionalidades del Producto Final
+## Funcionalidades
 
-1. **Panel de Control General (Dashboard):** Ranking institucional con puntajes de cumplimiento (score 0-100) comparando ministerios, regiones y municipalidades[cite: 2].
-2. **Ficha Técnica por Entidad:** Medición del nivel de accesibilidad WCAG 2.1 (soporte para lectores de pantalla, contraste), rendimiento móvil/desktop y estado de certificados SSL[cite: 2].
-3. **Rastreador de Disponibilidad (Uptime Tracker):** Gráficos de caídas de servicio e historial de latencia en tiempo real[cite: 2].
-
----
+1. **Captura de disponibilidad:** estado HTTP, tiempo de respuesta, errores de DNS, timeouts y problemas de SSL.
+2. **Auditoría de rendimiento:** métricas Core Web Vitals y puntuación de PageSpeed.
+3. **Evaluación de accesibilidad:** métricas automatizadas relacionadas con WCAG 2.1.
+4. **Persistencia histórica:** almacenamiento de mediciones para analizar tendencias, SLAs e incidentes.
+5. **Automatización:** ejecución programada o manual mediante GitHub Actions.
 
 ## Stack Tecnológico
 
-* **Backend & Web Scraping:** Python (`requests`, `beautifulsoup4`, `pandas`)[cite: 2].
-* **Automatización / Monitoreo:** GitHub Actions (ejecución programada de tareas periódicas via Cron Jobs).
-* **Métricas de Performance:** Google PageSpeed Insights API & auditorías Lighthouse[cite: 2].
-* **Base de Datos:** PostgreSQL (Supabase / Neon).
-* **Frontend:** Next.js / Astro con Tailwind CSS.
-* **Visualización de Datos:** Recharts / Chart.js.
-* **Hosting:** Vercel.
-
----
+* **Runtime y lenguaje:** Bun + TypeScript.
+* **Captura:** módulo propio con sonda HTTP nativa.
+* **Auditoría:** Google PageSpeed Insights API / Lighthouse.
+* **Base de datos:** PostgreSQL en Supabase.
+* **Automatización:** GitHub Actions.
+* **Backend y dashboard:** Bun y Astro, previstos para la Fase 2.
 
 ## Estructura del Repositorio
 
 ~~~text
 .
-├── README.md
-├── resumen.md
-└── scraping
-    ├── entidades_gob_pe.csv
-    ├── entidades_gob_pe.json
-    ├── main.py
-    ├── pyproject.toml
-    ├── README.md
-    └── uv.lock
-
-2 directories, 8 files
+├── .github/
+│   └── workflows/
+│       └── daily-audit.yml
+├── docs/
+│   ├── ADRs/
+│   ├── architecture/
+│   ├── schemes/
+│   ├── contexto.md
+│   ├── requerimientos_funcionales.md
+│   └── requerimientos_no_funcionales.md
+├── packages/
+│   ├── collector/                 # Captura cruda de telemetría (Fase 1)
+│   └── second_test/               # Pruebas de conexión y validación
+├── scraping/                      # Extracción y selección inicial de entidades
+├── HANDOFF.md
+└── README.md
 ~~~
+
+## Uso Rápido
+
+Para ejecutar el collector localmente:
+
+~~~bash
+cd packages/collector
+bun install
+bun run start
+~~~
+
+También se puede ejecutar una auditoría solo HTTP, sin consumir cuota de Google:
+
+~~~bash
+AUDIT_SOLO_HTTP=true bun run start
+~~~
+
+Las variables de entorno requeridas son `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` y `GOOGLE_PAGESPEED_API_KEY`. No deben incluirse en el repositorio.
+
+## Documentación
+
+* [Documento de traspaso técnico](./HANDOFF.md)
+* [Contexto de la investigación](./docs/contexto.md)
+* [Arquitectura del sistema](./docs/architecture/arquitectura_del_sistema.md)
+* [Modelo de base de datos](./docs/schemes/modelo_base_datos.md)
+* [Requerimientos funcionales](./docs/requerimientos_funcionales.md)
+* [Requerimientos no funcionales](./docs/requerimientos_no_funcionales.md)
+* [Decisiones arquitectónicas](./docs/ADRs/README.md)
+
+## Próximos Pasos — Fase 2
+
+* Implementar el backend REST en `apps/api/`.
+* Calcular SLAs, incidentes y puntajes de calidad.
+* Implementar el dashboard público en `apps/dashboard/`.
+* Habilitar reportes exportables en CSV y JSON.
