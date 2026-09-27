@@ -1,0 +1,77 @@
+[
+    {
+        "nombre":"Superintendencia Nacional de Aduanas y de Administración Tributaria (SUNAT)",
+        "url":"https:\/\/www.sunat.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Registro Nacional de Identificación y Estado Civil (RENIEC)",
+        "url":"https:\/\/www.gob.pe\/reniec",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Seguro Social de Salud (EsSalud)",
+        "url":"https:\/\/www.essalud.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Superintendencia Nacional de los Registros Públicos (SUNARP)",
+        "url":"https:\/\/www.sunarp.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Instituto Nacional de Estadística e Informática (INEI)",
+        "url":"https:\/\/www.inei.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Organismo Supervisor de la Inversión en Energía y Minería (OSINERGMIN)",
+        "url":"https:\/\/www.osinergmin.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Organismo Supervisor de la Inversión en Telecomunicaciones (OSIPTEL)",
+        "url":"https:\/\/www.osiptel.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Superintendencia Nacional de Educación Superior Universitaria (SUNEDU)",
+        "url":"https:\/\/www.sunedu.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Superintendencia Nacional de Fiscalización Laboral (SUNAFIL)",
+        "url":"https:\/\/www.sunafil.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Organismo de Evaluación y Fiscalización Ambiental (OEFA)",
+        "url":"https:\/\/www.oefa.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Superintendencia Nacional de Servicios de Saneamiento (SUNASS)",
+        "url":"https:\/\/www.sunass.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Superintendencia de Transporte Terrestre de Personas, Carga y Mercancías (SUTRAN)",
+        "url":"https:\/\/www.sutran.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Instituto Nacional de Defensa de la Competencia y de la Protección de la Propiedad Intelectual (INDECOPI)",
+        "url":"https:\/\/www.indecopi.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Instituto Nacional de Calidad (INACAL)",
+        "url":"https:\/\/www.inacal.gob.pe",
+        "categoria":"Organismo Autónomo"
+    },
+    {
+        "nombre":"Banco Central de Reserva del Perú (BCRP)",
+        "url":"https:\/\/www.gob.pe\/banco-central-de-reserva-del-peru",
+        "categoria":"Organismo Autónomo"
+    }
+]

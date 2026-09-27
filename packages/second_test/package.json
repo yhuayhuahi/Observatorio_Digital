@@ -1,0 +1,16 @@
+{
+  "name": "@observatorio/second_test",
+  "version": "1.0.0",
+  "description": "Pruebas de conexión previa para el Observatorio Digital",
+  "main": "test-connection.ts",
+  "type": "module",
+  "scripts": {
+    "test:connection": "bun run test-connection.ts",
+    "seed": "bun run seed-entities.ts",
+    "setup": "bun run setup-database.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "postgres": "^3.4.9"
+  }
+}

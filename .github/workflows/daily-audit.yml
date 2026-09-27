@@ -1,0 +1,70 @@
+name: 🇵🇪 Auditoría Diaria — Observatorio de Calidad Digital
+
+on:
+  # Cron diario a las 05:00 UTC = 00:00 hora Perú (UTC-5)
+  schedule:
+    - cron: '0 5 * * *'
+
+  # Trigger manual desde la UI o CLI de GitHub
+  workflow_dispatch:
+    inputs:
+      solo_http:
+        description: 'Solo sonda HTTP (omitir PageSpeed). Útil para debug rápido.'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+      batch_size:
+        description: 'Entidades en paralelo por lote (1-5). Default: 3'
+        required: false
+        default: '3'
+      delay_ms:
+        description: 'Pausa entre lotes en ms. Default: 1500'
+        required: false
+        default: '1500'
+
+jobs:
+  audit:
+    name: Captura Cruda de Telemetría
+    runs-on: ubuntu-latest
+    timeout-minutes: 60   # Timeout máximo: 90 portales × ~30s promedio / lotes de 3
+
+    steps:
+      - name: 📥 Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: ⚡ Instalar Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.2'
+
+      - name: 📦 Instalar dependencias del módulo collector
+        working-directory: packages/collector
+        run: bun install --frozen-lockfile
+
+      - name: 🚀 Ejecutar auditoría de los 90 portales
+        working-directory: packages/collector
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          GOOGLE_PAGESPEED_API_KEY: ${{ secrets.GOOGLE_PAGESPEED_API_KEY }}
+          # Flags configurables por workflow_dispatch (o defaults para cron)
+          AUDIT_BATCH_SIZE: ${{ github.event.inputs.batch_size || '3' }}
+          AUDIT_DELAY_MS: ${{ github.event.inputs.delay_ms || '1500' }}
+          AUDIT_SOLO_HTTP: ${{ github.event.inputs.solo_http || 'false' }}
+        run: bun run start
+
+      - name: 📋 Resumen de ejecución
+        if: always()
+        run: |
+          echo "### 🇵🇪 Observatorio de Calidad Digital — Auditoría ${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Campo | Valor |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 📅 Fecha | $(date -u '+%Y-%m-%d %H:%M UTC') |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔢 Run | #${{ github.run_number }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ⚡ Trigger | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🧩 Lote | ${{ github.event.inputs.batch_size || '3' }} entidades/lote |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🌐 Solo HTTP | ${{ github.event.inputs.solo_http || 'false' }} |" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,252 @@
+[
+    {
+        "nombre":"Gobierno Regional Tacna (Gore Tacna)",
+        "url":"https:\/\/www.gob.pe\/regiontacna",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Tacna",
+        "url":"http:\/\/www.regiontacna.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Huancavelica (Gore Huancavelica)",
+        "url":"https:\/\/www.gob.pe\/regionhuancavelica",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Huancavelica",
+        "url":"http:\/\/www.regionhuancavelica.gob.pe\/",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Lima (Gore Lima)",
+        "url":"https:\/\/www.gob.pe\/regionlima",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Lima",
+        "url":"http:\/\/www.regionlima.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Apurímac (Gore Apurímac)",
+        "url":"https:\/\/www.gob.pe\/regionapurimac",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Apurímac",
+        "url":"http:\/\/www.regionapurimac.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Callao (Gore Callao)",
+        "url":"https:\/\/www.gob.pe\/regioncallao",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Callao",
+        "url":"http:\/\/www.regioncallao.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Ayacucho (Gore Ayacucho)",
+        "url":"https:\/\/www.gob.pe\/regionayacucho",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Ayacucho",
+        "url":"http:\/\/www.regionayacucho.gob.pe\/index.php",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional San Martín (Gore San Martín)",
+        "url":"https:\/\/www.gob.pe\/regionsanmartin",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional San Martín",
+        "url":"http:\/\/www.regionsanmartin.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Cusco (Gore Cusco)",
+        "url":"https:\/\/www.gob.pe\/regioncusco",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Cusco",
+        "url":"http:\/\/www.regioncusco.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Madre de Dios (Gore Madre de Dios)",
+        "url":"https:\/\/www.gob.pe\/regionmadrededios",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Madre de Dios",
+        "url":"http:\/\/www.regionmadrededios.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Loreto (Gore Loreto)",
+        "url":"https:\/\/www.gob.pe\/regionloreto",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Loreto",
+        "url":"http:\/\/www.regionloreto.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Ica (Gore Ica)",
+        "url":"https:\/\/www.gob.pe\/regionica",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Ica",
+        "url":"https:\/\/www.regionica.gob.pe\/web\/",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Ucayali (Gore Ucayali)",
+        "url":"https:\/\/www.gob.pe\/regionucayali",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Ucayali",
+        "url":"http:\/\/www.regionucayali.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Puno (Gore Puno)",
+        "url":"https:\/\/www.gob.pe\/regionpuno",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Puno",
+        "url":"http:\/\/www.regionpuno.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Arequipa (Gore Arequipa)",
+        "url":"https:\/\/www.gob.pe\/regionarequipa",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Arequipa",
+        "url":"https:\/\/old.regionarequipa.gob.pe\/",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional la Libertad (Gore La Libertad)",
+        "url":"https:\/\/www.gob.pe\/regionlalibertad",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional la Libertad",
+        "url":"http:\/\/www.regionlalibertad.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Tumbes (Gore Tumbes)",
+        "url":"https:\/\/www.gob.pe\/regiontumbes",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Tumbes",
+        "url":"http:\/\/regiontumbes.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Cajamarca (Gore Cajamarca)",
+        "url":"https:\/\/www.gob.pe\/regioncajamarca",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Cajamarca",
+        "url":"https:\/\/www.regioncajamarca.gob.pe\/",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Pasco (Gore Pasco)",
+        "url":"https:\/\/www.gob.pe\/regionpasco",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Pasco",
+        "url":"http:\/\/www.regionpasco.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Junín (Gore Junín)",
+        "url":"https:\/\/www.gob.pe\/regionjunin",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Junín",
+        "url":"http:\/\/www.regionjunin.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Amazonas (Gore Amazonas)",
+        "url":"https:\/\/www.gob.pe\/regionamazonas",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Amazonas",
+        "url":"http:\/\/www.regionamazonas.gob.pe\/sisadport\/portal\/index.html#\/home",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Huánuco (Gore Huánuco)",
+        "url":"https:\/\/www.gob.pe\/regionhuanuco",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Huánuco",
+        "url":"http:\/\/www.regionhuanuco.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Piura (Gore Piura)",
+        "url":"https:\/\/www.gob.pe\/regionpiura",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Piura",
+        "url":"http:\/\/www.regionpiura.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Ancash (Gore Ancash)",
+        "url":"https:\/\/www.gob.pe\/regionancash",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Ancash",
+        "url":"https:\/\/regionancash.gob.pe\/portalweb.php",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Lambayeque (Gore Lambayeque)",
+        "url":"https:\/\/www.gob.pe\/regionlambayeque",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Lambayeque",
+        "url":"http:\/\/www.regionlambayeque.gob.pe",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Gobierno Regional Moquegua (Gore Moquegua)",
+        "url":"https:\/\/www.gob.pe\/regionmoquegua",
+        "categoria":"GORE"
+    },
+    {
+        "nombre":"Web de Gobierno Regional Moquegua",
+        "url":"http:\/\/www.regionmoquegua.gob.pe",
+        "categoria":"GORE"
+    }
+]

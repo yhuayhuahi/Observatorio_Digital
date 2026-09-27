@@ -1,0 +1,20 @@
+# Variables de entorno sensibles — NUNCA COMMITEAR
+**/.env
+**/.env.local
+**/.env.production
+
+# Dependencias
+**/node_modules/
+
+# Bun lockfile (se puede incluir opcionalmente)
+# bun.lock
+
+# Python
+**/__pycache__/
+**/.venv/
+**/*.pyc
+scraping/.envrc
+
+# Misc
+.DS_Store
+*.log

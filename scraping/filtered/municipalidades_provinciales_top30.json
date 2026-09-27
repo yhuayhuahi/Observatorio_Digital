@@ -1,0 +1,194 @@
+[
+    {
+        "nombre":"Municipalidad Provincial de Casma (MPC)",
+        "url":"https:\/\/www.gob.pe\/municasma",
+        "region":"Ancash",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Huaraz (MPH)",
+        "url":"https:\/\/www.gob.pe\/munihuaraz",
+        "region":"Ancash",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Arequipa (MPA)",
+        "url":"https:\/\/www.gob.pe\/muniarequipa",
+        "region":"Arequipa",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Castilla - Arequipa (MPC)",
+        "url":"https:\/\/www.gob.pe\/municastilla-arequipa",
+        "region":"Arequipa",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Cajamarca (MPC)",
+        "url":"https:\/\/www.gob.pe\/municajamarca",
+        "region":"Cajamarca",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Jaén (MPJ)",
+        "url":"https:\/\/www.gob.pe\/munijaen",
+        "region":"Cajamarca",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial del Cusco (MPC)",
+        "url":"https:\/\/www.gob.pe\/municusco",
+        "region":"Cusco",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de la Convención (MPLC)",
+        "url":"https:\/\/www.gob.pe\/munilaconvencion",
+        "region":"Cusco",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Quispicanchi (MPQ)",
+        "url":"https:\/\/www.gob.pe\/muniquispicanchi",
+        "region":"Cusco",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Huancavelica (MPH)",
+        "url":"https:\/\/www.gob.pe\/munihuancavelica",
+        "region":"Huancavelica",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Huánuco (MPH)",
+        "url":"https:\/\/www.gob.pe\/munihuanuco",
+        "region":"Huánuco",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Chincha (MPCH)",
+        "url":"https:\/\/www.gob.pe\/munichincha",
+        "region":"Ica",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Ica (MPIca)",
+        "url":"https:\/\/www.gob.pe\/muniica",
+        "region":"Ica",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Concepción (MPC)",
+        "url":"https:\/\/www.gob.pe\/municoncepcion-junin",
+        "region":"Junín",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Huancayo (MPH)",
+        "url":"https:\/\/www.gob.pe\/munihuancayo",
+        "region":"Junín",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Ascope (MPAscope)",
+        "url":"https:\/\/www.gob.pe\/muniascope",
+        "region":"La Libertad",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Pacasmayo (MPP)",
+        "url":"https:\/\/www.gob.pe\/munipacasmayo",
+        "region":"La Libertad",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Trujillo (MPT)",
+        "url":"https:\/\/www.gob.pe\/munitrujillo",
+        "region":"La Libertad",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Chiclayo (MPCH)",
+        "url":"https:\/\/www.gob.pe\/munichiclayo",
+        "region":"Lambayeque",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Ferreñafe (MPF)",
+        "url":"https:\/\/www.gob.pe\/muniferrenafe",
+        "region":"Lambayeque",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Barranca (MPB)",
+        "url":"https:\/\/www.gob.pe\/munibarranca",
+        "region":"Lima",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Huaura (MPH)",
+        "url":"https:\/\/www.gob.pe\/munihuaura",
+        "region":"Lima",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Metropolitana de Lima (MML)",
+        "url":"https:\/\/www.gob.pe\/munilima",
+        "region":"Lima",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Pasco (MPP)",
+        "url":"https:\/\/www.gob.pe\/munipasco",
+        "region":"Pasco",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Sullana (MPS)",
+        "url":"https:\/\/www.gob.pe\/munisullana",
+        "region":"Piura",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Piura (MPP)",
+        "url":"https:\/\/www.gob.pe\/munipiura",
+        "region":"Piura",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Azángaro (MPA)",
+        "url":"https:\/\/www.gob.pe\/muniazangaro",
+        "region":"Puno",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Puno (MPP)",
+        "url":"https:\/\/www.gob.pe\/munipuno",
+        "region":"Puno",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Moyobamba (MPM)",
+        "url":"https:\/\/www.gob.pe\/munimoyobamba",
+        "region":"San Martín",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial Jorge Basadre (MPJB)",
+        "url":"https:\/\/www.gob.pe\/munijorgebasadre",
+        "region":"Tacna",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Tacna (MPT)",
+        "url":"https:\/\/www.gob.pe\/munitacna",
+        "region":"Tacna",
+        "categoria":"Municipalidad Provincial"
+    },
+    {
+        "nombre":"Municipalidad Provincial de Coronel Portillo (MPCP)",
+        "url":"https:\/\/www.gob.pe\/municoronelportillo",
+        "region":"Ucayali",
+        "categoria":"Municipalidad Provincial"
+    }
+]

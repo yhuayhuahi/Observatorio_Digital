@@ -1,0 +1,97 @@
+[
+    {
+        "nombre":"Presidencia de la República del Perú (Presidencia)",
+        "url":"https:\/\/www.gob.pe\/presidencia",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Presidencia del Consejo de Ministros (PCM)",
+        "url":"https:\/\/www.gob.pe\/pcm",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Relaciones Exteriores (RREE)",
+        "url":"https:\/\/www.gob.pe\/rree",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Defensa (MINDEF)",
+        "url":"https:\/\/www.gob.pe\/mindef",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Economía y Finanzas (MEF)",
+        "url":"https:\/\/www.gob.pe\/mef",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio del Interior (MININTER)",
+        "url":"https:\/\/www.gob.pe\/mininter",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Justicia y Derechos Humanos (MINJUSDH)",
+        "url":"https:\/\/www.gob.pe\/minjus",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Educación (MINEDU)",
+        "url":"https:\/\/www.gob.pe\/minedu",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Salud (MINSA)",
+        "url":"https:\/\/www.gob.pe\/minsa",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Desarrollo Agrario y Riego (MIDAGRI)",
+        "url":"https:\/\/www.gob.pe\/midagri",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Trabajo y Promoción del Empleo (MTPE)",
+        "url":"https:\/\/www.gob.pe\/mtpe",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de la Producción (PRODUCE)",
+        "url":"https:\/\/www.gob.pe\/produce",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Comercio Exterior y Turismo (MINCETUR)",
+        "url":"https:\/\/www.gob.pe\/mincetur",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Vivienda, Construcción y Saneamiento (VIVIENDA)",
+        "url":"https:\/\/www.gob.pe\/vivienda",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio del Ambiente (MINAM)",
+        "url":"https:\/\/www.gob.pe\/minam",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Desarrollo e Inclusión Social (MIDIS)",
+        "url":"https:\/\/www.gob.pe\/midis",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Cultura (Cultura)",
+        "url":"https:\/\/www.gob.pe\/cultura",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Transportes y Comunicaciones (MTC)",
+        "url":"https:\/\/www.gob.pe\/mtc",
+        "categoria":"Ministerio"
+    },
+    {
+        "nombre":"Ministerio de Energía y Minas (MINEM)",
+        "url":"https:\/\/www.gob.pe\/minem",
+        "categoria":"Ministerio"
+    }
+]

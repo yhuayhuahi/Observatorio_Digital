@@ -1,0 +1,17 @@
+{
+  "name": "@observatorio/collector",
+  "version": "1.0.0",
+  "description": "Módulo de Captura Cruda de Telemetría — Observatorio de Calidad Digital Pública del Perú",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "bun run src/cli.ts",
+    "dev": "bun --watch src/cli.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
