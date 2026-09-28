@@ -149,11 +149,11 @@ Donde cada dimensión se calcula sobre una escala normalizada de 0 a 100:
    *Si el portal estuvo 100% disponible en sus mediciones, $\text{ScoreDisp} = 100$. Si estuvo caído la mitad del tiempo, $\text{ScoreDisp} = 50$.*
 
 2. **Sub-score de Rendimiento Core Web Vitals ($\text{ScorePerf}_i$):**
-   $$\text{ScorePerf}_i = \text{Media de los últimos 7 días de } \texttt{score\_desempeno} \text{ (Lighthouse)}$$
-   *Si $\texttt{score\_desempeno}$ es `null` por fallo de auditoría, se utiliza el valor válido más reciente en una ventana de 14 días.*
+   $$\text{ScorePerf}_i = \text{Media de los últimos 7 días de } \texttt{score\\_desempeno} \text{ (Lighthouse)}$$
+   *Si $\texttt{score\\_desempeno}$ es `null` por fallo de auditoría, se utiliza el valor válido más reciente en una ventana de 14 días.*
 
 3. **Sub-score de Accesibilidad WCAG 2.1 ($\text{ScoreAcc}_i$):**
-   $$\text{ScoreAcc}_i = \max\left(0, \texttt{score\_accesibilidad} - (\text{Violaciones Críticas} \times 5)\right)$$
+   $$\text{ScoreAcc}_i = \max\left(0, \texttt{score\\_accesibilidad} - (\text{Violaciones Críticas} \times 5)\right)$$
    *Garantiza penalización estricta por barreras insalvables para usuarios con discapacidad.*
 
 ---
