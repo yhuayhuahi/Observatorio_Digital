@@ -51,7 +51,7 @@ graph TD
     subgraph Pages
         DL --> P_Home[index.astro - Portada]
         DL --> P_Rank[ranking.astro - Ranking]
-        DL --> P_Ent[entidad/[id].astro - Ficha]
+        DL --> P_Ent["entidad/[id].astro - Ficha"]
         DL --> P_Inc[incidentes.astro - Incidentes]
         DL --> P_Rep[reportes.astro - Descargas]
     end
