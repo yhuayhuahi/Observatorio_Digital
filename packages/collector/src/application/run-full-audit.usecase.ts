@@ -9,7 +9,6 @@ import type { IHttpProbe } from '../core/ports/http-probe.port.ts';
 import type { IAuditService } from '../core/ports/audit-service.port.ts';
 import type { RawMeasurement } from '../core/models/measurement.model.ts';
 import type { Entity } from '../core/models/entity.model.ts';
-import { runInBatches } from './rate-limiter.ts';
 
 export interface AuditSummary {
   totalEntidades: number;
@@ -51,11 +50,11 @@ export class RunFullAuditUseCase {
     let exitosas = 0;
     let conErrorHttp = 0;
     let conErrorPageSpeed = 0;
-    const measurementsToSave: RawMeasurement[] = []; // ← **Array temporal para cada lote**
+    const measurementsToSave: RawMeasurement[] = [];
 
     // 3. Función para procesar un lote de entidades
     const processBatch = async (batchEntities: Entity[]) => {
-      measurementsToSave.length = 0; // ← **Vaciar el array para el nuevo lote**
+      measurementsToSave.length = 0; // Vaciar el array para el nuevo lote
 
       for (const entity of batchEntities) {
         const measurement = await this.auditEntity(entity, soloHttp);
@@ -79,7 +78,7 @@ export class RunFullAuditUseCase {
         }
       }
 
-      // **Guardar el lote actual en Supabase** (no esperar a que terminen todos)
+      // Guardar el lote actual en Supabase
       if (measurementsToSave.length > 0) {
         console.log(`\n💾 Guardando lote de ${measurementsToSave.length} mediciones en Supabase...`);
         try {
@@ -87,7 +86,6 @@ export class RunFullAuditUseCase {
           console.log(`   ✅ Lote guardado.`);
         } catch (error) {
           console.error(`   ⚠️  Error al guardar lote: ${error instanceof Error ? error.message : String(error)}`);
-          // **No fallar el proceso completo por un error en un lote**
         }
       }
     };
@@ -97,12 +95,11 @@ export class RunFullAuditUseCase {
     if (soloHttp) console.log('   ℹ️  Modo soloHttp: omitiendo auditoría PageSpeed.');
     console.log('');
 
-    // Dividir entidades en lotes y procesar cada lote
     for (let i = 0; i < entities.length; i += batchSize) {
       const batchEntities = entities.slice(i, i + batchSize);
       await processBatch(batchEntities);
       if (i + batchSize < entities.length) {
-        await new Promise(resolve => setTimeout(resolve, delayMs)); // Pausa entre lotes
+        await new Promise(resolve => setTimeout(resolve, delayMs));
       }
     }
 
