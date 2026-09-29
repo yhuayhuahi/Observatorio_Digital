@@ -31,6 +31,12 @@ export async function runInBatches<T>(
   options: Partial<RateLimiterOptions> = {}
 ): Promise<T[]> {
   const { batchSize, delayBetweenBatchesMs } = { ...DEFAULTS, ...options };
+  if (!Number.isInteger(batchSize) || batchSize < 1) {
+    throw new Error(`batchSize debe ser un entero mayor que 0 (recibido: ${batchSize})`);
+  }
+  if (!Number.isFinite(delayBetweenBatchesMs) || delayBetweenBatchesMs < 0) {
+    throw new Error(`delayBetweenBatchesMs debe ser un número no negativo (recibido: ${delayBetweenBatchesMs})`);
+  }
   const results: T[] = [];
 
   const totalBatches = Math.ceil(tasks.length / batchSize);

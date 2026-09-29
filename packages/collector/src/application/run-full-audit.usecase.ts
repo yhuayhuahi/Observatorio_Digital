@@ -9,6 +9,7 @@ import type { IHttpProbe } from '../core/ports/http-probe.port.ts';
 import type { IAuditService } from '../core/ports/audit-service.port.ts';
 import type { RawMeasurement } from '../core/models/measurement.model.ts';
 import type { Entity } from '../core/models/entity.model.ts';
+import { runInBatches } from './rate-limiter.ts';
 
 export interface AuditSummary {
   totalEntidades: number;
@@ -50,15 +51,15 @@ export class RunFullAuditUseCase {
     let exitosas = 0;
     let conErrorHttp = 0;
     let conErrorPageSpeed = 0;
-    const measurementsToSave: RawMeasurement[] = [];
+    // 3. Procesar en paralelo controlado y conservar todas las mediciones para
+    // persistirlas en una única operación al terminar la captura.
+    console.log(`🚀 Iniciando auditoría de ${entities.length} entidades (lotes de ${batchSize})...`);
+    if (soloHttp) console.log('   ℹ️  Modo soloHttp: omitiendo auditoría PageSpeed.');
+    console.log('');
 
-    // 3. Función para procesar un lote de entidades
-    const processBatch = async (batchEntities: Entity[]) => {
-      measurementsToSave.length = 0; // Vaciar el array para el nuevo lote
-
-      for (const entity of batchEntities) {
+    const measurements = await runInBatches(
+      entities.map((entity) => async () => {
         const measurement = await this.auditEntity(entity, soloHttp);
-        measurementsToSave.push(measurement);
 
         if (!measurement.probe.disponible) {
           conErrorHttp++;
@@ -76,31 +77,16 @@ export class RunFullAuditUseCase {
             `  ✅ [${entity.id}] ${entity.nombre} — HTTP ${measurement.probe.statusCode} (${measurement.probe.tiempoRespuestaMs}ms) | Perf:${perf} A11y:${a11y} LCP:${lcp}`
           );
         }
-      }
 
-      // Guardar el lote actual en Supabase
-      if (measurementsToSave.length > 0) {
-        console.log(`\n💾 Guardando lote de ${measurementsToSave.length} mediciones en Supabase...`);
-        try {
-          await this.measurementRepo.saveBatch(measurementsToSave);
-          console.log(`   ✅ Lote guardado.`);
-        } catch (error) {
-          console.error(`   ⚠️  Error al guardar lote: ${error instanceof Error ? error.message : String(error)}`);
-        }
-      }
-    };
+        return measurement;
+      }),
+      { batchSize, delayBetweenBatchesMs: delayMs }
+    );
 
-    // 4. Procesar entidades en lotes y guardar cada lote
-    console.log(`🚀 Iniciando auditoría de ${entities.length} entidades (lotes de ${batchSize})...`);
-    if (soloHttp) console.log('   ℹ️  Modo soloHttp: omitiendo auditoría PageSpeed.');
-    console.log('');
-
-    for (let i = 0; i < entities.length; i += batchSize) {
-      const batchEntities = entities.slice(i, i + batchSize);
-      await processBatch(batchEntities);
-      if (i + batchSize < entities.length) {
-        await new Promise(resolve => setTimeout(resolve, delayMs));
-      }
+    if (measurements.length > 0) {
+      console.log(`\n💾 Guardando ${measurements.length} mediciones en Supabase...`);
+      await this.measurementRepo.saveBatch(measurements);
+      console.log('   ✅ Mediciones guardadas.');
     }
 
     const duracionMs = Math.round(performance.now() - startTime);
