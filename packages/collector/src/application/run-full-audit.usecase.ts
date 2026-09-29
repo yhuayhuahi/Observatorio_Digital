@@ -1,7 +1,6 @@
 // =============================================================================
 // CASO DE USO: RunFullAuditUseCase
-// Orquestador principal de la auditoría diaria de las 90 entidades.
-// Coordina: lectura de entidades → sonda HTTP → auditoría PageSpeed → persistencia.
+// **MODIFICADO: Guarda cada lote de mediciones a medida que se procesa**
 // =============================================================================
 
 import type { IEntityRepository } from '../core/ports/entity-repository.port.ts';
@@ -21,11 +20,8 @@ export interface AuditSummary {
 }
 
 export interface RunFullAuditOptions {
-  /** Entidades en paralelo por lote (default: 3) */
   batchSize?: number;
-  /** Pausa entre lotes en ms (default: 1500) */
   delayMs?: number;
-  /** Si TRUE, omite la auditoría PageSpeed (solo probe HTTP). Útil para pruebas rápidas. */
   soloHttp?: boolean;
 }
 
@@ -41,7 +37,7 @@ export class RunFullAuditUseCase {
     const { batchSize = 3, delayMs = 1500, soloHttp = false } = options;
     const startTime = performance.now();
 
-    // 1. Cargar entidades activas del catálogo maestro
+    // 1. Cargar entidades activas
     console.log('\n📋 Leyendo entidades activas desde Supabase...');
     const entities = await this.entityRepo.getActiveEntities();
     console.log(`   ✅ ${entities.length} entidades activas cargadas.\n`);
@@ -51,45 +47,64 @@ export class RunFullAuditUseCase {
       return { totalEntidades: 0, exitosas: 0, conErrorHttp: 0, conErrorPageSpeed: 0, duracionMs: 0 };
     }
 
-    // 2. Construir tareas como funciones lazy para el rate limiter
+    // 2. Contadores
     let exitosas = 0;
     let conErrorHttp = 0;
     let conErrorPageSpeed = 0;
-    const measurementsToSave: RawMeasurement[] = [];
+    const measurementsToSave: RawMeasurement[] = []; // ← **Array temporal para cada lote**
 
-    const tasks = entities.map((entity) => async (): Promise<void> => {
-      const measurement = await this.auditEntity(entity, soloHttp);
-      measurementsToSave.push(measurement);
+    // 3. Función para procesar un lote de entidades
+    const processBatch = async (batchEntities: Entity[]) => {
+      measurementsToSave.length = 0; // ← **Vaciar el array para el nuevo lote**
 
-      if (!measurement.probe.disponible) {
-        conErrorHttp++;
-        console.log(`  ❌ [${entity.id}] ${entity.nombre} — HTTP ${measurement.probe.statusCode ?? 'ERR'} (${measurement.probe.errorConexion ?? 'no disponible'})`);
-      } else if (measurement.audit?.errorAuditoria) {
-        conErrorPageSpeed++;
-        exitosas++;
-        console.log(`  ⚠️  [${entity.id}] ${entity.nombre} — HTTP ✓ | PageSpeed Error: ${measurement.audit.errorAuditoria}`);
-      } else {
-        exitosas++;
-        const perf = measurement.audit?.scoreDesempeno ?? '—';
-        const a11y = measurement.audit?.scoreAccesibilidad ?? '—';
-        const lcp = measurement.audit?.lcpSegundos != null ? `${measurement.audit.lcpSegundos}s` : '—';
-        console.log(
-          `  ✅ [${entity.id}] ${entity.nombre} — HTTP ${measurement.probe.statusCode} (${measurement.probe.tiempoRespuestaMs}ms) | Perf:${perf} A11y:${a11y} LCP:${lcp}`
-        );
+      for (const entity of batchEntities) {
+        const measurement = await this.auditEntity(entity, soloHttp);
+        measurementsToSave.push(measurement);
+
+        if (!measurement.probe.disponible) {
+          conErrorHttp++;
+          console.log(`  ❌ [${entity.id}] ${entity.nombre} — HTTP ${measurement.probe.statusCode ?? 'ERR'} (${measurement.probe.errorConexion ?? 'no disponible'})`);
+        } else if (measurement.audit?.errorAuditoria) {
+          conErrorPageSpeed++;
+          exitosas++;
+          console.log(`  ⚠️  [${entity.id}] ${entity.nombre} — HTTP ✓ | PageSpeed Error: ${measurement.audit.errorAuditoria}`);
+        } else {
+          exitosas++;
+          const perf = measurement.audit?.scoreDesempeno ?? '—';
+          const a11y = measurement.audit?.scoreAccesibilidad ?? '—';
+          const lcp = measurement.audit?.lcpSegundos != null ? `${measurement.audit.lcpSegundos}s` : '—';
+          console.log(
+            `  ✅ [${entity.id}] ${entity.nombre} — HTTP ${measurement.probe.statusCode} (${measurement.probe.tiempoRespuestaMs}ms) | Perf:${perf} A11y:${a11y} LCP:${lcp}`
+          );
+        }
       }
-    });
 
-    // 3. Ejecutar en lotes controlados
+      // **Guardar el lote actual en Supabase** (no esperar a que terminen todos)
+      if (measurementsToSave.length > 0) {
+        console.log(`\n💾 Guardando lote de ${measurementsToSave.length} mediciones en Supabase...`);
+        try {
+          await this.measurementRepo.saveBatch(measurementsToSave);
+          console.log(`   ✅ Lote guardado.`);
+        } catch (error) {
+          console.error(`   ⚠️  Error al guardar lote: ${error instanceof Error ? error.message : String(error)}`);
+          // **No fallar el proceso completo por un error en un lote**
+        }
+      }
+    };
+
+    // 4. Procesar entidades en lotes y guardar cada lote
     console.log(`🚀 Iniciando auditoría de ${entities.length} entidades (lotes de ${batchSize})...`);
     if (soloHttp) console.log('   ℹ️  Modo soloHttp: omitiendo auditoría PageSpeed.');
     console.log('');
 
-    await runInBatches(tasks, { batchSize, delayBetweenBatchesMs: delayMs });
-
-    // 4. Persistir todas las mediciones en un solo batch a Supabase
-    console.log(`\n💾 Guardando ${measurementsToSave.length} mediciones en Supabase...`);
-    await this.measurementRepo.saveBatch(measurementsToSave);
-    console.log(`   ✅ Persistencia completada.`);
+    // Dividir entidades en lotes y procesar cada lote
+    for (let i = 0; i < entities.length; i += batchSize) {
+      const batchEntities = entities.slice(i, i + batchSize);
+      await processBatch(batchEntities);
+      if (i + batchSize < entities.length) {
+        await new Promise(resolve => setTimeout(resolve, delayMs)); // Pausa entre lotes
+      }
+    }
 
     const duracionMs = Math.round(performance.now() - startTime);
 
@@ -104,11 +119,8 @@ export class RunFullAuditUseCase {
 
   private async auditEntity(entity: Entity, soloHttp: boolean): Promise<RawMeasurement> {
     const fechaCaptura = new Date();
-
-    // Sonda HTTP siempre ejecuta
     const probe = await this.httpProbe.checkAvailability(entity.url);
 
-    // Auditoría PageSpeed solo si el portal responde y no estamos en modo soloHttp
     let audit = null;
     if (!soloHttp && probe.disponible) {
       audit = await this.auditService.runAudit(entity.url);
