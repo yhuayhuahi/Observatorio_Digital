@@ -1,7 +1,7 @@
 // =============================================================================
 // ADAPTADOR: SupabaseMeasurementRepo
 // Implementa IMeasurementRepository usando @supabase/supabase-js.
-// Mapea el modelo de dominio RawMeasurement al esquema de mediciones_crudas.
+// **Modificado para evitar timeout en inserciones masivas.**
 // =============================================================================
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
@@ -10,13 +10,14 @@ import type { IEntityRepository } from '../../core/ports/entity-repository.port.
 import type { RawMeasurement } from '../../core/models/measurement.model.ts';
 import type { Entity } from '../../core/models/entity.model.ts';
 
-// SupabaseRepo implementa AMBOS repositorios en una sola conexión
 export class SupabaseRepo implements IMeasurementRepository, IEntityRepository {
   private readonly client: SupabaseClient;
 
   constructor(supabaseUrl: string, serviceKey: string) {
     this.client = createClient(supabaseUrl, serviceKey, {
       auth: { persistSession: false, autoRefreshToken: false },
+      // Aumentar timeout para consultas (opcional, pero útil)
+      db: { connectionTimeout: 10000 }, // 10 segundos para conectar
     });
   }
 
@@ -39,40 +40,55 @@ export class SupabaseRepo implements IMeasurementRepository, IEntityRepository {
 
   // ---------------------------------------------------------------------------
   // IMeasurementRepository: Persistir lote de mediciones crudas
+  // **MODIFICADO: Insertar en lotes de 10 para evitar timeout**
   // ---------------------------------------------------------------------------
   async saveBatch(measurements: RawMeasurement[]): Promise<void> {
     if (measurements.length === 0) return;
 
-    const rows = measurements.map((m) => ({
-      entidad_id: m.entidadId,
-      fecha_captura: m.fechaCaptura.toISOString(),
+    // Tamaño del lote (10 registros por inserción)
+    const BATCH_SIZE = 10;
 
-      // Telemetría HTTP
-      status_code: m.probe.statusCode,
-      tiempo_respuesta_ms: m.probe.tiempoRespuestaMs,
-      disponible: m.probe.disponible,
-      error_conexion: m.probe.errorConexion,
+    // Procesar en lotes
+    for (let i = 0; i < measurements.length; i += BATCH_SIZE) {
+      const batch = measurements.slice(i, i + BATCH_SIZE);
 
-      // Core Web Vitals
-      lcp_segundos: m.audit?.lcpSegundos ?? null,
-      fid_ms: m.audit?.fidMs ?? null,
-      cls_score: m.audit?.clsScore ?? null,
-      fcp_segundos: m.audit?.fcpSegundos ?? null,
-      ttfb_ms: m.audit?.ttfbMs ?? null,
-      score_desempeno: m.audit?.scoreDesempeno ?? null,
+      // Mapear a filas de Supabase
+      const rows = batch.map((m) => ({
+        entidad_id: m.entidadId,
+        fecha_captura: m.fechaCaptura.toISOString(),
 
-      // Accesibilidad
-      score_accesibilidad: m.audit?.scoreAccesibilidad ?? null,
-      errores_accesibilidad: m.audit?.erroresAccesibilidad ?? null,
+        // Telemetría HTTP
+        status_code: m.probe.statusCode,
+        tiempo_respuesta_ms: m.probe.tiempoRespuestaMs,
+        disponible: m.probe.disponible,
+        error_conexion: m.probe.errorConexion,
 
-      // Raw completo para trazabilidad
-      raw_auditoria: m.audit?.rawAuditoria ?? null,
-    }));
+        // Core Web Vitals
+        lcp_segundos: m.audit?.lcpSegundos ?? null,
+        fid_ms: m.audit?.fidMs ?? null,
+        cls_score: m.audit?.clsScore ?? null,
+        fcp_segundos: m.audit?.fcpSegundos ?? null,
+        ttfb_ms: m.audit?.ttfbMs ?? null,
+        score_desempeno: m.audit?.scoreDesempeno ?? null,
 
-    const { error } = await this.client.from('mediciones_crudas').insert(rows);
+        // Accesibilidad
+        score_accesibilidad: m.audit?.scoreAccesibilidad ?? null,
+        errores_accesibilidad: m.audit?.erroresAccesibilidad ?? null,
 
-    if (error) {
-      throw new Error(`Error al insertar mediciones crudas: ${error.message}`);
+        // Raw completo para trazabilidad
+        raw_auditoria: m.audit?.rawAuditoria ?? null,
+      }));
+
+      // Insertar el lote
+      const { error } = await this.client.from('mediciones_crudas').insert(rows);
+
+      if (error) {
+        console.error(`⚠️ Error al insertar lote ${i / BATCH_SIZE + 1}: ${error.message}`);
+        // **Continuar con el siguiente lote** (no fallar todo por un error parcial)
+        continue;
+      } else {
+        console.log(`✅ Lote ${i / BATCH_SIZE + 1} insertado (${batch.length} registros).`);
+      }
     }
   }
 }
