@@ -10,14 +10,16 @@ import type { IEntityRepository } from '../../core/ports/entity-repository.port.
 import type { RawMeasurement } from '../../core/models/measurement.model.ts';
 import type { Entity } from '../../core/models/entity.model.ts';
 
+const SUPABASE_REQUEST_TIMEOUT_MS = 120_000;
+
 export class SupabaseRepo implements IMeasurementRepository, IEntityRepository {
   private readonly client: SupabaseClient;
 
   constructor(supabaseUrl: string, serviceKey: string) {
     this.client = createClient(supabaseUrl, serviceKey, {
       auth: { persistSession: false, autoRefreshToken: false },
-      // Aumentar timeout para consultas (opcional, pero útil)
-      db: { timeout: 10000 }, // 10 segundos
+      // La inserción incluye el raw de PageSpeed de todas las entidades.
+      db: { timeout: SUPABASE_REQUEST_TIMEOUT_MS },
     });
   }
 
