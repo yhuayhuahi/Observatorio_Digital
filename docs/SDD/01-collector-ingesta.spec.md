@@ -168,7 +168,7 @@ sequenceDiagram
    - Se invoca `https://pagespeedonline.googleapis.com/pagespeedonline/v5/runPagespeed?url={URL}&key={API_KEY}&category=PERFORMANCE&category=ACCESSIBILITY&strategy=DESKTOP`.
    - En caso de error HTTP 429 (Cuota excedida) o 500/503 de la API de Google, se ejecuta reintento con backoff exponencial (1 intento adicional tras 3 segundos). Si persiste el error, se guarda la medición con métricas de PageSpeed en `null` y `error_conexion = 'Google API Error: ...'`.
 6. **Mapeo de Datos:** Se combinan los resultados del sondeo HTTP y de PageSpeed en un objeto `RawMeasurement`.
-7. **Persistencia en Base de Datos:** Se ejecuta inserción por lotes (`INSERT INTO mediciones_crudas`) garantizando atomicidad mediante transacción o chunks de 10 registros.
+7. **Persistencia en Base de Datos:** Al terminar la captura se ejecutan inserciones secuenciales de hasta 10 mediciones. Se evita la concurrencia y el `statement timeout` provocado por el payload JSON completo de PageSpeed. Si Supabase rechaza un lote, la ejecución falla explícitamente indicando el lote afectado.
 8. **Definition of Done (DoD) para SDD-MOD-001:**
    - La suite de pruebas unitarias (`bun test`) pasa al 100% con mocks de red.
    - El script `bun run collect` se ejecuta de inicio a fin sobre una base de datos PostgreSQL local/remota y puebla 90 registros en `mediciones_crudas` sin interrupciones por excepciones no controladas.
