@@ -18,3 +18,4 @@ scraping/.envrc
 # Misc
 .DS_Store
 *.log
+.obsidian/

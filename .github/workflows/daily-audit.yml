@@ -1,9 +1,10 @@
 name: 🇵🇪 Auditoría Diaria — Observatorio de Calidad Digital
 
 on:
-  # Cron diario a las 18:00 UTC = 13:00 hora Perú (UTC-5) — horario pico de tráfico
+  # Cron diario a las 20:10 UTC = 15:10 hora Perú (UTC-5) — ventana vespertina de cierre administrativo
+  # Se utiliza el minuto :10 (no redondo) para evitar la latencia de encolamiento de GitHub Actions
   schedule:
-    - cron: '0 18 * * *'
+    - cron: '10 20 * * *'
 
   # Trigger manual desde la UI o CLI de GitHub
   workflow_dispatch:
