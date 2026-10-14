@@ -11,7 +11,7 @@ import type { RawMeasurement } from '../../core/models/measurement.model.ts';
 import type { Entity } from '../../core/models/entity.model.ts';
 
 const SUPABASE_REQUEST_TIMEOUT_MS = 120_000;
-const INSERT_BATCH_SIZE = 3;
+const INSERT_BATCH_SIZE = 10;
 
 export class SupabaseRepo implements IMeasurementRepository, IEntityRepository {
   private readonly client: SupabaseClient;
@@ -62,9 +62,6 @@ export class SupabaseRepo implements IMeasurementRepository, IEntityRepository {
       // Accesibilidad
       score_accesibilidad: m.audit?.scoreAccesibilidad ?? null,
       errores_accesibilidad: m.audit?.erroresAccesibilidad ?? null,
-
-      // Raw completo para trazabilidad
-      raw_auditoria: m.audit?.rawAuditoria ?? null,
     };
   }
 
@@ -89,8 +86,8 @@ export class SupabaseRepo implements IMeasurementRepository, IEntityRepository {
 
   // ---------------------------------------------------------------------------
   // IMeasurementRepository: Persistir lote de mediciones crudas
-  // Inserta bloques pequeños secuenciales (3 filas) con reintentos para evitar
-  // el error 520 de Cloudflare o timeouts por el payload pesado de PageSpeed.
+  // Inserta en lotes de 10 registros limpios (sin raw_auditoria pesado).
+  // Cada lote pesa apenas ~15 KB, garantizando inserción instantánea sin timeouts.
   // ---------------------------------------------------------------------------
   async saveBatch(measurements: RawMeasurement[]): Promise<void> {
     if (measurements.length === 0) return;
@@ -113,16 +110,6 @@ export class SupabaseRepo implements IMeasurementRepository, IEntityRepository {
             console.log(`  ✅ Registro individual para entidad ${row.entidad_id} insertado con éxito.`);
           } catch (rowError: any) {
             console.error(`  ❌ Error insertando entidad ${row.entidad_id}:`, rowError?.message ?? rowError);
-            try {
-              const fallbackRow = {
-                ...row,
-                raw_auditoria: { error: 'Payload omitido por límite de gateway Cloudflare (520)' },
-              };
-              await this.client.from('mediciones_crudas').insert([fallbackRow]);
-              console.log(`  ⚠️ Entidad ${row.entidad_id} insertada con métricas clave (raw_auditoria aliviado).`);
-            } catch (fatalRowError) {
-              console.error(`  ❌ No se pudo guardar entidad ${row.entidad_id} de ninguna forma.`);
-            }
           }
         }
       }

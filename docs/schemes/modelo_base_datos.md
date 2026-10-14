@@ -71,7 +71,6 @@ erDiagram
         int score_desempeno "Puntaje nativo Lighthouse Rendimiento (0-100)"
         int score_accesibilidad "Puntaje nativo Lighthouse Accesibilidad (0-100)"
         jsonb errores_accesibilidad "Array estructurado de violaciones WCAG 2.1"
-        jsonb raw_auditoria "Auditoria cruda completa para reprocesamiento"
     }
 ```
 
@@ -125,11 +124,6 @@ Almacena cada evento de monitoreo y auditoría obtenido por el script de recolec
 | `score_accesibilidad` | `INTEGER` | Sí | Puntaje directo (0 - 100) de accesibilidad devuelto por Lighthouse. |
 | `errores_accesibilidad` | `JSONB` | Sí | Lista estructurada de violaciones a WCAG 2.1 (ID de auditoría fallada, descripción, selectores y elementos infractores). |
 
-#### D. Auditoría Cruda Sin Pérdidas (Trazabilidad RNF-009)
-| Campo | Tipo | Nulo | Descripción y Criterio |
-| :--- | :--- | :---: | :--- |
-| `raw_auditoria` | `JSONB` | Sí | Payload JSON original retornado por la API de Google PageSpeed Insights. Permite auditar detalles forenses o reprocesar métricas futuras sin perder datos históricos. |
-
 ---
 
 ## 4. Script DDL para PostgreSQL (`schema_fase1.sql`)
@@ -178,10 +172,7 @@ CREATE TABLE IF NOT EXISTS mediciones_crudas (
     
     -- Métricas de Accesibilidad (Lighthouse / WCAG 2.1)
     score_accesibilidad INTEGER CHECK (score_accesibilidad BETWEEN 0 AND 100),
-    errores_accesibilidad JSONB,
-    
-    -- Respaldo crudo completo de la API
-    raw_auditoria JSONB
+    errores_accesibilidad JSONB
 );
 
 -- 3. Índices de Rendimiento para Consultas Temporales

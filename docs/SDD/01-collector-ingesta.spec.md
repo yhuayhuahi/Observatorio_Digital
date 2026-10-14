@@ -24,7 +24,7 @@ Este módulo resuelve la captura automatizada, periódica y no sesgada de teleme
 2. **Sonda de Disponibilidad y Latencia HTTP (RF-002):** Ejecución de solicitudes HTTP `GET` nativas en Bun con timeouts estrictos (10 segundos), captura del código de estado HTTP (`status_code`), tiempo de respuesta en milisegundos (`tiempo_respuesta_ms`) y bandera booleana `disponible`.
 3. **Auditoría de Desempeño y Core Web Vitals (RF-003):** Consulta estandarizada a la API v5 de Google PageSpeed Insights (estrategia `DESKTOP` y/o `MOBILE` configurable; por defecto `DESKTOP`) para extraer LCP (s), FID/INP (ms), CLS, FCP (s), TTFB (ms) y el `score_desempeno` (0-100).
 4. **Auditoría de Accesibilidad WCAG 2.1 AA (RF-004):** Extracción del `score_accesibilidad` (0-100) y de la lista detallada de violaciones de accesibilidad estructuradas en JSONB desde el reporte de Lighthouse generado por Google PageSpeed.
-5. **Persistencia Inmutable de Telemetría (RNF-003):** Registro de cada ejecución en la tabla `mediciones_crudas`, almacenando tanto los campos normalizados como el payload crudo (`raw_auditoria`) para auditoría forense.
+5. **Persistencia Inmutable de Telemetría (RNF-003):** Registro de cada ejecución en la tabla `mediciones_crudas`, almacenando los campos normalizados y errores WCAG para el análisis longitudinal con un modelo ligero de costo cero (RNF-011).
 6. **Manejo de Tasa y Concurrencia (Rate Limiting):** Control estricto de concurrencia (máximo 2 a 3 peticiones paralelas con backoff exponencial) para no saturar la cuota gratuita de Google PageSpeed API (25,000 queries/día, 240 QPM) ni provocar bloqueos por WAF institucional.
 7. **Punto de Entrada Doble:**
    - Modo CLI autónomo (`bun run collect`) para ejecución desatendida en GitHub Actions (ADR-0005).

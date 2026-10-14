@@ -40,10 +40,7 @@ CREATE TABLE IF NOT EXISTS mediciones_crudas (
     
     -- Métricas de Accesibilidad (Lighthouse / WCAG 2.1)
     score_accesibilidad INTEGER CHECK (score_accesibilidad BETWEEN 0 AND 100),
-    errores_accesibilidad JSONB,
-    
-    -- Respaldo crudo completo de la API
-    raw_auditoria JSONB
+    errores_accesibilidad JSONB
 );
 
 -- 3. Índices de Rendimiento para Consultas Temporales

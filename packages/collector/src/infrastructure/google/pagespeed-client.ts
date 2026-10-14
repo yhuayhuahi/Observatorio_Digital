@@ -113,7 +113,7 @@ export class PageSpeedClient implements IAuditService {
       scoreDesempeno,
       scoreAccesibilidad,
       erroresAccesibilidad,
-      rawAuditoria: data,
+      rawAuditoria: null,
       errorAuditoria: null,
     };
   }

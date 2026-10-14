@@ -77,7 +77,7 @@ Desarrollar un **Observatorio de Calidad Digital Pública** que monitoree de for
 
 - **Reproducibilidad total:** el pipeline completo (recolección → persistencia → análisis → visualización) es open source y ejecutable por terceros. Cualquier investigador puede auditar o replicar las mediciones.
 - **Estandarización:** todas las entidades se miden con el mismo instrumento (Lighthouse en entorno de laboratorio controlado), lo que hace las comparaciones entre entidades **válidas y justas**.
-- **Trazabilidad:** cada medición conserva el payload crudo de la auditoría (`raw_auditoria`) y el timestamp exacto de captura, permitiendo verificación y reanálisis a posteriori.
+- **Trazabilidad:** cada medición conserva el detalle estructurado de métricas, violaciones WCAG y el timestamp exacto de captura (`fecha_captura`), permitiendo verificación y auditoría a posteriori dentro del límite de almacenamiento gratuito (RNF-011).
 
 ### 4.2 Aporte metodológico
 
@@ -188,7 +188,7 @@ El monitoreo se alinea con los principios de **Gobierno Abierto** (transparencia
 
 - **Población:** catálogo maestro de 90 entidades estatales peruanas (tabla `entidades`), clasificadas en Gobiernos Regionales, Municipalidades Provinciales, Organismos Autónomos y Ministerios.
 - **Frecuencia:** una captura diaria por entidad, programada dentro del horario laboral peruano.
-- **Persistencia:** tabla `mediciones_crudas` (PostgreSQL/Supabase) con una fila por entidad-captura, índices por fecha y entidad, y preservación del payload crudo (`raw_auditoria`) para reproducibilidad.
+- **Persistencia:** tabla `mediciones_crudas` (PostgreSQL/Supabase) con una fila por entidad-captura, índices por fecha y entidad, almacenando todas las métricas digeridas de disponibilidad, Core Web Vitals y errores WCAG con inserción eficiente en lotes de 10 entidades.
 - **Automatización:** GitHub Actions (cron diario + disparo manual) ejecuta el colector (Bun + TypeScript, arquitectura hexagonal: puertos y adaptadores) que aplica las sondas y persiste en lotes pequeños para respetar los límites de tiempo del servicio de base de datos.
 
 ### 6.3 Fundamentación de las decisiones metodológicas (incluida la ventana de captura)
