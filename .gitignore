@@ -6,6 +6,10 @@
 # Dependencias
 **/node_modules/
 
+# Build outputs
+**/dist/
+**/.astro/
+
 # Bun lockfile (se puede incluir opcionalmente)
 # bun.lock
 
@@ -19,3 +23,5 @@ scraping/.envrc
 .DS_Store
 *.log
 .obsidian/
+**/.agents/
+

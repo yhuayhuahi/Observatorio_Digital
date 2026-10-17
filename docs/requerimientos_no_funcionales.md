@@ -2,7 +2,7 @@
 
 ## **1. Introducción**
 
-Este documento define los **Requerimientos No Funcionales (RNF)** del **Observatorio de Calidad Digital Pública**, complementando los [Requerimientos Funcionales](https://github.com/yhuayhuahi/Observatorio_Digital/blob/main/docs/requerimientos_funcionales.md). 
+Este documento define los **Requerimientos No Funcionales (RNF)** del **Observatorio de Calidad Digital Pública**, complementando los [Requerimientos Funcionales](./requerimientos_funcionales.md). 
 
 Los RNF aquí descritos **no cambiarán** durante el desarrollo del proyecto y están alineados con:
 
@@ -52,7 +52,7 @@ Los RNF aquí descritos **no cambiarán** durante el desarrollo del proyecto y e
 
 | **ID**  | **Requerimiento**                                    | **Descripción**                                                                                                                                    | **Métrica**                                         | **Criterio de Aceptación**                                            | **Prioridad** |
 | ------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------------------- | ------------- |
-| RNF-009 | Integración con APIs externas y exportación de datos | El sistema debe poder **integrarse con APIs de monitoreo** (PageSpeed Insights, Lighthouse) y **exportar datos en formatos estándar** (CSV, JSON). | Número de APIs integradas / Formatos de exportación | Integración con al menos **2 APIs externas** y soporte para CSV/JSON. | Alta          |
+| RNF-009 | Integración con APIs externas y exportación de datos | El sistema debe poder **integrarse con APIs de monitoreo** (PageSpeed Insights), **APIs de IA** (Google AI Studio Gemini) y **exportar datos en formatos estándar** (CSV, JSON). | Número de APIs integradas / Formatos de exportación | Integración con APIs externas (PageSpeed, Gemini) y soporte para CSV/JSON. | Alta          |
 
 
 ### 2.6. Cumplimiento Normativo
@@ -65,21 +65,29 @@ Los RNF aquí descritos **no cambiarán** durante el desarrollo del proyecto y e
 ### 2.7. Sostenibilidad
 
 
-| **ID**  | **Requerimiento**         | **Descripción**                                    | **Métrica**         | **Criterio de Aceptación**                                                                           | **Prioridad** |
-| ------- | ------------------------- | -------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------------------- | ------------- |
-| RNF-011 | Costos operativos mínimos | El sistema debe tener **costos operativos bajos**. | Costo mensual (USD) | ≤ $50 USD/mes para el primer año (usando servicios gratuitos como Supabase, Vercel, GitHub Actions). | Alta          |
+| **ID**  | **Requerimiento**         | **Descripción**                                    | **Métrica**         | **Criterio de Aceptación**                                                                                                           | **Prioridad** |
+| ------- | ------------------------- | -------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| RNF-011 | Costos operativos mínimos | El sistema debe tener **costos operativos bajos**. | Costo mensual (USD) | ≤ $50 USD/mes para el primer año, optimizado para **costo $0 USD/mes** mediante planes gratuitos (Supabase, GitHub Actions, Google AI Studio). | Alta          |
+
+### 2.8. Confiabilidad y Precisión del Sistema RAG
+
+
+| **ID**  | **Requerimiento**                                  | **Descripción**                                                                                                                                                                                                                           | **Métrica**                                                     | **Criterio de Aceptación**                                                                                    | **Prioridad** |
+| ------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------- |
+| RNF-012 | Fidelidad factual y anclaje normativo del RAG      | Las respuestas del asistente conversacional deben anclarse estrictamente en la telemetría registrada y en los fragmentos del marco legal peruano (**D.L. 1412, D.S. 029-2021-PCM**) y **WCAG 2.1**, evitando alucinaciones de datos o leyes. | Índice de fidelidad (*Faithfulness*) / Citas normativas válidas | $\ge 90\%$ de fidelidad factual en evaluaciones sobre el conjunto de consultas de prueba de auditoría de TI. | Alta          |
 
 
 ## **3. Resumen de Requerimientos No Funcionales**
 
 
-| **Prioridad** | **Cantidad** | **Requerimientos**                  |
-| ------------- | ------------ | ----------------------------------- |
-| **Alta**      | 8            | RNF-001 a RNF-006, RNF-009, RNF-010 |
-| **Media**     | 2            | RNF-007, RNF-008                    |
+| **Prioridad** | **Cantidad** | **Requerimientos**                                 |
+| ------------- | ------------ | -------------------------------------------------- |
+| **Alta**      | 10           | RNF-001 a RNF-006, RNF-009, RNF-010, RNF-011, RNF-012 |
+| **Media**     | 2            | RNF-007, RNF-008                                   |
+| **Total**     | **12**       |                                                    |
 
 
-## **6. Anexos**
+## **4. Anexos**
 
-- **Requerimientos Funcionales**: [requerimientos\_funcionales.md](https://github.com/yhuayhuahi/Observatorio_Digital/blob/main/docs/requerimientos_funcionales.md).
-- **Proceso de Obtención de URLs**: [proceso\_obtencion\_urls.md](https://github.com/yhuayhuahi/Observatorio_Digital/blob/main/docs/proceso_obtencion_urls.md).
+- **Requerimientos Funcionales**: [requerimientos_funcionales.md](./requerimientos_funcionales.md).
+- **Proceso de Obtención de URLs**: [proceso_obtencion_urls.md](./proceso_obtencion_urls.md).

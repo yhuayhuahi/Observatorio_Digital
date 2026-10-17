@@ -198,3 +198,32 @@ Cuando se hayan acumulado suficientes datos empíricos de las 90 entidades, la F
    - Agregaciones mensuales comparando el uptime real acumulado frente al umbral acordado (ej. 99.5%).
 3. **Puntajes Globales Normalizados (`scores_entidades`):**
    - Cálculo del score compuesto de 0 a 100 aplicando la fórmula que se defina objetivamente sobre los datos reales.
+
+---
+
+## 6. Persistencia Vectorial para el Sistema RAG (Fase 3: `pgvector`)
+
+Para soportar el componente de auditoría prescriptiva asistido por IA (RF-014, ADR-0008, ADR-0009), la base de datos se extiende con la extensión nativa **`pgvector`** de Supabase, incorporando la base de conocimiento normativo y técnico:
+
+```mermaid
+erDiagram
+    DOCUMENTOS_NORMATIVOS {
+        bigint id PK "Identificador secuencial del chunk"
+        varchar fuente "Norma o estandar (DL 1412, DS 029, WCAG 2.1)"
+        varchar categoria "LEGISLACION_PERU, ACCESIBILIDAD_WCAG, etc"
+        varchar titulo "Titulo o encabezado del articulo/criterio"
+        varchar seccion "Articulo o capitulo especifico"
+        text contenido "Texto completo del fragmento (chunk 300-600 tokens)"
+        jsonb metadata "Etiquetas, articulos relacionados y URLs"
+        vector embedding "Vector de 768 dimensiones (gemini-embedding-001)"
+        timestamptz created_at "Fecha de indexacion"
+    }
+```
+
+### 6.1. Características Clave del Esquema Vectorial
+* **Extensión:** `CREATE EXTENSION IF NOT EXISTS vector;`
+* **Tipo Vectorial:** `vector(768)` ajustado a la dimensionalidad del modelo `gemini-embedding-001` de Google.
+* **Indexación:** Índice **HNSW** (`vector_cosine_ops`) con parámetros `m = 16` y `ef_construction = 64`, permitiendo búsquedas por similitud coseno en menos de 10 ms.
+* **Función RPC:** Función PL/pgSQL `match_documentos_normativos()` que calcula la similitud coseno (`1 - (embedding <=> query_embedding)`), filtrando por categoría temática y umbral mínimo de similitud.
+* **Script de Despliegue:** Consultar [schema_rag_pgvector.sql](./schema_rag_pgvector.sql) para la definición DDL completa lista para ejecutar en la consola SQL de Supabase.
+

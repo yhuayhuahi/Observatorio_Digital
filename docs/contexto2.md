@@ -1,268 +1,341 @@
 # Observatorio de Calidad Digital Pública del Perú
+## Documento Maestro de Contexto, Objetivos, Arquitectura Técnica y Sistema Inteligente RAG
 
-## Documento de Contexto, Objetivos, Sustento Teórico y Aporte
-
-> **Tipo de proyecto:** Sistema de monitoreo continuo de la calidad de los portales web del Estado Peruano.
-> **Naturaleza:** Proyecto de investigación aplicada + desarrollo de software (arquitectura hexagonal, monorepo).
-> **Alcance actual:** Fase 1 — Captura cruda de telemetría diaria de 90 entidades públicas (25 Gobiernos Regionales, ~31 Municipalidades Provinciales, ~34 Organismos y Ministerios).
-
----
-
-## 1. Planteamiento del Problema
-
-Los servicios digitales del Estado Peruano presentan **deficiencias verificables y persistentes** de calidad: portales caídos, certificados SSL vencidos, tiempos de carga excesivos y barreras de accesibilidad que excluyen a personas con discapacidad. Estas fallas no son incidentes aislados: en las corridas de monitoreo ya ejecutadas se detectaron de forma reproducible:
-
-- **Dominios inexistentes** (`ENOTFOUND`): p. ej. los portales de los GORE Tacna, Ayacucho y Arequipa no resolvían DNS.
-- **Certificados TLS expirados**: GORE Piura.
-- **Bloqueos de acceso (HTTP 403)**: GORE Callao.
-- **Timeouts de conexión (>10 s)**: GORE Loreto, Ica, Ucayali, Amazonas, Lambayeque; SUNAFIL.
-- **Rendimiento crítico**: portales con score de desempeño Lighthouse de 12–16 sobre 100 (Puno) y LCP superiores a 13 segundos (Huancavelica).
-- **Accesibilidad por debajo del estándar**: scores de accesibilidad de 56 (SUNAT) frente al mínimo esperado WCAG.
-
-El problema central es doble:
-
-1. **No existe un mecanismo sistemático, continuo y público** que mida, documente y haga comparables estas deficiencias a lo largo del tiempo.
-2. **Sin evidencia longitudinal no hay rendición de cuentas ni mejora informada**: las evaluaciones existentes son puntuales, no comparativas, y no miden los atributos de calidad definidos por los estándares internacionales.
+> **Tipo de proyecto:** Sistema inteligente de observabilidad continua y auditoría prescriptiva para servicios digitales del Estado Peruano.  
+> **Naturaleza:** Investigación aplicada en Ingeniería de Software y Gestión de TI (Design Science Research) + Desarrollo de software (arquitectura hexagonal, monorepo).  
+> **Alcance empírico:** Catálogo maestro de 90 entidades públicas (19 Ministerios, 25 Gobiernos Regionales, 31 Municipalidades Provinciales estratégicas y 15 Organismos Autónomos).  
+> **Estado:** Fase 1 en producción (captura diaria automatizada); Fase 2 (dashboard y analítica) y Fase 3 (módulo RAG) en desarrollo.
 
 ---
 
-## 2. Objetivos
+# PARTE 1: ENFOQUE ESTRATÉGICO, OBJETIVOS Y SISTEMA INTELIGENTE RAG
 
-### 2.1 Objetivo General
+## 1. Planteamiento del Problema y Justificación
 
-Desarrollar un **Observatorio de Calidad Digital Pública** que monitoree de forma automatizada, continua y estandarizada los portales web de las entidades del Estado Peruano, generando evidencia longitudinal sobre su desempeño, accesibilidad y disponibilidad, para fundamentar políticas de mejora del gobierno digital.
+### 1.1 La realidad de los servicios web del Estado Peruano
+Los portales web constituyen el canal prioritario de interacción entre la ciudadanía y el Estado para la consulta de información, realización de trámites y acceso a mesas de partes virtuales. No obstante, las mediciones empíricas preliminares ejecutadas sobre 90 entidades del Estado evidencian **deficiencias persistentes y reproducibles** que afectan la disponibilidad, el rendimiento y la accesibilidad:
 
-### 2.2 Objetivos Específicos
+- **Fallas críticas de resolución de nombres (`ENOTFOUND`):** Dominios institucionales que no resuelven DNS (p. ej. portales de los Gobiernos Regionales de Tacna, Ayacucho y Arequipa).
+- **Vulnerabilidades de seguridad en transporte (TLS/SSL):** Certificados digitales expirados (p. ej. GORE Piura), que exponen al ciudadano a alertas de navegación y riesgos de interceptación.
+- **Bloqueos de acceso no controlados:** Respuestas HTTP 403 ante solicitudes legítimas (p. ej. GORE Callao).
+- **Latencias críticas de conexión (>10 s):** Timeouts reiterados en entidades de alto impacto (GORE Loreto, Ica, Ucayali, Amazonas, Lambayeque; SUNAFIL).
+- **Rendimiento deficiente en carga:** Portales con puntajes Lighthouse entre 12 y 16 sobre 100 y tiempos de renderizado de contenido principal (LCP) superiores a 13 segundos (p. ej. Huancavelica).
+- **Barreras severas de accesibilidad:** Puntuaciones promedio de 56/100 frente a las directivas de accesibilidad obligatorias (WCAG 2.1 AA), excluyendo sistemáticamente a personas con discapacidad visual y motriz.
 
-1. **Recolectar telemetría cruda diaria** de 90 portales públicos: disponibilidad (código HTTP, tiempo de respuesta), Core Web Vitals (LCP, FID, CLS, FCP, TTFB), puntaje de desempeño y de accesibilidad (Lighthouse/WCAG 2.1).
-2. **Detectar y registrar incidentes** (caídas, certificados vencidos, DNS roto) con fecha y hora exactas (`fecha_captura`), constituyendo un registro histórico auditable.
-3. **Construir rankings y comparativas** entre entidades, categorías (ministerios, GORE, organismos autónomos, municipalidades) y regiones.
-4. **Analizar tendencias temporales** (series de tiempo) para evaluar si la calidad digital pública mejora o deteriora.
-5. **Visualizar los resultados** en un dashboard público (Fase 2: frontend Astro) con fichas por entidad, reportes y evidencia descargable.
-6. **Fundamentar recomendaciones de política pública** basadas en datos abiertos y reproducibles.
+### 1.2 La brecha de decisión e interpretación: Por qué un dashboard no es suficiente
+Tradicionalmente, las iniciativas de evaluación digital se han limitado a mediciones puntuales o a tableros de control (*dashboards*) estáticos. Este enfoque presenta limitaciones estructurales:
 
----
+1. **Carencia de evidencia longitudinal:** Las evaluaciones aisladas no permiten distinguir entre incidentes transitorios y obsolescencia crónica de la infraestructura tecnológica, imposibilitando la rendición de cuentas (*accountability*).
+2. **La brecha de interpretación técnica:** Un dashboard convencional expone métricas cuantitativas crudas (LCP en segundos, TTFB en milisegundos, violaciones WCAG por código). Ni el ciudadano común, ni los periodistas, ni los funcionarios de TI de gobiernos locales y regionales poseen herramientas directas para traducir esas cifras a planes de remediación técnica o determinar con precisión qué artículo de la normativa nacional se está vulnerando.
+3. **Falta de soporte prescriptivo a la gobernanza:** Existe un vacío entre la recolección masiva de telemetría y la toma de decisiones informada. Las entidades públicas requieren no solo saber que su servicio está degradado, sino recibir recomendaciones técnicas accionables fundamentadas en estándares internacionales y en el marco legal del gobierno digital peruano.
 
-## 3. Requerimientos del Sistema (RF y RNF) — Resumen
-
-**Requerimientos Funcionales clave:**
-
-| RF | Descripción |
-|----|-------------|
-| RF-001 | Registro y clasificación del catálogo de entidades (90) por categoría y región. |
-| RF-002 | Verificación diaria de disponibilidad (código de estado HTTP, tiempo de respuesta). |
-| RF-003 | Medición de velocidad de carga y Core Web Vitals vía PageSpeed Insights / Lighthouse. |
-| RF-004 | Evaluación de accesibilidad (WCAG 2.1) con detalle de errores. |
-| RF-005/009 | Clasificación de entidades y registro de metadatos. |
-| RF-006 | **Actualización periódica automatizada** (GitHub Actions, cron diario). |
-| RF-008 | Detección de anomalías e incidentes. |
-| RF-010–013 | Visualización de métricas, rankings, tendencias y generación de reportes. |
-
-**Requerimientos No Funcionales clave:**
-
-| RNF | Descripción |
-|-----|-------------|
-| RNF-001/002 | Tiempo de respuesta del sistema ≤ 500 ms; carga del dashboard ≤ 3 s. |
-| RNF-003 | Almacenamiento histórico de mediciones (capacidad > 90 entidades). |
-| RNF-005 | Consultas agregadas eficientes (SQL, índices por fecha y entidad). |
-| RNF-011 | Costos operativos mínimos (≤ $50/mes) → infraestructura 100% en planes gratuitos. |
-| RNF-017 | Seguridad de credenciales (GitHub Secrets, claves de servicio restringidas). |
-| RNF-027 | Diseño responsivo (soporte móvil). |
+Para cerrar esta brecha, el proyecto integra una **capa de telemetría longitudinal automatizada bajo principios de ITIL v4 e ISO/IEC 25010** con un **agente conversacional inteligente basado en Retrieval-Augmented Generation (RAG)**, transformando los datos crudos en auditorías e instrucciones de remediación comprensibles y accionables.
 
 ---
 
-## 4. Aporte del Proyecto
+## 2. Propuesta de Valor del Proyecto
 
-### 4.1 Aporte técnico
+El valor que aporta el proyecto se estructura en tres dimensiones complementarias:
 
-- **Reproducibilidad total:** el pipeline completo (recolección → persistencia → análisis → visualización) es open source y ejecutable por terceros. Cualquier investigador puede auditar o replicar las mediciones.
-- **Estandarización:** todas las entidades se miden con el mismo instrumento (Lighthouse en entorno de laboratorio controlado), lo que hace las comparaciones entre entidades **válidas y justas**.
-- **Trazabilidad:** cada medición conserva el detalle estructurado de métricas, violaciones WCAG y el timestamp exacto de captura (`fecha_captura`), permitiendo verificación y auditoría a posteriori dentro del límite de almacenamiento gratuito (RNF-011).
+```
+                                  VALOR DEL PROYECTO
+                                           │
+         ┌─────────────────────────────────┼─────────────────────────────────┐
+         ▼                                 ▼                                 ▼
+┌──────────────────┐             ┌──────────────────┐             ┌──────────────────┐
+│ Aporte Técnico / │             │  Aporte GSTI y   │             │ Aporte Social y  │
+│   Metodológico   │             │    Gobernanza    │             │ Política Pública │
+└────────┬─────────┘             └────────┬─────────┘             └────────┬─────────┘
+         │                                │                                │
+ ├─ Panel longitudinal diario     ├─ ITIL v4 aplicado a la         ├─ Cumplimiento D.L. 1412 /
+ │  (no fotos transversales)         calidad externa del servicio     D.S. 029-2021-PCM
+ ├─ Telemetría reproducible       ├─ SLAs de cara al ciudadano     ├─ Inclusión digital medible
+ │  (90 entidades a costo cero)   ├─ Gestión formal de eventos        (WCAG 2.1 AA personas
+ └─ Auditoría automatizada           e incidentes de TI               con discapacidad)
+```
 
-### 4.2 Aporte metodológico
+### 2.1 Aporte Técnico y Metodológico
+- **Panel Longitudinal Continuo:** Frente al 90 % de estudios primarios de la literatura científica que reportan únicamente una medición puntual, este trabajo aporta la primera serie de tiempo diaria y automatizada de 90 portales del Estado Peruano.
+- **Estandarización y Reproducibilidad a Costo Cero:** Empleo de instrumentos abiertos (PageSpeed Insights API v5, sondas HTTP) y arquitectura serverless gratuita (GitHub Actions + Supabase), permitiendo su replicación y auditoría científica sin requerir presupuesto de infraestructura (RNF-011).
 
-- Convierte la evaluación de calidad digital de **estudio puntual** a **panel de datos longitudinales** (daily panel data), habilitando análisis de tendencia, detección de regresiones y evaluación de políticas.
-- Documenta y fundamenta los límites del método (ver § 6.3): métricas de laboratorio vs. campo, variabilidad horaria, muestras diarias.
+### 2.2 Aporte en Gestión de Sistemas y Tecnologías de Información (GSTI)
+- **Extensión Externa de ITIL v4:** Se trasladan las prácticas de **Gestión de Eventos, Gestión de Incidentes y Gestión de Niveles de Servicio (SLA)** fuera de la infraestructura interna de TI, evaluando la calidad del servicio directamente en el punto de contacto con el ciudadano.
+- **Operacionalización de Calidad de Software (ISO/IEC 25010):** Se traducen conceptos abstractos de confiabilidad, eficiencia de desempeño y accesibilidad en indicadores cuantitativos objetivos de nivel de servicio.
 
-### 4.3 Aporte social y de política pública
-
-- **Rendición de cuentas:** hace visible el estado real de la infraestructura digital pública peruana, incluidas fallas que afectan directamente a la ciudadanía (portales caídos, SSL vencido = riesgo de seguridad, accesibilidad deficiente = exclusión digital).
-- **Inclusión:** la evaluación WCAG 2.1 pone en la agenda pública la accesibilidad web como obligación del Estado hacia las personas con discapacidad.
-- **Evidencia para la decisión:** rankings y tendencias permiten priorizar intervenciones en las entidades con peores indicadores, y medir el efecto de las mejoras implementadas.
-
----
-
-## 5. Marco Teórico
-
-### 5.1 Gobierno digital y transformación digital del Estado
-
-El **gobierno digital** se entiende como el uso de tecnologías de la información por parte del Estado para mejorar servicios públicos, aumentar la eficiencia administrativa y promover la participación ciudadana (definiciones alineadas con la ONU E-Government Survey y la OECD). La literatura distingue tres fases: digitalización de trámites (e-government), apertura de datos (open government) y **gobierno digital como plataforma** centrada en el usuario.
-
-En el Perú, el marco normativo relevante incluye:
-
-- **Ley N.° 29733** — Ley de Protección de Datos Personales.
-- **Política Nacional de Transformación Digital de la Administración Pública (DS N.° 048-2020-PCM)** y su sucesora normativa, que fijan como objetivo una administración digital centrada en la ciudadanía.
-- **Directivas de la Secretaría de Gobierno Digital (PCM)** sobre estándares de plataformas digitales, interoperabilidad y accesibilidad de portales del Estado.
-- El **Plan de Acción de Gobierno Digital**, que compromete mejora continua de servicios digitales.
-
-**Vacío identificado:** la normativa peruana exige calidad, accesibilidad y seguridad a los portales estatales, pero **no existe un sistema público de monitoreo continuo** que verifique su cumplimiento. El Observatorio llena ese vacío.
-
-### 5.2 Calidad del software y calidad de servicios web
-
-El marco de referencia clásico es la norma **ISO/IEC 25010** (SQuaRE — Systems and software Quality Requirements and Evaluation), que define las características de calidad de productos de software. Para un portal web público, las características más relevantes del modelo son:
-
-- **Funcionalidad y confiabilidad (disponibilidad):** el servicio debe estar operativo; se operacionaliza con el código de estado HTTP y el tiempo de respuesta.
-- **Eficiencia de desempeño:** tiempo de respuesta, utilización de recursos; se operacionaliza con Core Web Vitals.
-- **Usabilidad y accesibilidad:** se operacionaliza con la auditoría WCAG 2.1 / Lighthouse.
-- **Seguridad:** se operacionaliza con la validez del certificado TLS (un certificado vencido es una falla de seguridad verificable).
-
-El Observatorio traduce características abstractas de calidad en **métricas objetivas, medibles automáticamente y comparables entre entidades** — un ejercicio de operacionalización de constructos de calidad de software al dominio del gobierno digital.
-
-### 5.3 Rendimiento web: Core Web Vitals y métricas de laboratorio
-
-Los **Core Web Vitals (CWV)**, definidos por Google, son el estándar de facto para medir la experiencia de usuario en la carga de páginas:
-
-| Métrica | Qué mide | Umbral "bueno" (Google) |
-|---------|----------|--------------------------|
-| **LCP** (Largest Contentful Paint) | Tiempo hasta el renderizado del elemento visible más grande. | ≤ 2.5 s |
-| **FID / INP** (First Input Delay / Interaction to Next Paint) | Responsividad ante la primera interacción. | ≤ 100 ms (FID) |
-| **CLS** (Cumulative Layout Shift) | Estabilidad visual del layout (desplazamientos inesperados). | ≤ 0.1 |
-| **FCP** (First Contentful Paint) | Tiempo hasta el primer contenido renderizado. | ≤ 1.8 s |
-| **TTFB** (Time to First Byte) | Latencia inicial del servidor. | ≤ 800 ms |
-
-Fundamento metodológico clave: **Lighthouse mide en "laboratorio"** (entorno controlado: Chrome emulado, condiciones de red y CPU estandarizadas), a diferencia de las métricas de "campo" (CrUX, RUM), que miden usuarios reales. Esto tiene dos consecuencias para el diseño del estudio:
-
-1. **Ventaja:** las mediciones son comparables entre entidades y estables a lo largo del día (la hora exacta de captura no altera significativamente LCP, CLS, accesibilidad).
-2. **Limitación:** no reflejan la experiencia de usuarios con conexiones heterogéneas; se declara como delimitación del estudio.
-
-Adicionalmente, CWV es un **factor de posicionamiento en buscadores (SEO)**, por lo que un bajo CWV en portales públicos reduce su visibilidad y, con ello, el acceso de la ciudadanía a información oficial.
-
-### 5.4 Accesibilidad web: WCAG 2.1 y la inclusión digital
-
-Las **Pautas de Accesibilidad para el Contenido Web (WCAG) 2.1** del W3C, organizadas en el modelo **POUR** (Perceptible, Operable, Comprensible, Robusto), son el estándar internacional de accesibilidad. Los niveles de conformancia **A, AA y AAA** gradúan el compromiso; la práctica internacional y las directivas estatales suelen exigir **AA** como mínimo.
-
-Fundamentos de por qué la accesibilidad es crítica en un Estado:
-
-- **Derechos humanos:** la Convención sobre los Derechos de las Personas con Discapacidad (ratificada por el Perú) reconoce el acceso a la información y comunicaciones, incluidos los sistemas digitales públicos, como un derecho. Un portal inaccesible es una **barrera de exclusión** institucional.
-- **Deber estatal:** si el Estado transfiere trámites y servicios a canales digitales, la accesibilidad deja de ser opcional: es la condición para que el servicio público sea universal.
-- **Beneficio universal:** las prácticas de accesibilidad (contraste, estructura semántica, navegación por teclado) mejoran la usabilidad para todos los usuarios.
-
-El Observatorio cuantifica la accesibilidad con el score de accesibilidad de Lighthouse y el detalle de errores (etiquetas `alt` faltantes, contraste insuficiente, jerarquía de encabezados incorrecta, etc.), y con ello genera la primera serie temporal peruana de este indicador.
-
-### 5.5 Seguridad como atributo de calidad (HTTPS/TLS)
-
-La validez del certificado TLS es un indicador mínimo de seguridad: garantiza cifrado e identidad del sitio. Un **certificado vencido en un portal del Estado** (caso detectado: GORE Piura) expone a los ciudadanos a riesgos de interceptación (man-in-the-middle) y genera advertencias del navegador que erosionan la confianza en el canal digital. El monitoreo continuo de este atributo convierte fallas de seguridad silentes en **incidentes documentados con fecha**.
-
-### 5.6 Monitoreo continuo, observabilidad y datos longitudinales
-
-Tres cuerpos de conocimiento convergen aquí:
-
-- **Monitoreo de disponibilidad (uptime monitoring):** práctica de ingeniería que verifica periódicamente que un servicio responde; se extiende aquí al conjunto del Estado como objeto de estudio, no a un solo sistema.
-- **Observabilidad:** más que saber "si funciona", permite interrogar el estado histórico del sistema (series de tiempo por entidad).
-- **Diseño de panel longitudinal:** a diferencia de cortes transversales (una foto en el tiempo), la repetición diaria de la medición sobre las mismas unidades (entidades) permite: detectar tendencias, identificar regresiones tras cambios en los portales, evaluar el efecto de políticas o sanciones, y distinguir fallas crónicas de fallas transitorias (una caída puntual ≠ un portal abandonado).
-
-### 5.7 Transparencia, open data y rendición de cuentas
-
-El monitoreo se alinea con los principios de **Gobierno Abierto** (transparencia, participación, colaboración): la evidencia del Observatorio es un insumo de control ciudadano sobre la administración digital. Su publicación periódica:
-
-- Presiona por mejora reputacional (rankings comparables entre entidades generan emulación).
-- Provee datos abiertos reutilizables por academia, prensa y sociedad civil (periodismo de datos sobre el Estado).
-- Materializa el principio de **accountability** en un dominio — la calidad de lo digital público — tradicionalmente invisible.
+### 2.3 Aporte Social y de Política Pública
+- **Fiscalización del Cumplimiento Normativo:** Verifica el acatamiento efectivo del **Decreto Legislativo N.º 1412 (Ley de Gobierno Digital)** y del **D.S. N.º 029-2021-PCM**, evidenciando las deficiencias que la normativa prohíbe pero que no eran supervisadas continuamente.
+- **Inclusión y Derechos Digitales:** Cuantifica la accesibilidad real (WCAG 2.1) como garantía de no discriminación y acceso equitativo a los servicios públicos para personas con discapacidad.
 
 ---
 
-## 6. Metodología de la Medición
+## 3. Arquitectura y Rol del Asistente Inteligente RAG
 
-### 6.1 Instrumento y variables
+### 3.1 Naturaleza del RAG: Agente de Auditoría y Diagnóstico Prescriptivo
+El componente conversacional no opera como un chatbot genérico de preguntas y respuestas frecuentes (FAQ), sino como un **motor RAG híbrido (estructurado y no estructurado)** especializado en auditoría y soporte a la decisión:
 
-| Variable | Instrumento | Unidad |
-|----------|-------------|--------|
-| Disponibilidad / código HTTP | Sonda HTTP (`HEAD`/`GET`, timeout 10 s) | código / booleano |
-| Tiempo de respuesta | Sonda HTTP | ms |
-| LCP, FCP, TTFB, CLS, FID | PageSpeed Insights API (Lighthouse v5+) | s / ms / adimensional |
-| Desempeño (score global) | Lighthouse | 0–100 |
-| Accesibilidad (score + errores) | Lighthouse (WCAG 2.1) | 0–100 / lista |
-| Incidentes | Derivación de reglas (DNS, TLS, timeouts, 403) | registro con timestamp |
+```mermaid
+flowchart TD
+    subgraph Fuentes de Conocimiento
+        F1["Telemetría Histórica (PostgreSQL/Supabase)<br>- 90 entidades públicas catalogadas<br>- Series temporales: LCP, CLS, TTFB, Uptime<br>- Registro diario de incidentes y SLAs"]
+        F2["Corpus Normativo Peruano<br>- D.L. 1412 (Ley de Gobierno Digital)<br>- D.S. 029-2021-PCM (Reglamento)<br>- D.S. 048-2020-PCM (Transformación Digital)<br>- Directivas de la SGTD-PCM"]
+        F3["Estándares Internacionales<br>- W3C WCAG 2.1 AA (Técnicas y Criterios POUR)<br>- ISO/IEC 25010 (Calidad de Software)<br>- ITIL v4 (Event & Service Level Management)"]
+    end
 
-### 6.2 Diseño
+    subgraph Motor RAG Híbrido
+        F1 -->|"Text-to-SQL / Consultas Estructuradas"| RAG["Orquestador RAG"]
+        F2 -->|"Búsqueda Vectorial Semántica (Embeddings)"| RAG
+        F3 -->|"Recuperación de Técnicas de Remediación"| RAG
+        LLM["Modelo LLM"] <--> RAG
+    end
 
-- **Población:** catálogo maestro de 90 entidades estatales peruanas (tabla `entidades`), clasificadas en Gobiernos Regionales, Municipalidades Provinciales, Organismos Autónomos y Ministerios.
-- **Frecuencia:** una captura diaria por entidad, programada dentro del horario laboral peruano.
-- **Persistencia:** tabla `mediciones_crudas` (PostgreSQL/Supabase) con una fila por entidad-captura, índices por fecha y entidad, almacenando todas las métricas digeridas de disponibilidad, Core Web Vitals y errores WCAG con inserción eficiente en lotes de 10 entidades.
-- **Automatización:** GitHub Actions (cron diario + disparo manual) ejecuta el colector (Bun + TypeScript, arquitectura hexagonal: puertos y adaptadores) que aplica las sondas y persiste en lotes pequeños para respetar los límites de tiempo del servicio de base de datos.
+    subgraph Perfiles de Salida y Soporte a la Decisión
+        RAG --> U1["Gestor de TI Institucional<br>(Diagnóstico técnico + Plan de remediación)"]
+        RAG --> U2["Ente Supervisor / Auditor<br>(Minutas ejecutivas de fiscalización legal)"]
+        RAG --> U3["Ciudadano / Periodismo de Datos<br>(Traducción transparente sin tecnicismos)"]
+    end
+```
 
-### 6.3 Fundamentación de las decisiones metodológicas (incluida la ventana de captura)
+### 3.2 Casos de Uso y Perfiles de Interacción
 
-- **Ventana horaria de observación:** Las capturas se sitúan deliberadamente dentro del horario laboral y operativo peruano (tarde / cierre de jornada). El orquestador opera sobre infraestructura serverless pública gratuita (GitHub Actions), donde la cola de runners compartidos introduce latencia variable respecto a la hora programada. Por ello, **la hora oficial de cada medición es el timestamp exacto registrado en la base de datos (`fecha_captura`)**, no la hora nominal del cron.
-- **Validez e invarianza frente a la variación horaria:**
-  - *Métricas de laboratorio (Lighthouse / WCAG 2.1):* El 80% de los indicadores (LCP, CLS, FCP, score de rendimiento, violaciones WCAG) corresponden a simulaciones de laboratorio en entornos controlados y emulados. Estas métricas evalúan la arquitectura del portal, el peso de recursos y la estructura del código, siendo **invariantes a la hora del día**.
-  - *Métricas de red y disponibilidad (HTTP status, TTFB):* La franja vespertina (15:00 a 18:00) coincide con el cierre de la jornada pública estatal y alta concurrencia de trámites ciudadanos de fin de día hábil (mesas de partes virtuales), evaluando la resiliencia de los portales bajo condiciones de estrés real.
-- **Costo cero como requisito (RNF-011):** Todo el pipeline opera en planes gratuitos (GitHub Actions ~60 min/mes vs. 2.000 disponibles; PageSpeed ~90 solicitudes/día vs. 10.000; Supabase ~3 MB/mes vs. 500 MB), garantizando la reproducibilidad y sostenibilidad a largo plazo.
+#### Caso A: El Gestor de TI Institucional (Diagnóstico y Remediación)
+- **Consulta:** *"¿Por qué la Municipalidad Provincial de Trujillo tiene su SLA en estado 'En Riesgo' este mes y qué debemos corregir para alinearnos a la normativa de gobierno digital?"*
+- **Comportamiento RAG:**
+  1. Extrae los registros históricos de telemetría de la entidad: identifica 5 caídas vespertinas (TTFB > 10 s) y un puntaje de accesibilidad de 52/100.
+  2. Identifica violaciones críticas específicas: ausencia de atributos `alt` en imágenes esenciales y contraste de color insuficiente (Criterio WCAG 1.4.3).
+  3. Recupera y cita el articulado pertinente del **D.S. 029-2021-PCM** sobre la obligatoriedad del estándar WCAG 2.1 nivel AA.
+  4. Formula una prescripción técnica paso a paso para el equipo de desarrollo web de la municipalidad.
 
-### 6.4 Limitaciones y delimitaciones
+#### Caso B: El Ente Supervisor o Auditor (PCM, Contraloría, Defensoría)
+- **Consulta:** *"Genera un reporte consolidado de los Gobiernos Regionales del sur que hayan presentado incidentes de certificados SSL vencidos o caídas de servicio durante el último mes."*
+- **Comportamiento RAG:**
+  1. Ejecuta agregaciones espaciotemporales sobre la base de datos de incidentes.
+  2. Detecta patrones recurrentes (p. ej. certificados expirados en GORE Piura, fallas de resolución DNS en GORE Tacna) con fecha y hora exacta (`fecha_captura`).
+  3. Redacta una minuta ejecutiva formal para fiscalización y control interno.
 
-1. **Laboratorio vs. campo:** Lighthouse mide condiciones controladas, no la experiencia de usuarios reales con conexiones heterogéneas (futuras fases podrían integrar CrUX).
-2. **Muestra diaria única:** una captura al día puede no capturar caídas breves; se mitiga con la serie temporal (fallas crónicas vs. transitorias) y el registro de reintentos.
-3. **Alcance institucional:** 90 entidades representativas; el catálogo es extensible (`activa = true/false`).
-4. **FID obsolescente:** Google reemplaza FID por INP; el instrumento actual reporta FID vía la API v5; migración prevista en fases posteriores.
-5. **Bloqueos geográficos/de bot:** algunos portales responden 403 a centros de datos extranjeros (donde corren los runners); se documenta como limitación conocida del método.
-
-### 6.5 Calibración de la Orquestación y Transición en Dos Etapas (Implementado)
-
-Para consolidar la estabilidad temporal del estudio durante la ventana de cierre del proyecto sin quebrar la coherencia de la serie temporal histórica, se formalizó e implementó la calibración del orquestador:
-
-#### A. Enfoque de Dos Etapas del Panel Longitudinal
-1. **Etapa 1A — Calibración Empírica y Línea Base (Datos iniciales recolectados):**
-   - *Configuración:* Disparador nominal programado a las 18:00 UTC (13:00 PET).
-   - *Comportamiento real:* Debido a la saturación de la cola en el minuto `:00` en los runners compartidos de GitHub Actions, las ejecuciones efectivas se distribuyeron en una ventana vespertina amplia (15:30 – 18:30 PET).
-   - *Estado metodológico:* Serie histórica válida como línea base de telemetría vespertina de cierre de operaciones.
-2. **Etapa 1B — Régimen Estable Acotado (Implementado en `.github/workflows/daily-audit.yml`):**
-   - *Configuración:* Cron calibrado a las **15:10 PET (`10 20 * * *`)**.
-   - *Comportamiento:* Al utilizar un minuto no redondo (`:10`), se elude la congestión masiva de la infraestructura compartida, logrando que el workflow inicie de forma regular entre las 15:11 y 15:15 PET, culminando las 90 auditorías antes de las 16:00 PET.
-   - *Estado metodológico:* Acotamiento de la varianza temporal (*jitter*) garantizando estabilidad operativa diaria.
-
-#### B. Redacción Formal para el Sustento en Informe / Tesis
-> *"El diseño metodológico del Observatorio contempló una fase inicial de calibración empírica (Etapa 1A) donde el orquestador serverless gratuito (GitHub Actions), programado a las 18:00 UTC, experimentó latencias de encolamiento que desplazaron las capturas hacia la franja de 15:30 a 18:30 PET. Aplicando el principio de mejora continua de la gestión de servicios TI (ITIL v4) y optimización de scheduling, el orquestador se ajustó a las 15:10 PET (`10 20 * * *`) con un minuto no redondo (Etapa 1B). Esta calibración preserva la homogeneidad de la serie temporal por tres razones: (1) ambas etapas se inscriben en el mismo constructo metodológico de 'Horario laboral vespertino de atención del Estado Peruano (15:00–18:00)'; (2) las métricas estructurales de laboratorio (Core Web Vitals sintéticos y accesibilidad WCAG 2.1) son invariantes a la hora; y (3) la tabla de telemetría conserva la estampa temporal auditable (`fecha_captura`) con precisión de microsegundos, asegurando máxima transparencia científica sin quiebres de muestra."*
+#### Caso C: El Ciudadano y Sociedad Civil (Transparencia e Inclusión)
+- **Consulta:** *"¿El portal de trámites de mi Gobierno Regional es accesible para personas con discapacidad visual?"*
+- **Comportamiento RAG:**
+  1. Traduce la jerga técnica de Lighthouse a un lenguaje cívico claro: explica si los lectores de pantalla pueden interpretar el contenido o si la navegación por teclado está rota.
 
 ---
 
-## 7. Arquitectura del Sistema (resumen técnico)
+## 4. Objetivos del Proyecto
 
-| Componente | Tecnología | Justificación |
-|------------|------------|---------------|
-| Colector (backend) | **Bun + TypeScript** (arquitectura hexagonal: `core` / `application` / `infrastructure`) | Alto rendimiento I/O, `fetch` nativo, ecosistema npm (Playwright, supabase-js); un solo lenguaje en todo el stack. |
-| Auditoría de rendimiento | **PageSpeed Insights API** (Lighthouse) | Estándar de facto; resultados de laboratorio comparables; cuota gratuita suficiente. |
-| Base de datos | **PostgreSQL (Supabase)** | Modelo relacional (entidades ↔ mediciones), SQL para agregaciones y tendencias, plan gratuito con SSL. |
-| Automatización | **GitHub Actions** (cron diario `10 20 * * *` a las 15:10 PET + `workflow_dispatch`) | Gratuito, nativo con el repositorio, ejecución reproducible con latencia de cola mínima. |
-| Frontend (Fase 2) | **Astro** (islas de interactividad) + **Chart.js** + **CSS puro** (sin frameworks ni Tailwind) | CSS nativo moderno (variables CSS, flexbox/grid), máxima ligereza, cero dependencias CSS externas (ADR-0004, RNF-002). |
-| Gestión de credenciales | GitHub Secrets (API key de PageSpeed, URL y service role key de Supabase) | RNF-017: sin credenciales en el código. |
+### 4.1 Objetivo General
+> **Diseñar, implementar y evaluar un sistema inteligente de observabilidad continua y auditoría de la calidad de los servicios web públicos basado en RAG, determinando su efectividad en la detección de incidentes de TI y en la generación de diagnósticos prescriptivos normativos mediante un caso de estudio en 90 entidades del Estado Peruano.**
 
-**Estructura del colector (`packages/collector`):** separación de puertos (interfaces de dominio: repositorios, sondas, servicios de auditoría) y adaptadores (Supabase, fetch HTTP, cliente PageSpeed), con inserción por lotes pequeños para respetar los timeouts de la base de datos y reintentos con backoff en la API de Google.
+### 4.2 Objetivos Específicos
 
----
+1. **OE1 (Diseño Metodológico y Telemetría Longitudinal):**  
+   Modelar un esquema de evaluación multidimensional estandarizado (ISO/IEC 25010, WCAG 2.1 y Core Web Vitals) y operacionalizar un pipeline automatizado, reproducible y de bajo costo para la captura longitudinal diaria de disponibilidad, rendimiento y accesibilidad de los 90 portales web institucionales.
 
-## 8. Estado Actual y Hoja de Ruta
+2. **OE2 (Marco de Gestión de Servicios y SLAs — ITIL v4):**  
+   Implementar un modelo de categorización de eventos, incidentes de disponibilidad y niveles de servicio (SLA) basado en las buenas prácticas de ITIL v4, cuantificando la persistencia y recurrencia de fallas en la administración pública.
 
-- ✅ **Fase 1 (en operación):** catálogo de 90 entidades en Supabase; colector de captura cruda funcionando; workflow diario automatizado con persistencia por lotes; registro de incidentes con timestamps exactos; orquestación calibrada en régimen vespertino estable a las 15:10 PET (`10 20 * * *`).
-- 🔜 **Fase 2:** dashboard público (Astro + Chart.js + CSS puro): rankings, fichas por entidad, tendencias, reportes.
-- 🔜 **Fase 3:** análisis longitudinal y generación de reportes de investigación (tendencias, rankings por categoría/región, correlaciones).
-- 🔜 **Fase 4 (opcional):** métricas de campo (CrUX), migración FID→INP, alertas públicas y API abierta.
+3. **OE3 (Capa de Inteligencia Conversacional y Auditoría Normativa — RAG):**  
+   Desarrollar un agente conversacional basado en Retrieval-Augmented Generation (RAG) que integre la base de telemetría histórica estructurada con un corpus no estructurado de normativas peruanas (D.L. 1412, D.S. 029-2021-PCM) y guías técnicas W3C, facilitando diagnósticos interpretables y planes de acción correctiva en lenguaje natural.
 
+4. **OE4 (Evaluación y Validación del Sistema):**  
+   Evaluar empíricamente la efectividad del sistema desarrollado sobre el caso de estudio de las 90 entidades del Estado Peruano, midiendo la confiabilidad del monitoreo automatizado y la calidad del asistente RAG en términos de exactitud factual, fundamentación normativa y ausencia de alucinaciones en consultas de auditoría de TI.
 
 ---
 
-## 9. Referencias Normativas y Técnicas
+## 5. Preguntas de Investigación del Artículo Científico
 
-1. W3C — *Web Content Accessibility Guidelines (WCAG) 2.1*.
-2. ISO/IEC 25010 — *Systems and software Quality Requirements and Evaluation (SQuaRE)*.
-3. Google — *Core Web Vitals* y documentación de la PageSpeed Insights API v5.
-4. ONU — *E-Government Survey* (marco de gobierno digital).
-5. OECD — recomendaciones sobre gobierno digital.
-6. PCM (Perú) — *Política Nacional de Transformación Digital de la Administración Pública* y directivas de la Secretaría de Gobierno Digital.
-8. Convención sobre los Derechos de las Personas con Discapacidad (ONU, ratificada por el Perú).
-9. GitHub Actions — documentación sobre limitaciones de workflows programados (`schedule`).
-10. Supabase — documentación de PostgreSQL gestionado y límites del plan gratuito.
+* **Pregunta Principal (RQ):**  
+  *¿En qué medida un sistema inteligente de observabilidad continua asistido por RAG permite caracterizar la degradación de los servicios web del Estado Peruano y generar recomendaciones de auditoría prescriptiva conformes con la normativa de gobierno digital?*
+
+* **Preguntas Específicas:**
+  * **RQ1 (Telemetría y Estado de la Calidad):** ¿Cuál es el comportamiento longitudinal de la disponibilidad, rendimiento y accesibilidad de los 90 portales evaluados y qué brechas existen entre ministerios, gobiernos regionales y municipalidades?
+  * **RQ2 (Gestión de Incidentes y SLAs bajo ITIL v4):** ¿Qué proporción de entidades incumple los umbrales de nivel de servicio (SLA) y cuál es la prevalencia de fallas crónicas frente a incidentes transitorios?
+  * **RQ3 (Efectividad del RAG en Auditoría y Prescripción):** ¿Con qué grado de fidelidad factual (*faithfulness*), relevancia de respuesta y precisión normativa responde el agente RAG ante escenarios complejos de auditoría de servicios TI en comparación con evaluaciones de expertos humanos?
 
 ---
 
-*Documento de contexto del proyecto — generado para el Observatorio de Calidad Digital Pública del Perú. Última actualización de la Fase 1: captura diaria automatizada en operación.*
+## 6. Proyección del Artículo Científico
+
+### 6.1 Títulos Sugeridos
+* **Español:**  
+  *Marco de Observabilidad Continua y Auditoría Inteligente Asistida por RAG para la Calidad de Servicios Web en el Gobierno Digital Peruano*
+* **Inglés:**  
+  *An Intelligent Continuous Observability and RAG-based Auditing Framework for Web Service Quality in the Peruvian Digital Government*
+
+### 6.2 Estructura del Artículo (Formato IMRaD para Scopus / IEEE / ACM)
+1. **Introducción:** Relevancia de los servicios digitales estatales, brecha entre marco normativo y fiscalización continua, formulación del problema y aporte científico.
+2. **Trabajos Relacionados:** Estado del arte en monitoreo de portales públicos, aplicaciones de ITIL en el sector público, y uso de LLMs/RAG en auditoría de software y cumplimiento regulatorio.
+3. **Metodología y Arquitectura del Sistema:** Muestra de 90 entidades, diseño de sondas y cuotas gratuitas, modelo de eventos y SLAs (ITIL v4), y diseño del motor RAG híbrido (Text-to-SQL + embeddings normativos).
+4. **Resultados Empíricos del Estado Peruano:** Hallazgos del panel longitudinal (fallas DNS, SSL, tiempos de carga, violaciones WCAG) y rankings institucionales.
+5. **Evaluación Experimental del Sistema RAG:** Métricas de desempeño del modelo RAG (fidelidad factual, relevancia de respuestas, reducción de alucinaciones normativas) y validación de planes de remediación.
+6. **Discusión e Implicaciones para la Gestión de TI:** Gobernanza de TI en el sector público, remediación técnica guiada por IA, y amenazas a la validez.
+7. **Conclusiones y Trabajo Futuro:** Resumen de contribuciones y líneas de investigación futuras.
+
+---
+
+# PARTE 2: CONTEXTO TÉCNICO Y METODOLÓGICO
+
+## 7. Requerimientos del Sistema (RF y RNF)
+
+### 7.1 Requerimientos Funcionales Clave
+| RF | Descripción | Módulo |
+|----|-------------|--------|
+| **RF-001** | Registro y categorización del catálogo maestro de 90 entidades públicas. | Core / Catálogo |
+| **RF-002** | Verificación diaria de disponibilidad (código de estado HTTP y tiempo de respuesta con sonda de 10 s). | Colector / Sonda |
+| **RF-003** | Medición de velocidad de carga y Core Web Vitals (LCP, FID/INP, CLS, FCP, TTFB) vía PageSpeed Insights API v5. | Colector / Rendimiento |
+| **RF-004** | Evaluación automatizada de accesibilidad según WCAG 2.1 (Lighthouse) con discriminación de violaciones. | Colector / Accesibilidad |
+| **RF-005** | Clasificación jerárquica por nivel administrativo (Ministerio, GORE, Municipalidad, Organismo Autónomo). | Core / Entidades |
+| **RF-006** | Actualización periódica automatizada mediante orquestación serverless (GitHub Actions cron diario). | Infraestructura |
+| **RF-007** | Detección y registro formal de incidentes de disponibilidad (DNS, SSL, 403, timeouts) con timestamp auditable. | Analítica / ITIL v4 |
+| **RF-008** | Cálculo de puntaje global ponderado y clasificación de estado de SLA mensual (Cumple, En Riesgo, Incumple). | Analítica / ITIL v4 |
+| **RF-009** | Visualización en dashboard público interactivo: rankings, comparativas, fichas por entidad y reportes descargables (Astro). | Frontend |
+| **RF-010** | **Módulo RAG de Auditoría Conversacional:** Consulta en lenguaje natural sobre telemetría histórica y prescripción de remediación normativa. | Inteligencia RAG |
+
+### 7.2 Requerimientos No Funcionales Clave
+| RNF | Criterio | Justificación |
+|-----|----------|---------------|
+| **RNF-001** | Tiempo de respuesta del sistema ≤ 500 ms en consultas agregadas SQL. | Consultas optimizadas con índices espaciotemporales en PostgreSQL. |
+| **RNF-002** | Carga inicial del dashboard web ≤ 3.0 s. | Arquitectura Astro con islas de interactividad y CSS puro (cero frameworks CSS pesados). |
+| **RNF-003** | Almacenamiento histórico auditable de mediciones continuas (> 90 entidades). | Modelo relacional indexado en Supabase. |
+| **RNF-011** | **Costo operativo cero (≤ $0/mes):** Sostenibilidad integral sobre planes gratuitos. | GitHub Actions (60 min/mes vs. 2000 disponibles), PageSpeed (90 req/día vs. 10.000), Supabase (3 MB/mes vs. 500 MB). |
+| **RNF-017** | Seguridad y aislamiento de credenciales. | GitHub Secrets para llaves de servicio; ninguna clave expuesta en código fuente. |
+| **RNF-027** | Diseño responsivo adaptado a dispositivos móviles. | Interfaces fluidas basadas en CSS Grid y Flexbox nativos. |
+
+---
+
+## 8. Marco Teórico y Referencias Normativas
+
+### 8.1 Gobierno Digital y Marco Normativo Peruano
+El marco normativo nacional impone obligaciones concretas sobre la calidad de las plataformas digitales:
+- **Decreto Legislativo N.º 1412 (Ley de Gobierno Digital):** Establece el régimen jurídico aplicable al uso de las tecnologías digitales en las entidades públicas, promoviendo la interoperabilidad, la seguridad y la accesibilidad.
+- **Decreto Supremo N.º 029-2021-PCM (Reglamento del D.L. 1412):** Dispone que las plataformas web institucionales deben garantizar condiciones mínimas de usabilidad, disponibilidad y accesibilidad para toda la ciudadanía.
+- **Política Nacional de Transformación Digital (D.S. N.º 048-2020-PCM):** Fija como pilar la entrega de servicios públicos digitales de alta calidad centrados en las personas.
+- **Ley N.º 29973 (Ley General de la Persona con Discapacidad):** Garantiza el derecho de las personas con discapacidad a acceder a la información y a los servicios digitales sin barreras discriminatorias.
+
+### 8.2 Calidad del Software: Modelo ISO/IEC 25010 (SQuaRE)
+El sistema operacionaliza el modelo de calidad de producto de software **ISO/IEC 25010**:
+- **Confiabilidad / Disponibilidad:** Capacidad del servicio de estar operativo y accesible en el tiempo (sondas HTTP y tiempo de respuesta).
+- **Eficiencia de Desempeño:** Tiempos de respuesta y comportamiento bajo condiciones de red estandarizadas (Core Web Vitals).
+- **Usabilidad y Accesibilidad:** Grado en que el software puede ser utilizado por personas con distintas capacidades (WCAG 2.1).
+- **Seguridad:** Confidencialidad y autenticidad del canal de comunicación (vigencia de certificados TLS/HTTPS).
+
+### 8.3 Rendimiento Web: Core Web Vitals y Métricas de Laboratorio
+El estándar Core Web Vitals cuantifica la experiencia de carga del usuario en tres dimensiones esenciales:
+- **LCP (Largest Contentful Paint):** Percepción de velocidad de carga del elemento principal visible (umbral óptimo: ≤ 2.5 s).
+- **FID / INP (First Input Delay / Interaction to Next Paint):** Responsividad ante la interacción del usuario (umbral óptimo: ≤ 100 ms).
+- **CLS (Cumulative Layout Shift):** Estabilidad visual para evitar desplazamientos inesperados de contenido (umbral óptimo: ≤ 0.1).
+- **FCP y TTFB:** Métricas de soporte que evalúan el primer renderizado y la latencia del servidor de alojamiento.
+
+*Fundamento de laboratorio:* PageSpeed Insights evalúa en un entorno controlado (Chrome emulado, red y CPU estandarizadas), asegurando que las comparaciones entre las 90 entidades sean justas, reproducibles e invariantes a la calidad de la conexión de un usuario individual.
+
+### 8.4 Accesibilidad Web: WCAG 2.1 y Principios POUR
+Las pautas W3C WCAG 2.1 se estructuran en los cuatro principios fundamentales:
+1. **Perceptible:** La información y los componentes no pueden ser invisibles a todos los sentidos del usuario (contraste adecuado, textos alternativos `alt`).
+2. **Operable:** La navegación debe ser realizable por teclado, sin trampas de foco ni límites de tiempo arbitrarios.
+3. **Comprensible:** Los textos y la estructura de navegación deben ser predecibles y legibles.
+4. **Robusto:** El código HTML debe ser compatible con tecnologías asistivas actuales y futuras (lectores de pantalla).
+
+### 8.5 Gestión de Servicios de TI: ITIL v4 aplicada a la Calidad Externa
+El proyecto adopta los constructos de **ITIL v4**:
+- **Evento:** Cualquier cambio de estado detectable en la sonda de monitoreo (p. ej. respuesta HTTP 200, cambio en latencia).
+- **Incidente:** Una interrupción no planificada o reducción de la calidad del servicio (p. ej. timeout >10 s, certificado SSL expirado, error 500 o 403).
+- **Acuerdos de Nivel de Servicio (SLA):** Compromisos de disponibilidad mensual clasificados en:
+  - *Cumple:* Disponibilidad mensual ≥ 99.5 %.
+  - *En Riesgo:* Disponibilidad mensual entre 98.0 % y 99.49 %.
+  - *Incumple:* Disponibilidad mensual < 98.0 %.
+
+---
+
+## 9. Metodología de Medición e Instrumentación
+
+### 9.1 Instrumentos y Variables Evaluadas
+| Variable | Instrumento | Parámetros Técnicos |
+|----------|-------------|---------------------|
+| **Disponibilidad HTTP** | Sonda HTTP nativa Bun | Método `HEAD`/`GET`, timeout 10 s, registro de código de estado y DNS. |
+| **Tiempo de respuesta (TTFB)** | Sonda HTTP | Medición en milisegundos hasta el primer byte del servidor. |
+| **Core Web Vitals (LCP, CLS, FCP)** | Google PageSpeed Insights API v5 | Modo laboratorio móvil, red emulada 4G, CPU throttled. |
+| **Puntaje de Desempeño** | Lighthouse v5+ | Escala normalizada de 0 a 100. |
+| **Puntaje y Violaciones WCAG 2.1** | Lighthouse Accessibility Audit | Escala normalizada 0 a 100 y lista de reglas incumplidas (A, AA). |
+| **Incidentes de Disponibilidad** | Motor de reglas de inferencia | Clasificación en: `DNS_ERROR`, `SSL_EXPIRED`, `HTTP_FORBIDDEN_403`, `TIMEOUT_GT_10S`. |
+
+### 9.2 Población y Diseño Muestral
+El universo de análisis consta de un catálogo maestro de **90 entidades públicas peruanas**, equilibrado por tipología institucional:
+- **19 Ministerios:** Todo el Poder Ejecutivo y Presidencia del Consejo de Ministros.
+- **25 Gobiernos Regionales (GOREs):** Cobertura nacional completa de sedes centrales departamentales.
+- **31 Municipalidades Provinciales Estratégicas:** Capitales departamentales y municipios con mayor concentración poblacional.
+- **15 Organismos Autónomos y Reguladores:** SUNAT, RENIEC, EsSalud, SUNAFIL, Tribunal Constitucional, ONPE, etc.
+
+### 9.3 Calibración de la Orquestación y Régimen Vespertino (Implementado)
+Para asegurar la estabilidad de la serie temporal bajo infraestructura serverless compartida (GitHub Actions), se ejecutó una calibración en dos etapas:
+- **Etapa 1A (Calibración Inicial):** Disparador programado a las 18:00 UTC (13:00 PET). Debido a la congestión de runners en horas punta en minutos en punto (`:00`), las corridas reales experimentaron desplazamientos temporales (*jitter* de 15:30 a 18:30 PET).
+- **Etapa 1B (Régimen Estable Acotado — `.github/workflows/daily-audit.yml`):** Se ajustó el cron a las **15:10 PET (`10 20 * * *`)**. Al utilizar un minuto no redondo (`:10`), el inicio del flujo se estabilizó de forma reproducible entre las 15:11 y 15:15 PET, culminando las 90 auditorías antes de las 16:00 PET.
+- **Validez del panel:** La serie temporal preserva plena coherencia científica porque:
+  1. Ambas etapas se inscriben en el horario operativo vespertino estatal peruano (15:00 a 18:00), momento de alta concurrencia de trámites y cierre de jornada.
+  2. El 80 % de las métricas (Core Web Vitals y violaciones WCAG) son de laboratorio, siendo invariantes a fluctuaciones de tráfico de red.
+  3. Cada registro conserva su estampa temporal exacta en microsegundos (`fecha_captura`) en PostgreSQL.
+
+---
+
+## 10. Arquitectura de Software e Implementación
+
+### 10.1 Resumen del Stack Tecnológico
+| Componente | Tecnología | Justificación y Rol |
+|------------|------------|---------------------|
+| **Colector de Telemetría** | **Bun + TypeScript** | Ecosistema tipado, I/O ultrarrápido, cliente HTTP nativo y arquitectura hexagonal (`core` / `application` / `infrastructure`). [ADR-0001](./ADRs/ADR-0001-uso-de-bun.md). |
+| **Persistencia Relacional y Vectorial** | **PostgreSQL (Supabase) + `pgvector`** | Modelo relacional indexado para series de tiempo y extensión vectorial nativa para embeddings normativos en 768d a costo cero (RNF-011). [ADR-0003](./ADRs/ADR-0003-uso-de-postgresql.md), [ADR-0008](./ADRs/ADR-0008-uso-de-pgvector-en-supabase.md). |
+| **Orquestación Automática** | **GitHub Actions** | Pipelines programados (`cron: '10 20 * * *'`) reproducibles, auditable mediante control de versiones. [ADR-0005](./ADRs/ADR-0005-uso-de-github-actions.md). |
+| **Frontend del Dashboard** | **Astro + Chart.js + CSS Puro** | Arquitectura de islas, máximo rendimiento de carga (RNF-002), cero dependencias CSS externas. [ADR-0002](./ADRs/ADR-0002-uso-de-astro.md), [ADR-0004](./ADRs/ADR-0004-uso-de-css-puro.md). |
+| **Motor Inteligente RAG** | **Google Gemini (3.5 Flash-Lite / 3.5 Flash) + `gemini-embedding-001`** | Orquestación RAG híbrida (Text-to-SQL + Búsqueda Vectorial); Flash-Lite para evaluación masiva del artículo y Flash para producción interactiva. [ADR-0009](./ADRs/ADR-0009-seleccion-modelo-gemini-rag.md). |
+
+### 10.2 Modelo Arquitectural Hexagonal del Colector (`packages/collector`)
+El backend de recolección aísla estrictamente la lógica de dominio de los detalles de infraestructura:
+- **Puertos de Dominio:** Interfaces para sondas de disponibilidad (`AvailabilityProbe`), auditorías externas (`AuditService`) y repositorios de telemetría (`TelemetryRepository`).
+- **Adaptadores:** Implementaciones concretas para la API de PageSpeed, cliente HTTP con backoff exponencial y cliente Supabase con inserción por lotes de 10 entidades para evitar saturar conexiones serverless.
+
+---
+
+## 11. Estado Actual y Hoja de Ruta del Proyecto
+
+```mermaid
+flowchart LR
+    F1["Fase 1: Captura Cruda<br>(COMPLETADA)"] --> F2["Fase 2: Dashboard y Analítica<br>(EN DESARROLLO)"]
+    F2 --> F3["Fase 3: Módulo RAG Inteligente<br>(EN DESARROLLO)"]
+    F3 --> F4["Fase 4: Evaluación y Artículo<br>(PLANIFICADA)"]
+
+    style F1 fill:#2e7d32,stroke:#1b5e20,color:#fff
+    style F2 fill:#f57c00,stroke:#e65100,color:#fff
+    style F3 fill:#1976d2,stroke:#0d47a1,color:#fff
+    style F4 fill:#757575,stroke:#424242,color:#fff
+```
+
+- ✅ **Fase 1 — En Operación Diaria:**
+  - Catálogo maestro de 90 entidades públicas clasificado en Supabase.
+  - Colector en Bun/TypeScript ejecutándose diariamente vía GitHub Actions a las 15:10 PET.
+  - Inserción transaccional por lotes y detección reproducible de incidentes (DNS, SSL vencido, 403, timeouts).
+- 🔄 **Fase 2 — En Desarrollo (Dashboard y Lógica de Servicios):**
+  - Implementación de la API de agregaciones (cálculo de SLA mensual, normalización y puntajes 40/30/30).
+  - Construcción del frontend interactivo en Astro con Chart.js y CSS nativo puro.
+- 🔄 **Fase 3 — En Desarrollo (Módulo RAG Conversacional):**
+  - Indexación vectorial del corpus normativo peruano (D.L. 1412, D.S. 029-2021-PCM) y directivas W3C.
+  - Implementación de la capa híbrida Text-to-SQL + Búsqueda Vectorial para soporte a la decisión de TI.
+- ⏳ **Fase 4 — Planificada (Evaluación Científica y Redacción de Artículo):**
+  - Análisis estadístico del panel longitudinal acumulado durante las semanas de captura.
+  - Evaluación cuantitativa del RAG (*Faithfulness*, *Answer Relevance*, precisión normativa).
+  - Redacción y envío del artículo a revista o conferencia indexada en Scopus.
+
+---
+
+## 12. Referencias Normativas y Técnicas
+
+1. **Presidencia del Consejo de Ministros (Perú):** *Decreto Legislativo N.º 1412, Ley de Gobierno Digital*, 2018.
+2. **Presidencia del Consejo de Ministros (Perú):** *Decreto Supremo N.º 029-2021-PCM, Reglamento del Decreto Legislativo N.º 1412*, 2021.
+3. **Presidencia del Consejo de Ministros (Perú):** *Decreto Supremo N.º 048-2020-PCM, Política Nacional de Transformación Digital*, 2020.
+4. **Congreso de la República del Perú:** *Ley N.º 29973, Ley General de la Persona con Discapacidad*, 2012.
+5. **World Wide Web Consortium (W3C):** *Web Content Accessibility Guidelines (WCAG) 2.1*, W3C Recommendation, 2018.
+6. **International Organization for Standardization:** *ISO/IEC 25010: Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE)*, 2011.
+7. **AXELOS:** *ITIL Foundation: ITIL 4 Edition*, TSO (The Stationery Office), London, 2019.
+8. **Google Developers:** *Core Web Vitals y PageSpeed Insights API v5 Documentation*, 2024.
+9. **ONU (UNDESA):** *United Nations E-Government Survey: Accelerating Digital Transformation for Sustainable Development*, 2024.
+10. **OECD / IDB:** *Digital Government Index: Assessing Digital Transformation in Latin America and the Caribbean*, 2024.
+11. **B. Kitchenham and S. Charters:** *Guidelines for performing Systematic Literature Reviews in Software Engineering*, Tech. Rep. EBSE-2007-01, 2007.
+12. **A. R. Hevner, S. T. March, J. Park, and S. Ram:** *Design Science in Information Systems Research*, MIS Quarterly, vol. 28, no. 1, pp. 75–105, 2004.
+13. **Y. Huayhuahi et al.:** *Observatorio_Digital*, repositorio de software, GitHub: https://github.com/yhuayhuahi/Observatorio_Digital, 2026.
+

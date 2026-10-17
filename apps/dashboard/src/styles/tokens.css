@@ -1,0 +1,446 @@
+/* ==========================================================================
+   Material Design 3 (M3) Tokens & WCAG 2.1 AA Accessible Stylesheet
+   Observatorio de Calidad Digital del Estado Peruano
+   ========================================================================== */
+
+:root {
+  /* ==========================================================================
+     M3 COLOR SYSTEM - LIGHT THEME (DEFAULT)
+     All foreground/background pairings meet or exceed WCAG 2.1 AA (>= 4.5:1)
+     ========================================================================== */
+  --md-sys-color-primary: #004D84;              /* Deep governmental cobalt blue */
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #CEE5FF;
+  --md-sys-color-on-primary-container: #001D36;
+
+  --md-sys-color-secondary: #4A607A;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #D2E4FF;
+  --md-sys-color-on-secondary-container: #041C33;
+
+  --md-sys-color-tertiary: #65587B;
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #ECDCFF;
+  --md-sys-color-on-tertiary-container: #211634;
+
+  --md-sys-color-surface: #F8F9FA;
+  --md-sys-color-surface-dim: #D9DCE0;
+  --md-sys-color-surface-bright: #FFFFFF;
+  --md-sys-color-surface-container-lowest: #FFFFFF;
+  --md-sys-color-surface-container-low: #F1F4F8;
+  --md-sys-color-surface-container: #E9EDF2;
+  --md-sys-color-surface-container-high: #E2E7ED;
+  --md-sys-color-surface-container-highest: #DCE1E7;
+
+  --md-sys-color-on-surface: #191C1E;           /* Contrast 15.2:1 against surface */
+  --md-sys-color-on-surface-variant: #404850;   /* Contrast 8.8:1 against surface */
+  --md-sys-color-outline: #717882;
+  --md-sys-color-outline-variant: #C1C7D0;
+
+  /* Status Tokens (WCAG 2.1 AA compliant) */
+  --color-status-success: #0E6229;
+  --color-status-success-container: #DCFCE7;
+  --color-status-success-on-container: #064E1B;
+
+  --color-status-warning: #854D0E;
+  --color-status-warning-container: #FEF3C7;
+  --color-status-warning-on-container: #713F12;
+
+  --color-status-danger: #991B1B;
+  --color-status-danger-container: #FEE2E2;
+  --color-status-danger-on-container: #7F1D1D;
+
+  --color-status-info: #0369A1;
+  --color-status-info-container: #E0F2FE;
+  --color-status-info-on-container: #075985;
+
+  /* Brand Peru & Accessibility Accents */
+  --color-brand-red: #C5111B;
+  --color-brand-red-dark: #9B0A12;
+  --color-focus-ring: #0056B3;
+
+  /* M3 Elevation Shadows */
+  --md-sys-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+  --md-sys-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.04);
+  --md-sys-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.06);
+  --md-sys-elevation-4: 0px 6px 10px 4px rgba(0, 0, 0, 0.08), 0px 2px 3px 0px rgba(0, 0, 0, 0.06);
+}
+
+/* ==========================================================================
+   M3 COLOR SYSTEM - DARK THEME
+   Triggered via data-theme="dark" on <html> or <body>
+   ========================================================================== */
+[data-theme="dark"] {
+  --md-sys-color-primary: #96CCFF;
+  --md-sys-color-on-primary: #00335D;
+  --md-sys-color-primary-container: #00497E;
+  --md-sys-color-on-primary-container: #CEE5FF;
+
+  --md-sys-color-secondary: #B1C8E7;
+  --md-sys-color-on-secondary: #1C324A;
+  --md-sys-color-secondary-container: #334862;
+  --md-sys-color-on-secondary-container: #D2E4FF;
+
+  --md-sys-color-tertiary: #D0C0E8;
+  --md-sys-color-on-tertiary: #362B4A;
+  --md-sys-color-tertiary-container: #4D4162;
+  --md-sys-color-on-tertiary-container: #ECDCFF;
+
+  --md-sys-color-surface: #111418;
+  --md-sys-color-surface-dim: #111418;
+  --md-sys-color-surface-bright: #373A3E;
+  --md-sys-color-surface-container-lowest: #0C0F12;
+  --md-sys-color-surface-container-low: #191C20;
+  --md-sys-color-surface-container: #1D2024;
+  --md-sys-color-surface-container-high: #272A2F;
+  --md-sys-color-surface-container-highest: #32353A;
+
+  --md-sys-color-on-surface: #E1E2E8;           /* High contrast against dark background */
+  --md-sys-color-on-surface-variant: #C1C7D0;
+  --md-sys-color-outline: #8B919A;
+  --md-sys-color-outline-variant: #404850;
+
+  /* Dark Status Tokens */
+  --color-status-success: #86EFAC;
+  --color-status-success-container: #14351E;
+  --color-status-success-on-container: #DCFCE7;
+
+  --color-status-warning: #FDE047;
+  --color-status-warning-container: #422006;
+  --color-status-warning-on-container: #FEF3C7;
+
+  --color-status-danger: #FCA5A5;
+  --color-status-danger-container: #450A0A;
+  --color-status-danger-on-container: #FEE2E2;
+
+  --color-status-info: #7DD3FC;
+  --color-status-info-container: #0C4A6E;
+  --color-status-info-on-container: #E0F2FE;
+
+  --color-brand-red: #FF6B72;
+  --color-brand-red-dark: #FF8D92;
+  --color-focus-ring: #60A5FA;
+
+  --md-sys-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.4), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.4), 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  --md-sys-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.45), 0px 1px 3px 0px rgba(0, 0, 0, 0.25);
+  --md-sys-elevation-4: 0px 6px 10px 4px rgba(0, 0, 0, 0.5), 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================================================
+   GLOBAL DESIGN TOKENS (Shared across themes)
+   ========================================================================== */
+:root {
+  /* M3 Shape / Corner Radii */
+  --md-shape-xs: 4px;
+  --md-shape-sm: 8px;
+  --md-shape-md: 12px;
+  --md-shape-lg: 16px;
+  --md-shape-xl: 24px;
+  --md-shape-full: 9999px;
+
+  /* Typography Scale - Google Documentation Standard (Dart / Flutter) */
+  --font-sans: 'Google Sans Flex', 'Google Sans Text', 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Google Sans Code', 'Google Sans Mono', 'Roboto Mono', 'SFMono-Regular', Consolas, Menlo, monospace;
+
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 2rem;       /* 32px */
+  --text-4xl: 2.5rem;     /* 40px */
+
+  /* Spacing Scale (8px baseline) */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+
+  /* Layout Containers */
+  --container-max-width: 1240px;
+  --header-height: 72px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   BASE RESET & ACCESSIBILITY RULES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--md-sys-color-on-surface);
+  background-color: var(--md-sys-color-surface);
+  color-scheme: light dark;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* WCAG 2.1 AA Mandatory Skip-Link */
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: 1rem;
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--md-shape-sm);
+  font-weight: 600;
+  z-index: 9999;
+  text-decoration: none;
+  box-shadow: var(--md-sys-elevation-3);
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+/* Mandatory Focus Visible Rule */
+:focus-visible {
+  outline: 3px solid var(--color-focus-ring) !important;
+  outline-offset: 2px !important;
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
+  line-height: 1.25;
+}
+
+h1 { font-size: var(--text-3xl); margin-bottom: var(--space-3); }
+h2 { font-size: var(--text-2xl); margin-bottom: var(--space-3); }
+h3 { font-size: var(--text-xl); margin-bottom: var(--space-2); }
+h4 { font-size: var(--text-lg); margin-bottom: var(--space-2); }
+
+p {
+  color: var(--md-sys-color-on-surface-variant);
+  margin-bottom: var(--space-3);
+}
+
+a {
+  color: var(--md-sys-color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  filter: brightness(0.85);
+}
+
+/* ==========================================================================
+   CONTAINER & LAYOUT
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.main-content {
+  flex: 1;
+  padding: var(--space-6) 0 var(--space-12);
+}
+
+/* ==========================================================================
+   M3 COMMON COMPONENTS
+   ========================================================================== */
+/* Elevated Surface Card */
+.m3-card {
+  background-color: var(--md-sys-color-surface-container-lowest);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-md);
+  padding: var(--space-5);
+  box-shadow: var(--md-sys-elevation-1);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.m3-card:hover {
+  box-shadow: var(--md-sys-elevation-2);
+}
+
+/* Buttons */
+.m3-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border-radius: var(--md-shape-full);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  min-height: 40px;
+}
+
+.m3-btn-primary {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  box-shadow: var(--md-sys-elevation-1);
+}
+
+.m3-btn-primary:hover {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.m3-btn-tonal {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.m3-btn-tonal:hover {
+  filter: brightness(0.95);
+}
+
+.m3-btn-outlined {
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+  border: 1px solid var(--md-sys-color-outline);
+}
+
+.m3-btn-outlined:hover {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+/* Chips & Badges */
+.m3-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  border-radius: var(--md-shape-full);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.m3-chip-success {
+  background-color: var(--color-status-success-container);
+  color: var(--color-status-success-on-container);
+  border: 1px solid var(--color-status-success);
+}
+
+.m3-chip-warning {
+  background-color: var(--color-status-warning-container);
+  color: var(--color-status-warning-on-container);
+  border: 1px solid var(--color-status-warning);
+}
+
+.m3-chip-danger {
+  background-color: var(--color-status-danger-container);
+  color: var(--color-status-danger-on-container);
+  border: 1px solid var(--color-status-danger);
+}
+
+.m3-chip-info {
+  background-color: var(--color-status-info-container);
+  color: var(--color-status-info-on-container);
+  border: 1px solid var(--color-status-info);
+}
+
+/* Form Controls */
+.m3-input, .m3-select, .m3-textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--md-sys-color-on-surface);
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: var(--md-shape-sm);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.m3-input:focus, .m3-select:focus, .m3-textarea:focus {
+  background-color: var(--md-sys-color-surface-container-lowest);
+  border-color: var(--md-sys-color-primary);
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 1px;
+}
+
+/* Material Table */
+.m3-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-md);
+  background-color: var(--md-sys-color-surface-container-lowest);
+  box-shadow: var(--md-sys-elevation-1);
+}
+
+.m3-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--text-sm);
+}
+
+.m3-table th {
+  background-color: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  font-weight: 700;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 2px solid var(--md-sys-color-outline-variant);
+  white-space: nowrap;
+}
+
+.m3-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.m3-table tr:hover td {
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+/* Utility Grid */
+.grid-cols-1 { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+.grid-cols-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+.grid-cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+.grid-cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+
+@media (max-width: 900px) {
+  .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-cols-3 { grid-template-columns: repeat(1, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .grid-cols-4, .grid-cols-2 { grid-template-columns: 1fr; }
+}

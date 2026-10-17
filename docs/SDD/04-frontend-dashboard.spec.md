@@ -1,40 +1,44 @@
 # Especificación Técnica: Frontend Dashboard y Sistema de Diseño Accesible (`apps/dashboard`)
 
 * **Identificador de Especificación:** SDD-MOD-004
-* **Versión:** 1.0.0
+* **Versión:** 1.1.0
 * **Estado:** Aprobado para Implementación
-* **Requerimientos Asociados:** RF-010, RF-011 | RNF-002, RNF-006, RNF-007, RNF-010, RNF-011
-* **Decisiones Arquitectónicas Vinculadas:** ADR-0001 (Bun), ADR-0002 (Astro), ADR-0004 (CSS Puro), ADR-0007 (Docker)
+* **Requerimientos Asociados:** RF-010, RF-011, RF-014 | RNF-002, RNF-006, RNF-007, RNF-010, RNF-011, RNF-012
+* **Decisiones Arquitectónicas Vinculadas:** ADR-0001 (Bun), ADR-0002 (Astro), ADR-0004 (CSS Puro), ADR-0007 (Docker), ADR-0008 (pgvector en Supabase), ADR-0009 (Google Gemini Flash-Lite / Flash)
 
 ---
 
 ## 1. OBJETIVO Y CONTEXTO
 
 ### 1.1. Definición del Problema de Negocio
-La información sobre el desempeño tecnológico y la accesibilidad de los portales gubernamentales debe ser accesible para toda la ciudadanía, incluidos usuarios con discapacidad visual o motriz y personas con conexiones de baja velocidad en distintas regiones del Perú. Los dashboards convencionales basados en aplicaciones pesadas de una sola página (SPAs) introducen dependencias sobredimensionadas de JavaScript que degradan el tiempo de carga y vulneran las pautas de accesibilidad WCAG 2.1 AA.
+La información sobre el desempeño tecnológico y la accesibilidad de los portales gubernamentales debe ser accesible para toda la ciudadanía, incluidos usuarios con discapacidad visual o motriz y personas con conexiones de baja velocidad en distintas regiones del Perú. Los dashboards convencionales basados en aplicaciones pesadas de una sola página (SPAs) introducen dependencias sobredimensionadas de JavaScript que degradan el tiempo de carga y vulneran las pautas de accesibilidad WCAG 2.1 AA. Además, un panel únicamente cuantitativo dificulta que funcionarios públicos o ciudadanos sin formación técnica avanzada comprendan la gravedad de los incumplimientos normativos o sepan cómo subsanarlos.
 
-Este módulo especifica la construcción del **Dashboard Web** utilizando **Astro Framework** (ADR-0002) y **CSS Puro** (ADR-0004), garantizando:
+Este módulo especifica la construcción del **Dashboard Web** utilizando **Astro Framework** (ADR-0002) y **CSS Puro** (ADR-0004). El frontend se nutre directamente de los endpoints del backend (`apps/api`, SDD-MOD-003) conectados a Supabase PostgreSQL, garantizando:
 - Tiempo de carga inicial $\le 3\text{ segundos}$ en redes 4G estándar (RNF-002).
 - Cumplimiento estricto del estándar **WCAG 2.1 nivel AA** (RNF-006).
 - Arquitectura de islas (*Islands Architecture*) con Cero JavaScript por defecto para el contenido estático.
+- Interfaz conversacional del **Auditor Inteligente con RAG** (RF-014, RNF-012) con streaming SSE en tiempo real para análisis prescriptivo y remediaciones técnicas.
 
 ### 1.2. Alcance del Módulo
 
 #### A. QUÉ ESTÁ INCLUIDO (In-Scope)
-1. **Páginas Principales del Dashboard (RF-010, RF-011):**
+1. **Páginas Principales del Dashboard (RF-010, RF-011, RF-014):**
    - **`/` (Resumen Ejecutivo):** Indicadores clave de rendimiento (KPIs globales de disponibilidad media, velocidad y accesibilidad) y Top 10 de entidades con mejor y peor desempeño.
    - **`/ranking` (Ranking Nacional Completo):** Tabla interactiva con las 90 entidades, con filtros combinados por categoría (Ministerio, GORE, etc.) y región, y ordenamiento dinámico por columnas.
    - **`/entidad/[id]` (Ficha Técnica Institucional):** Vista detallada de una entidad con semáforo de SLA, evolución histórica de Core Web Vitals en gráficos de líneas y detalle de violaciones de accesibilidad.
    - **`/incidentes` (Tablero de Incidentes ITIL v4):** Panel de caídas activas en tiempo real y registro histórico de indisponibilidad.
    - **`/reportes` (Centro de Descargas):** Interfaz para exportar reportes en CSV y JSON con selector de fechas y filtros institucionales.
+   - **`/auditor-ia` (Auditor Conversacional RAG):** Vista dedicada para interactuar en lenguaje natural con el sistema de auditoría inteligente, formulando preguntas sobre leyes peruanas, telemetría y soluciones de código.
 2. **Sistema de Diseño en CSS Puro (`src/styles/`):**
    - Variables CSS (*Design Tokens*) para tipografía accesible, espaciado proporcional, sombras y paleta de colores con contraste garantizado $\ge 4.5:1$ (texto normal) y $\ge 3:1$ (elementos de interfaz).
    - Componentes UI modulares nativos sin dependencias externas (Bootstrap, Tailwind, etc.).
-3. **Accesibilidad Integral (WCAG 2.1 AA):** Enlaces de salto al contenido (*skip-links*), navegación 100% operable por teclado, foco visible con alto contraste, marcado semántico HTML5 y atributos ARIA rigurosos.
+3. **Componente de Chat Inteligente (`AuditChatWidget.tsx`):** Isla reactiva reutilizable tanto en `/auditor-ia` como en modal flotante accesible en las fichas institucionales, con consumo de Server-Sent Events (SSE).
+4. **Accesibilidad Integral (WCAG 2.1 AA):** Enlaces de salto al contenido (*skip-links*), navegación 100% operable por teclado, foco visible con alto contraste, marcado semántico HTML5 y atributos ARIA rigurosos.
 
 #### B. QUÉ QUEDA EXCLUIDO (Out-of-Scope)
 1. Autenticación de usuarios ciudadanos (el dashboard es 100% público y abierto).
 2. Paneles de edición manual de datos en el cliente.
+3. Sondeo web o auditorías Lighthouse síncronas en el navegador (los datos son provistos por el backend vía PostgreSQL).
 
 ---
 
@@ -54,6 +58,7 @@ graph TD
         DL --> P_Ent["entidad/[id].astro - Ficha"]
         DL --> P_Inc[incidentes.astro - Incidentes]
         DL --> P_Rep[reportes.astro - Descargas]
+        DL --> P_Aud[auditor-ia.astro - Auditor IA RAG]
     end
 
     subgraph Static_UI_Components ["Componentes Estáticos (Zero JS)"]
@@ -68,6 +73,8 @@ graph TD
         P_Rank --> DynamicTable[DynamicRankingTable.tsx]
         P_Ent --> HistoryChart[HistoricalMetricsChart.tsx]
         P_Rep --> ExportBtn[ExportButton.tsx]
+        P_Aud --> ChatWidget[AuditChatWidget.tsx]
+        P_Ent --> FloatChatBtn[FloatingAuditLauncher.tsx]
     end
 ```
 
@@ -162,6 +169,18 @@ graph TD
   2. **Medidor de Cumplimiento de SLA Mensual:** Indicador gráfico del uptime mensual acumulado frente a la meta del $99.5\%$.
   3. **Gráficos de Tendencia Histórica:** Componente `HistoricalMetricsChart.tsx` (con `client:visible`), graficando la serie temporal de 30 días de LCP, latencia HTTP y puntajes.
   4. **Panel de Accesibilidad y Hallazgos WCAG 2.1:** Listado desplegable con cada auditoría fallida, selector CSS y recomendación de solución técnica.
+  5. **Acceso al Auditor Inteligente:** Botón de acción rápida para formular preguntas sobre la entidad directamente al asistente RAG.
+
+---
+
+### 3.4. Vista 4: Auditor Inteligente con RAG (`src/pages/auditor-ia.astro`) (RF-014, RNF-012)
+* **Propósito:** Brindar una interfaz de diálogo asistida por IA para analizar telemetría, auditar cumplimiento de leyes peruanas (D.L. 1412, D.S. 029-2021-PCM, R.SGTD 001-2025-PCM/SGTD) y generar código de remediación técnica.
+* **Componente Reactivo:** `AuditChatWidget.tsx` (Hidratado con `client:idle`).
+* **Elementos de la Interfaz:**
+  1. **Barra de Preguntas Frecuentes Sugeridas:** Pills clickeables con prompts predefinidos (ej. *"¿Cuáles son los 5 portales con peor tiempo de carga LCP?"*, *"¿Qué GOREs incumplen la directiva de accesibilidad 2025?"*, *"¿Cómo solucionar violaciones de contraste en botones?"*).
+  2. **Línea de Tiempo de Mensajes:** Mensajes diferenciados visualmente (usuario vs. asistente auditor) con soporte completo para markdown renderizado, bloques de código con botón de copiado rápido (`pre code`) y badges de citas normativas oficiales verificadas.
+  3. **Indicador de Razonamiento y Ejecución de Herramientas:** Animación accesible indicando cuándo el agente ejecuta una consulta SQL a la base de datos o realiza búsqueda semántica vectorial.
+  4. **Caja de Entrada Accesible:** `<textarea>` multilínea con auto-expansión, envío con `Enter`, salto de línea con `Shift+Enter`, botón de envío con contraste AA y región accesible con `aria-live="polite"` para lectores de pantalla.
 
 ---
 
@@ -203,6 +222,30 @@ export interface RankingEntity {
 export interface DynamicRankingTableProps {
   initialEntities: RankingEntity[];
   lastUpdated: string;
+}
+
+// src/islands/AuditChatWidget.tsx
+export interface ChatCitation {
+  fuente: string;
+  articulo?: string;
+  seccion?: string;
+  criterio?: string;
+}
+
+export interface ChatMessageUI {
+  id: string;
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp: string;
+  status?: 'thinking' | 'streaming' | 'complete' | 'error';
+  toolExecuting?: string;
+  citations?: ChatCitation[];
+}
+
+export interface AuditChatWidgetProps {
+  apiEndpoint?: string; // Defecto: '/api/v1/chat'
+  initialContextEntityId?: number; // Para abrir el chat contextualizado en una entidad
+  preloadedPrompts?: string[];
 }
 ```
 
@@ -247,3 +290,10 @@ export interface DynamicRankingTableProps {
 * **Cuando** interactúa con el selector de categorías y presiona `Enter` sobre `'Ministerio'`.
 * **Entonces** el foco debe permanecer en una posición lógica y accesible.
 * **Y** la tabla debe actualizarse mostrando únicamente los 20 ministerios sin recargar la página completa.
+
+### Escenario 4: Asistente Conversacional RAG Accesible y Streaming (RF-014, RNF-012)
+* **Dado que** un usuario accede a `/auditor-ia` con un lector de pantalla (NVDA / VoiceOver).
+* **Cuando** escribe una consulta en el `<textarea>`, presiona `Enter` y se inicia el streaming SSE desde el backend.
+* **Entonces** el contenedor de respuesta debe notificar progresivamente los cambios mediante `aria-live="polite"`.
+* **Y** los bloques de código HTML/CSS para remediación deben ser navegables por teclado y contar con un botón "Copiar código" accesible.
+* **Y** las citas de leyes peruanas deben renderizarse como enlaces o etiquetas legibles con alto contraste ($\ge 4.5:1$).

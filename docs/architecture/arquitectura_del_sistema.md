@@ -1,78 +1,93 @@
 # Arquitectura del Sistema - Observatorio de Calidad Digital Pública
 
-* **Documento:** Especificación Arquitectónica en 3 Niveles
-* **Fecha:** 2026-09-27
+* **Documento:** Especificación Arquitectónica en 3 Niveles (Actualizado con Sistema Inteligente RAG)
+* **Fecha:** 2026-10-16
 * **Estado:** Aprobado
-* **Relación con ADRs:** ADR-0001 (Bun), ADR-0002 (Astro), ADR-0003 (PostgreSQL/Supabase), ADR-0004 (CSS Puro), ADR-0005 (GitHub Actions), ADR-0006 (Google APIs), ADR-0007 (Docker).
+* **Relación con ADRs:** ADR-0001 (Bun), ADR-0002 (Astro), ADR-0003 (PostgreSQL/Supabase), ADR-0004 (CSS Puro), ADR-0005 (GitHub Actions), ADR-0006 (Google APIs PageSpeed), ADR-0007 (Docker), ADR-0008 (pgvector en Supabase), ADR-0009 (Google Gemini 3.5 Flash-Lite / Flash para RAG).
 
 ---
 
 ## 1. Visión General y Principio de Desacoplamiento
 
-La arquitectura del sistema está diseñada para resolver la necesidad inmediata: **recolectar telemetría cruda y objetiva de 90 portales del Estado peruano de forma diaria y desatendida desde el primer momento**, desacoplando la fase de captura temprana del desarrollo posterior del backend analítico y del dashboard frontend.
+La arquitectura del sistema está diseñada para resolver dos necesidades fundamentales en un ciclo de vida evolutivo y modular:
+1. **Recolección objetiva y continua:** Capturar telemetría cruda diaria de 90 portales del Estado peruano de forma automatizada y desatendida a costo cero.
+2. **Auditoría prescriptiva e inteligencia de servicio:** Superar la limitación de los dashboards tradicionales mediante un **motor RAG híbrido** que traduce métricas numéricas y violaciones WCAG en diagnósticos técnicos y dictámenes normativos fundamentados en la Ley de Gobierno Digital (D.L. 1412 y D.S. 029-2021-PCM).
 
 ```
-┌────────────────────────────────────────────────────────────────────────┐
-│                          EVOLUCIÓN EN 2 FASES                          │
-│                                                                        │
-│   FASE 1 (Inmediata):                                                  │
-│   [GitHub Actions (Cron)] ──▶ [Módulo Captura Cruda] ──▶ [Supabase DB] │
-│                                                                        │
-│   FASE 2 (Backend + Dashboard):                                        │
-│   [Módulo Captura] ──(Se integra en)──▶ [Backend Core API (Bun)]       │
-│                                                   │                    │
-│                                                   ▼                    │
-│                                         [Dashboard (Astro)]            │
-└────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                 EVOLUCIÓN EN 3 FASES                                   │
+│                                                                                        │
+│   FASE 1 (Operación Diaria Automatizada):                                              │
+│   [GitHub Actions (Cron)] ──▶ [Módulo Captura Cruda] ──▶ [Supabase PostgreSQL]         │
+│                                                                                        │
+│   FASE 2 (Backend Core + Dashboard Astro):                                             │
+│   [Módulo Captura] ──(Se integra en)──▶ [Backend Core API (Bun)]                       │
+│                                                   │                                    │
+│                                                   ▼                                    │
+│                                         [Dashboard Web (Astro)]                        │
+│                                                                                        │
+│   FASE 3 (Capa de Inteligencia RAG Híbrida):                                           │
+│   [Supabase: SQL + pgvector] ◀──▶ [Motor RAG (Gemini 3.5)] ──▶ [Auditor Conversacional]│
+└────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## 2. Nivel 1: Arquitectura de Contexto e Interacción Global
 
-Representa cómo interactúan los usuarios, el sistema central del Observatorio y todos los servicios externos (sensores, APIs de auditoría, base de datos e infraestructura de despliegue).
+Representa cómo interactúan los diferentes perfiles de usuarios, el sistema central del Observatorio y todos los servicios externos (sensores, APIs de auditoría, base de datos relacional y vectorial, e infraestructura de IA generativa).
 
 ### Diagrama de Contexto (Mermaid)
 
 ```mermaid
 flowchart TD
     subgraph Usuarios ["Usuarios del Sistema"]
-        U1["Ciudadanía e Investigadores"]
-        U2["Servidores Públicos y Reguladores"]
+        U1["Ciudadanía y Periodismo de Datos<br>(Transparencia cívica)"]
+        U2["Servidores Públicos y Auditores<br>(PCM, Contraloría, Jefes de TI)"]
         ADM["Administradores del Observatorio"]
     end
 
     subgraph Observatorio ["Observatorio de Calidad Digital Pública"]
-        SYS["Plataforma Central del Observatorio"]
+        SYS["Plataforma Central del Observatorio<br>(Backend API + Motor RAG + Dashboard)"]
     end
 
     subgraph Sistemas_Externos ["Entidades Monitoreadas y Servicios Externos"]
-        P90["90 Portales del Estado Peruano (Ministerios, GOREs, etc.)"]
-        GAPI["Google PageSpeed Insights API (Core Web Vitals y WCAG 2.1)"]
-        GHA["GitHub Actions (Orquestador de Tareas Cron y CI/CD)"]
-        SUPA["Supabase / PostgreSQL (Almacenamiento de Telemetría)"]
-        HOST["Plataforma de Hosting Web (Vercel / Cloudflare Pages)"]
+        P90["90 Portales del Estado Peruano<br>(Ministerios, GOREs, Municipalidades)"]
+        GAPI["Google PageSpeed Insights API<br>(Core Web Vitals y WCAG 2.1 AA)"]
+        GEMINI["Google AI Studio API<br>(Gemini 3.5 Flash-Lite / Flash + Embeddings)"]
+        GHA["GitHub Actions<br>(Orquestador Cron Diario a las 15:10 PET)"]
+        SUPA["Supabase PostgreSQL + pgvector<br>(Telemetría Relacional + Corpus Normativo)"]
+        HOST["Plataforma de Hosting CDN<br>(Vercel / Cloudflare Pages)"]
     end
 
-    %% Flujos de interacción
-    GHA --"1. Dispara ejecucion programada (cron diario)"--> SYS
-    SYS --"2. Sondea disponibilidad HTTP y latencia"--> P90
-    SYS --"3. Solicita auditoria de CWV y accesibilidad"--> GAPI
-    SYS --"4. Persiste mediciones crudas sin sesgo"--> SUPA
-    SYS --"5. Despliega artefactos estaticos/SSR"--> HOST
+    %% Flujos de Telemetría e Ingesta
+    GHA --"1. Dispara recolección programada (15:10 PET)"--> SYS
+    SYS --"2. Sondea disponibilidad HTTP y latencia TTFB"--> P90
+    SYS --"3. Solicita auditoría CWV y errores WCAG"--> GAPI
+    SYS --"4. Persiste mediciones crudas diarias"--> SUPA
 
-    U1 --"Consulta rankings y fichas tecnicas (HTTPS)"--> HOST
-    U2 --"Descarga reportes CSV/JSON y evalua SLAs"--> HOST
-    ADM --"Supervisa telemetria y dispara auditorias manuales"--> GHA
-    HOST --"Consulta metricas agregadas"--> SUPA
+    %% Flujos de Despliegue y Consulta Web
+    SYS --"5. Despliega artefactos estáticos/SSR"--> HOST
+    U1 --"Consulta rankings y fichas técnicas (HTTPS)"--> HOST
+    U2 --"Descarga reportes CSV/JSON y evalúa SLAs"--> HOST
+    ADM --"Supervisa telemetría y dispara flujos manuales"--> GHA
+
+    %% Flujos de Inteligencia RAG
+    U1 & U2 --"6. Formula consultas de auditoría en lenguaje natural"--> HOST
+    HOST --"7. Enruta consulta al Motor RAG"--> SYS
+    SYS --"8. Ejecuta Tool Calling Text-to-SQL y Búsqueda Vectorial"--> SUPA
+    SYS --"9. Infiere diagnóstico prescriptivo con LLM"--> GEMINI
+    GEMINI --"10. Retorna respuesta fundamentada sin alucinaciones"--> SYS
+    SYS --"11. Presenta reporte prescriptivo en el Chatbot"--> HOST
 ```
 
 ### Descripción de Flujos de Nivel 1
-1. **Orquestación Desatendida:** GitHub Actions despierta diariamente el proceso de recolección según el cron configurado.
-2. **Sondeo Directo:** El sistema realiza peticiones HTTP a los 90 portales para verificar estado (200, 404, 500) y tiempos de respuesta.
-3. **Auditoría Externa Estandarizada:** El sistema consulta a Google PageSpeed Insights API para obtener de forma imparcial los Core Web Vitals (LCP, FID/INP, CLS) y el puntaje WCAG 2.1.
-4. **Persistencia Centralizada:** Toda la telemetría se guarda en la base de datos PostgreSQL alojada en Supabase.
-5. **Consulta Pública:** La ciudadanía y los servidores públicos acceden al dashboard en Astro servido en la CDN con velocidad ultrarrápida y diseño accesible.
+1. **Orquestación Desatendida:** GitHub Actions dispara diariamente a las 15:10 PET el colector de telemetría sin intervención humana.
+2. **Sondeo Directo:** Sondas HTTP verifican disponibilidad (códigos 200, 403, 500, timeouts y DNS) sobre los 90 portales.
+3. **Auditoría Imparcial:** Consulta a Google PageSpeed API para obtener Core Web Vitals (LCP, CLS, FCP) y auditoría de accesibilidad WCAG 2.1.
+4. **Persistencia Híbrida:** Supabase almacena la serie temporal relacional y aloja el corpus normativo peruano indexado en vectores mediante `pgvector`.
+5. **Consulta Pública del Dashboard:** Usuarios acceden al dashboard en Astro servido en CDN con velocidad ultrarrápida (LCP < 1.5s).
+6. **Auditoría Inteligente Asistida por RAG:** Funcionarios y ciudadanos interactúan en lenguaje natural con el asistente. El sistema consulta a Gemini para generar SQL dinámico sobre la telemetría, recupera artículos de leyes peruanas mediante similitud de vectores, y sintetiza diagnósticos prescriptivos accionables.
 
 ---
 
@@ -85,303 +100,274 @@ Desglosa los subsistemas que componen el Observatorio, delimitando sus responsab
 ```mermaid
 flowchart LR
     subgraph Orquestacion ["Orquestación Serverless"]
-        GHA_WORK["Workflow Cron (daily-audit.yml)"]
+        GHA_WORK["Workflow Cron Diaria<br>(daily-audit.yml)"]
     end
 
     subgraph Subsistema_Captura ["Subsistema de Ingesta (Fase 1)"]
-        COLLECTOR["Módulo de Captura Cruda (CLI / Runner Autónomo)"]
-        HTTP_PROBE["Sonda HTTP (Disponibilidad / Uptime)"]
-        GPS_CLIENT["Cliente Google PageSpeed (CWV & WCAG)"]
-        RATE_LIMIT["Controlador de Concurrencia y Throttling"]
+        COLLECTOR["Módulo Colector (Bun CLI)"]
+        HTTP_PROBE["Sonda HTTP (Disponibilidad / TTFB)"]
+        GPS_CLIENT["Cliente Google PageSpeed"]
+        RATE_LIMIT["Controlador de Concurrencia"]
     end
 
-    subgraph Base_Datos ["Persistencia Relacional"]
-        DB[(Supabase PostgreSQL)]
-        T_ENT["entidades (Catalogo Maestro)"]
-        T_RAW["mediciones_crudas (Telemetría)"]
-        T_SLA["vistas_slas e incidentes (Fase 2)"]
+    subgraph Base_Datos ["Persistencia Unificada (Supabase)"]
+        DB[(PostgreSQL + pgvector)]
+        T_ENT["entidades (Catálogo 90)"]
+        T_RAW["mediciones_crudas (Series Temporales)"]
+        T_INC["incidentes y evaluaciones_sla (ITIL v4)"]
+        T_VEC["documentos_normativos (Embeddings 768d)"]
     end
 
     subgraph Subsistema_Backend ["Subsistema Backend Core (Fase 2)"]
         API["Backend API REST (Bun HTTP)"]
-        SLA_ENGINE["Motor de SLAs (ITIL v4)"]
-        INC_ENGINE["Motor de Detección de Incidentes"]
+        SLA_ENGINE["Motor de SLAs e Incidentes (ITIL v4)"]
         REPORT_GEN["Generador de Reportes (CSV/JSON)"]
     end
 
-    subgraph Subsistema_Frontend ["Subsistema Frontend (Astro)"]
-        DASHBOARD["Dashboard Web (Astro Framework)"]
-        PAGES["Páginas Estáticas / SSR (Ranking, Fichas)"]
-        ISLANDS["Islas Interactivas (Filtros y Gráficos)"]
-        CSS_THEME["Sistema de Diseño (CSS Puro + WCAG AA)"]
+    subgraph Subsistema_RAG ["Subsistema de Inteligencia RAG (Fase 3)"]
+        RAG_ORCH["Orquestador RAG Conversacional"]
+        TEXT_SQL["Herramienta Text-to-SQL (Tool Calling)"]
+        VEC_SEARCH["Búsqueda Vectorial Semántica"]
+        GEMINI_CLIENT["Cliente Google GenAI SDK"]
     end
 
-    %% Conexiones
+    subgraph Subsistema_Frontend ["Subsistema Frontend (Astro)"]
+        DASHBOARD["Dashboard Web (Astro)"]
+        PAGES["Páginas SSR/Estáticas (Ranking, Fichas)"]
+        ISLANDS["Islas Interactivas (Gráficos SVG Nativos)"]
+        CHAT_ISLAND["Isla Chatbot de Auditoría (React/Preact)"]
+    end
+
+    %% Conexiones Ingesta
     GHA_WORK -->|Ejecuta bun run collect| COLLECTOR
-    COLLECTOR --> HTTP_PROBE
-    COLLECTOR --> GPS_CLIENT
-    COLLECTOR --> RATE_LIMIT
-    COLLECTOR -->|Inserta registros| T_RAW
-    T_ENT -->|Lee lista de URLs| COLLECTOR
+    COLLECTOR --> HTTP_PROBE & GPS_CLIENT & RATE_LIMIT
+    COLLECTOR -->|Inserta telemetría| T_RAW
+    T_ENT -->|Lee URLs activas| COLLECTOR
 
+    %% Conexiones Analítica
     T_RAW --> SLA_ENGINE
-    T_RAW --> INC_ENGINE
-    SLA_ENGINE --> API
-    INC_ENGINE --> API
-    REPORT_GEN --> API
-    COLLECTOR -.->|Se importa como servicio interno| API
+    SLA_ENGINE -->|Persiste SLAs e Incidentes| T_INC
+    SLA_ENGINE & REPORT_GEN --> API
 
-    API -->|JSON REST / SSR Data| DASHBOARD
-    DASHBOARD --> PAGES
-    PAGES --> ISLANDS
-    PAGES --> CSS_THEME
+    %% Conexiones RAG
+    API --> RAG_ORCH
+    RAG_ORCH --> TEXT_SQL & VEC_SEARCH & GEMINI_CLIENT
+    TEXT_SQL -->|Consulta métricas estructuradas| T_RAW & T_INC & T_ENT
+    VEC_SEARCH -->|Consulta coseno embeddings| T_VEC
+
+    %% Conexiones Frontend
+    API -->|REST API / SSR Data| DASHBOARD
+    DASHBOARD --> PAGES & ISLANDS
+    PAGES --> CHAT_ISLAND
+    CHAT_ISLAND <-->|Streaming / POST /api/chat| RAG_ORCH
 ```
 
 ### Responsabilidades de los Módulos de Nivel 2
-* **Módulo de Captura Cruda:** Módulo autónomo y prioritario. Lee las 90 entidades de la base de datos, ejecuta las comprobaciones de disponibilidad en paralelo controlado, procesa las auditorías de Google con rate-limiting y guarda los resultados crudos en Supabase.
-* **Supabase PostgreSQL:** Almacén único de la verdad. Implementa las tablas de Fase 1 con llaves foráneas e índices temporales de alto rendimiento.
-* **Backend Core (Bun):** En Fase 2 proporciona la lógica analítica: evalúa umbrales de SLA, clasifica incidentes por continuidad de caída, expone endpoints REST seguros y genera reportes en CSV y JSON.
-* **Frontend (Astro):** Interfaz pública optimizada para rendimiento (LCP < 1.5s, cero JavaScript innecesario). Utiliza componentes estáticos para el contenido y *islas* reactivas exclusivamente para filtros y gráficos dinámicos.
+* **Módulo de Captura Cruda (`packages/collector`):** CLI autónomo ejecutado por GitHub Actions. Aplica sondas HTTP con control de timeouts (10s) y consume PageSpeed API con backoff exponencial, insertando en lotes pequeños en Supabase.
+* **Supabase PostgreSQL + `pgvector`:** Almacén único de la verdad. Mantiene el catálogo relacional, las series de tiempo de telemetría y la tabla de embeddings vectoriales a 768 dimensiones sin superar el 12 % de la cuota gratuita (ADR-0008).
+* **Backend Core API (`apps/api`):** Evalúa la continuidad de fallas para abrir/cerrar incidentes según ITIL v4, calcula porcentajes de SLA mensual y expone endpoints REST estructurados.
+* **Subsistema RAG (`apps/api/src/modules/rag`):**
+  * Orquesta la interacción con **Google Gemini (3.5 Flash-Lite para evaluación y 3.5 Flash para producción)** mediante el SDK oficial `@google/genai` (ADR-0009).
+  * Cuenta con dos herramientas acopladas: `TextToSqlTool` (consulta de telemetría) y `VectorRetrieverTool` (búsqueda semántica sobre leyes D.L. 1412, D.S. 029-2021-PCM y WCAG 2.1).
+* **Frontend Astro (`apps/dashboard`):** Ofrece visualización accesible Zero-JS por defecto para rankings y fichas, incorporando la isla interactiva `AuditChatWidget` para el diálogo con el asistente RAG.
 
 ---
 
 ## 4. Nivel 3: Arquitectura de Código y Componentes
 
-Define la estructura de directorios, capas y contratos de código para los tres componentes de software: el **Módulo de Captura Cruda**, el **Backend** y el **Frontend**.
+Define la estructura de directorios, capas y contratos de código para todos los componentes del monorepo.
 
 ```
 GSTI_project/
 ├── .github/
 │   └── workflows/
-│       └── daily-audit.yml              # Orquestador programado de recolección
+│       └── daily-audit.yml              # Orquestador cron diario (15:10 PET)
 ├── packages/
-│   └── collector/                       # MÓDULO DE CAPTURA CRUDA (Fase 1 - Prioritario)
+│   └── collector/                       # MÓDULO DE CAPTURA CRUDA (Fase 1 - Operativo)
 ├── apps/
-│   ├── api/                             # BACKEND CORE (Fase 2)
-│   └── dashboard/                       # FRONTEND ASTRO (Fase 2)
+│   ├── api/                             # BACKEND CORE + MOTOR RAG (Fases 2 y 3)
+│   └── dashboard/                       # FRONTEND ASTRO + CHATBOT (Fases 2 y 3)
 └── docs/
-    ├── ADRs/
-    ├── architecture/
-    └── schemes/
+    ├── ADRs/                            # Registro formal de decisiones (ADR-0001 a 0009)
+    ├── architecture/                    # Especificaciones arquitectónicas
+    └── schemes/                         # Diagramas y modelos de datos
 ```
 
 ---
 
-### 4.1. Módulo de Captura Cruda (`packages/collector`) — *Prioridad 1*
+### 4.1. Módulo de Captura Cruda (`packages/collector`) — *Arquitectura Hexagonal*
 
-Este módulo está diseñado con **Arquitectura Hexagonal (Puertos y Adaptadores)**. Esto garantiza que funcione hoy de manera autónoma como un CLI en GitHub Actions y que mañana se importe directamente en el Backend sin tocar su lógica interna.
-
-#### Estructura de Directorios
+Mantiene estricto desacoplamiento entre el dominio de auditoría y los adaptadores de infraestructura:
 
 ```
 packages/collector/
-├── package.json                         # Configurado con Bun
-├── tsconfig.json
-├── src/
-│   ├── index.ts                         # Exportación pública del módulo para reuso en Backend
-│   ├── cli.ts                           # Punto de entrada para ejecución por terminal / GitHub Actions
-│   │
-│   ├── core/                            # Dominio y Abstracciones (Independiente de librerías)
-│   │   ├── models/
-│   │   │   ├── entity.model.ts          # Interface de Entidad Pública
-│   │   │   ├── probe-result.model.ts    # Modelo de telemetría HTTP cruda
-│   │   │   └── audit-result.model.ts    # Modelo de Core Web Vitals y Accesibilidad
-│   │   └── ports/
-│   │       ├── entity-repository.port.ts # Contrato de lectura de entidades
-│   │       ├── measurement-repository.port.ts # Contrato de inserción de métricas
-│   │       ├── http-probe.port.ts       # Contrato de sondeo HTTP
-│   │       └── audit-service.port.ts    # Contrato de auditoría PageSpeed
-│   │
-│   ├── infrastructure/                  # Adaptadores Tecnológicos
-│   │   ├── http/
-│   │   │   └── fetch-http-probe.ts      # Implementación con fetch nativo de Bun (timeout/latencia)
-│   │   ├── google/
-│   │   │   └── pagespeed-client.ts      # Cliente de Google PageSpeed Insights API v5 con reintentos
-│   │   ├── persistence/
-│   │   │   └── supabase-measurement-repo.ts # Adaptador PostgreSQL / Supabase (@supabase/supabase-js o pg)
-│   │   └── config/
-│   │       └── env.config.ts            # Validación de variables (SUPABASE_URL, GOOGLE_API_KEY)
-│   │
-│   └── application/                     # Casos de Uso / Orquestador
-│       ├── run-full-audit.usecase.ts    # Orquestador del lote de 90 entidades
-│       └── rate-limiter.ts              # Control de concurrencia (ej. 3 peticiones concurrentes con delay)
-```
-
-#### Diagrama de Clases y Contratos del Colector (Mermaid)
-
-```mermaid
-classDiagram
-    class RunFullAuditUseCase {
-        -IEntityRepository entityRepo
-        -IMeasurementRepository measurementRepo
-        -IHttpProbe httpProbe
-        -IAuditService auditService
-        +execute(batchSize: number): Promise~AuditSummary~
-    }
-
-    class IEntityRepository {
-        <<interface>>
-        +getActiveEntities(): Promise~Entity[]~
-    }
-
-    class IMeasurementRepository {
-        <<interface>>
-        +saveBatch(measurements: RawMeasurement[]): Promise~void~
-    }
-
-    class IHttpProbe {
-        <<interface>>
-        +checkAvailability(url: string): Promise~HttpProbeResult~
-    }
-
-    class IAuditService {
-        <<interface>>
-        +runAudit(url: string): Promise~PageSpeedAuditResult~
-    }
-
-    class FetchHttpProbe {
-        +checkAvailability(url: string): Promise~HttpProbeResult~
-    }
-
-    class PageSpeedClient {
-        -string apiKey
-        +runAudit(url: string): Promise~PageSpeedAuditResult~
-    }
-
-    class SupabaseMeasurementRepo {
-        -SupabaseClient client
-        +saveBatch(measurements: RawMeasurement[]): Promise~void~
-    }
-
-    RunFullAuditUseCase --> IEntityRepository
-    RunFullAuditUseCase --> IMeasurementRepository
-    RunFullAuditUseCase --> IHttpProbe
-    RunFullAuditUseCase --> IAuditService
-
-    FetchHttpProbe ..|> IHttpProbe
-    PageSpeedClient ..|> IAuditService
-    SupabaseMeasurementRepo ..|> IMeasurementRepository
-```
-
-#### Integración Futura con el Backend
-Cuando se construya el backend, la integración consistirá en una sola línea de importación:
-```typescript
-import { RunFullAuditUseCase } from '@observatorio/collector';
-// Permite ejecutar auditorías desde un endpoint admin o desde el scheduler interno del backend
-```
-
----
-
-### 4.2. Backend (`apps/api`) — *Fase 2*
-
-El backend provee servicios REST ligeros en Bun/TypeScript, calculando la lógica analítica de SLAs e incidentes sobre los datos persistidos en Supabase.
-
-#### Estructura de Directorios
-
-```
-apps/api/
 ├── package.json                         # Runtime Bun
 ├── tsconfig.json
 ├── src/
-│   ├── server.ts                        # Punto de entrada HTTP (Bun.serve o microframework liviano)
-│   ├── config/
-│   │   ├── database.ts                  # Pool de conexiones a PostgreSQL / Supabase
-│   │   └── constants.ts                 # Umbrales de SLAs (ej: Uptime 99.5%, LCP 2.5s)
+│   ├── index.ts                         # Exportación pública del módulo
+│   ├── cli.ts                           # Entrypoint para GitHub Actions
 │   │
-│   ├── modules/
-│   │   ├── entities/                    # Catálogo de entidades
-│   │   │   ├── entities.controller.ts
-│   │   │   ├── entities.service.ts
-│   │   │   └── entities.repository.ts
-│   │   ├── metrics/                     # Series temporales de telemetría cruda
-│   │   │   ├── metrics.controller.ts
-│   │   │   └── metrics.service.ts
-│   │   ├── slas/                        # Análisis de SLAs según ITIL v4 (Cálculo temporal)
-│   │   │   ├── sla-calculator.service.ts
-│   │   │   └── sla.controller.ts
-│   │   ├── incidents/                  # Detección y ciclo de vida de caídas de servicio
-│   │   │   ├── incident-detector.service.ts
-│   │   │   └── incidents.controller.ts
-│   │   ├── scoring/                     # Cálculo del puntaje normalizado (0-100)
-│   │   │   └── score.service.ts
-│   │   └── reports/                     # Exportación de reportes CSV / JSON
-│   │       ├── csv-exporter.ts
-│   │       └── reports.controller.ts
+│   ├── core/                            # Dominio y Abstracciones
+│   │   ├── models/
+│   │   │   ├── entity.model.ts          # Interface de Entidad Pública
+│   │   │   ├── probe-result.model.ts    # Modelo de telemetría HTTP
+│   │   │   └── audit-result.model.ts    # Modelo de Core Web Vitals y WCAG
+│   │   └── ports/
+│   │       ├── entity-repository.port.ts
+│   │       ├── measurement-repository.port.ts
+│   │       ├── http-probe.port.ts
+│   │       └── audit-service.port.ts
 │   │
-│   └── middlewares/
-│       ├── error-handler.ts
-│       ├── cors.ts
-│       └── logger.ts
+│   ├── infrastructure/                  # Adaptadores Tecnológicos
+│   │   ├── http/fetch-http-probe.ts     # Sonda nativa Bun (timeout 10s)
+│   │   ├── google/pagespeed-client.ts   # Cliente PageSpeed API v5
+│   │   ├── persistence/supabase-measurement-repo.ts # Persistencia en lotes de 10
+│   │   └── config/env.config.ts         # Validación de variables de entorno
+│   │
+│   └── application/                     # Orquestación de Casos de Uso
+│       ├── run-full-audit.usecase.ts    # Auditoría por lotes de 90 entidades
+│       └── rate-limiter.ts              # Control de concurrencia
 ```
 
 ---
 
-### 4.3. Frontend (`apps/dashboard`) — *Fase 2*
+### 4.2. Backend Core y Módulo RAG (`apps/api`) — *Fases 2 y 3*
 
-Construido en **Astro** para máxima velocidad de carga (RNF-002) y cumplimiento estricto de accesibilidad WCAG 2.1 nivel AA (RNF-006).
+Combina los servicios REST de analítica con el orquestador inteligente RAG:
 
-#### Estructura de Directorios
+```
+apps/api/
+├── package.json                         # Runtime Bun + @google/genai + @supabase/supabase-js
+├── tsconfig.json
+├── src/
+│   ├── server.ts                        # Servidor HTTP Bun
+│   ├── config/
+│   │   ├── database.ts                  # Conexión a PostgreSQL / Supabase
+│   │   ├── gemini.ts                    # Cliente Google GenAI (Flash-Lite / Flash)
+│   │   └── env.ts                       # Validación (GEMINI_API_KEY, SUPABASE_KEY)
+│   │
+│   ├── modules/
+│   │   ├── entities/                    # Catálogo de entidades públicas
+│   │   │   ├── entities.controller.ts
+│   │   │   └── entities.service.ts
+│   │   ├── metrics/                     # Series temporales crudas
+│   │   │   ├── metrics.controller.ts
+│   │   │   └── metrics.service.ts
+│   │   ├── slas/                        # Análisis de SLAs según ITIL v4
+│   │   │   ├── sla-calculator.service.ts
+│   │   │   └── sla.controller.ts
+│   │   ├── incidents/                   # Ciclo de vida de incidentes
+│   │   │   ├── incident-detector.service.ts
+│   │   │   └── incidents.controller.ts
+│   │   ├── reports/                     # Exportación CSV y JSON
+│   │   │   └── reports.controller.ts
+│   │   │
+│   │   └── rag/                         # SUBSISTEMA RAG INTELIGENTE (Fase 3)
+│   │       ├── rag.controller.ts        # Endpoint POST /api/chat (Streaming y JSON)
+│   │       ├── rag-orchestrator.service.ts # Orquestador Gemini con Tool Calling
+│   │       ├── prompts/
+│   │       │   ├── system-auditor.prompt.ts # Instrucciones de rol, guardrails y contexto
+│   │       │   └── sql-generation.prompt.ts # Reglas para Text-to-SQL seguro
+│   │       ├── tools/
+│   │       │   ├── text-to-sql.tool.ts  # Herramienta de consulta SQL sobre telemetría
+│   │       │   └── vector-retriever.tool.ts # Búsqueda en pgvector (similitud coseno)
+│   │       └── indexer/
+│   │           ├── chunker.ts           # División de leyes y pautas WCAG en fragmentos
+│   │           └── seed-normative-db.ts # Script de carga con gemini-embedding-001
+│   │
+│   └── middlewares/
+│       ├── rate-limit-middleware.ts     # Control de cuota (15 RPM)
+│       └── error-handler.ts
+```
+
+#### Diagrama de Clases del Subsistema RAG (Mermaid)
+
+```mermaid
+classDiagram
+    class RagController {
+        -RagOrchestratorService ragService
+        +handleChatQuery(req: Request): Promise~Response~
+    }
+
+    class RagOrchestratorService {
+        -GoogleGenAIClient geminiClient
+        -TextToSqlTool sqlTool
+        -VectorRetrieverTool vectorTool
+        +processQuery(userPrompt: string, history: Message[]): Promise~RagAnswer~
+    }
+
+    class TextToSqlTool {
+        -SupabaseClient db
+        +executeSafeQuery(sql: string): Promise~QueryResult~
+        +describeSchema(): SchemaDefinition
+    }
+
+    class VectorRetrieverTool {
+        -SupabaseClient db
+        -GoogleGenAIClient embeddingClient
+        +searchNormativeDocs(query: string, topK: number): Promise~NormativeChunk[]~
+    }
+
+    RagController --> RagOrchestratorService
+    RagOrchestratorService --> TextToSqlTool
+    RagOrchestratorService --> VectorRetrieverTool
+```
+
+---
+
+### 4.3. Frontend Dashboard y Chatbot (`apps/dashboard`) — *Fase 2 y 3*
+
+Construido en **Astro** para mantener un LCP < 1.5s y cero dependencias CSS externas:
 
 ```
 apps/dashboard/
-├── astro.config.mjs                     # Configuración de Astro (modo SSR/SSG con Bun)
+├── astro.config.mjs
 ├── package.json
-├── public/
-│   ├── favicon.svg
-│   └── assets/logos/
-│
 ├── src/
 │   ├── layouts/
-│   │   ├── BaseLayout.astro             # Estructura HTML5 accesible (meta tags, skip links, aria)
-│   │   └── DashboardLayout.astro        # Header gubernamental, sidebar/navbar y footer
+│   │   └── DashboardLayout.astro        # Layout institucional accesible
 │   │
 │   ├── pages/
-│   │   ├── index.astro                  # Resumen Ejecutivo (KPIs globales y Top 10)
-│   │   ├── ranking.astro                # Tabla completa de las 90 entidades con filtros
-│   │   ├── entidad/
-│   │   │   └── [id].astro               # Ficha técnica individual y gráficos históricos
-│   │   ├── incidentes.astro             # Tablero de alertas e incidentes (ITIL v4)
-│   │   └── reportes.astro               # Panel de descarga de datos en CSV y JSON
+│   │   ├── index.astro                  # Resumen ejecutivo nacional (Top 10 / KPIs)
+│   │   ├── ranking.astro                # Tabla completa de 90 entidades con filtros
+│   │   ├── entidad/[id].astro           # Ficha técnica individual y serie temporal
+│   │   ├── incidentes.astro             # Gestión de incidentes y SLAs (ITIL v4)
+│   │   ├── reportes.astro               # Centro de descargas de datos abiertos
+│   │   └── auditor-ia.astro             # Vista dedicada del Asistente RAG
 │   │
-│   ├── components/                      # Componentes Astro (Zero JS por defecto)
-│   │   ├── ui/
-│   │   │   ├── KpiCard.astro            # Tarjeta de métrica clave
-│   │   │   ├── BadgeStatus.astro        # Indicador de estado (Disponible / Caído)
-│   │   │   └── Breadcrumb.astro
-│   │   └── entities/
-│   │       ├── EntityHeader.astro
-│   │       └── WcagComplianceBar.astro
+│   ├── components/ui/                   # Componentes estáticos Astro
+│   │   ├── KpiCard.astro
+│   │   └── BadgeStatus.astro
 │   │
-│   ├── islands/                         # Islas Interactivas (React / Preact / Vanilla JS hidratado)
-│   │   ├── DynamicRankingTable.tsx      # Tabla interactiva con ordenamiento y filtros por región
-│   │   ├── HistoricalMetricsChart.tsx   # Gráfico de líneas (Uptime y Core Web Vitals)
-│   │   └── ExportButton.tsx             # Disparador de descarga de reportes
+│   ├── islands/                         # Componentes hidratados interactivos
+│   │   ├── DynamicRankingTable.tsx      # Tabla interactiva con ordenamiento
+│   │   ├── HistoricalMetricsChart.tsx   # Gráficos Chart.js de Uptime y CWV
+│   │   └── AuditChatWidget.tsx          # Widget conversacional de auditoría RAG
 │   │
-│   ├── styles/                          # CSS Puro sin dependencias externas
-│   │   ├── tokens.css                   # Custom Properties: paleta de colores WCAG AA, tipografía, espacios
-│   │   ├── reset.css                    # Reseteo estándar de navegador
-│   │   ├── layout.css                   # CSS Grid y Flexbox globales
-│   │   └── components.css               # Estilos comunes no encapsulados
-│   │
-│   └── services/
-│       ├── api-client.ts                # Conexión al backend o Supabase en tiempo de compilación/SSR
-│       └── formatters.ts                # Formateo de fechas, milisegundos y puntajes
+│   └── styles/                          # CSS Puro nativo (ADR-0004)
+│       ├── tokens.css                   # Paleta WCAG AA y variables de diseño
+│       └── layout.css
 ```
 
 ---
 
 ## 5. Matriz de Trazabilidad Arquitectónica
 
-| Requerimiento | Nivel 1 (Contexto) | Nivel 2 (Módulos) | Nivel 3 (Componentes de Código) |
-| :--- | :--- | :--- | :--- |
-| **RF-001 (90 URLs)** | Conexión con portales | Catálogo `entidades` | `entity.model.ts`, `IEntityRepository` |
-| **RF-002 (Uptime)** | Sondeo HTTP | Sonda HTTP | `FetchHttpProbe`, `probe-result.model.ts` |
-| **RF-003 (CWV)** | Google PageSpeed API | Cliente PageSpeed | `PageSpeedClient`, `audit-result.model.ts` |
-| **RF-004 (WCAG 2.1)** | Google PageSpeed API | Extractor de errores | `PageSpeedClient` (`errores_accesibilidad`) |
-| **RF-010 (Dashboard)** | Hosting Web en CDN | Astro Framework | `apps/dashboard/src/pages/index.astro` |
-| **RF-012 (ITIL v4)** | Consulta de incidentes | Motor de SLAs e Incidentes | `apps/api/src/modules/slas/`, `incidents/` |
-| **RF-013 (Reportes)** | Descarga de archivos | Generador de Reportes | `apps/api/src/modules/reports/csv-exporter.ts` |
-| **RNF-001 (Latencia Backend)** | Conexión directa | Runtime Bun nativo | `Bun.serve` con tiempos < 50 ms |
-| **RNF-002 (Carga Frontend ≤ 3s)** | Despliegue estático | Astro Islands Architecture | Zero JS por defecto en `.astro` |
-| **RNF-006 (Accesibilidad AA)** | Interacción ciudadana | Sistema de tokens CSS | `tokens.css` con contraste contrast-ratio ≥ 4.5:1 |
-| **RNF-011 (Costo ≤ $50/mes)** | GitHub Actions + Supabase | Arquitectura serverless | Cron runners gratuitos + tier libre de Supabase |
+| Requerimiento | Nivel 1 (Contexto) | Nivel 2 (Módulos) | Nivel 3 (Componentes de Código) | ADR Asociada |
+| :--- | :--- | :--- | :--- | :--- |
+| **RF-001 (Catálogo 90 URLs)** | Conexión con portales | Catálogo `entidades` | `entity.model.ts`, `IEntityRepository` | ADR-0003 |
+| **RF-002 (Disponibilidad HTTP)** | Sonda HTTP | Sonda de disponibilidad | `FetchHttpProbe`, `probe-result.model.ts` | ADR-0001 |
+| **RF-003 (Core Web Vitals)** | Google PageSpeed API | Cliente PageSpeed | `PageSpeedClient`, `audit-result.model.ts` | ADR-0006 |
+| **RF-004 (WCAG 2.1 AA)** | Google PageSpeed API | Extractor de violaciones | `PageSpeedClient` (`errores_accesibilidad`) | ADR-0006 |
+| **RF-006 (Ejecución Diaria)** | GitHub Actions Cron | Workflow desatendido | `.github/workflows/daily-audit.yml` | ADR-0005 |
+| **RF-008 (Incidentes / SLAs)** | Gestión de Eventos | Motor de SLAs (ITIL v4) | `apps/api/src/modules/slas/`, `incidents/` | ADR-0003 |
+| **RF-009 (Dashboard Astro)** | Hosting CDN | Framework Astro | `apps/dashboard/src/pages/index.astro` | ADR-0002, ADR-0004 |
+| **RF-010 (Auditoría RAG IA)** | Google AI Studio | Subsistema RAG + pgvector | `apps/api/src/modules/rag/`, `AuditChatWidget.tsx` | ADR-0008, ADR-0009 |
+| **RNF-001 (Latencia Backend)** | Conexión directa Bun | Runtime Bun nativo | `Bun.serve` con tiempos < 50 ms | ADR-0001 |
+| **RNF-002 (Carga Web ≤ 3s)** | Despliegue estático | Astro Islands Architecture | Zero JS por defecto en componentes `.astro` | ADR-0002 |
+| **RNF-006 (Accesibilidad AA)** | Interacción ciudadana | Sistema de tokens CSS | `tokens.css` (contraste $\ge 4.5:1$) | ADR-0004 |
+| **RNF-011 (Costo Cero $0/mes)**| GitHub + Supabase + Gemini | Capas gratuitas unificadas | Cuotas gratuitas analizadas y verificadas | ADR-0005, 0008, 0009 |
+
+---
+
+*Especificación técnica de arquitectura v2.0 — Observatorio de Calidad Digital Pública del Perú.*

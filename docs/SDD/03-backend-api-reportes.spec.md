@@ -1,34 +1,36 @@
-# Especificación Técnica: Backend Core REST API y Exportación de Reportes (`apps/api`)
+# Especificación Técnica: Backend Core REST API, Chatbot RAG y Reportes (`apps/api`)
 
 * **Identificador de Especificación:** SDD-MOD-003
-* **Versión:** 1.0.0
+* **Versión:** 1.1.0
 * **Estado:** Aprobado para Implementación
-* **Requerimientos Asociados:** RF-010, RF-011, RF-013 | RNF-001, RNF-004, RNF-005, RNF-007, RNF-009, RNF-011
-* **Decisiones Arquitectónicas Vinculadas:** ADR-0001 (Bun), ADR-0003 (PostgreSQL), ADR-0007 (Docker)
+* **Requerimientos Asociados:** RF-010, RF-011, RF-013, RF-014 | RNF-001, RNF-004, RNF-005, RNF-007, RNF-009, RNF-011, RNF-012
+* **Decisiones Arquitectónicas Vinculadas:** ADR-0001 (Bun), ADR-0003 (PostgreSQL), ADR-0007 (Docker), ADR-0008 (pgvector en Supabase), ADR-0009 (Google Gemini Flash-Lite / Flash)
 
 ---
 
 ## 1. OBJETIVO Y CONTEXTO
 
 ### 1.1. Definición del Problema de Negocio
-Para que la ciudadanía, investigadores y funcionarios públicos puedan auditar y consumir los datos de calidad digital de los portales del Estado peruano, se requiere una interfaz programática (API REST) estandarizada, de alta velocidad y baja latencia (≤ 500 ms según RNF-001). Asimismo, se requiere la capacidad de exportar masivamente los datos históricos en formatos abiertos (CSV y JSON según RF-013 y RNF-009).
+Para que la ciudadanía, investigadores y funcionarios públicos puedan auditar y consumir los datos de calidad digital de los portales del Estado peruano, se requiere una interfaz programática (API REST) estandarizada, de alta velocidad y baja latencia (≤ 500 ms según RNF-001). Asimismo, se requiere la capacidad de exportar masivamente los datos históricos en formatos abiertos (CSV y JSON según RF-013 y RNF-009) y brindar un canal conversacional inteligente dotado de RAG (RF-014, RNF-012) para interpretar métricas, contrastarlas con leyes peruanas y sugerir remediaciones técnicas.
 
-Este módulo define la capa de servicios HTTP construida sobre el runtime **Bun** (ADR-0001), exponiendo contratos RESTful limpios, paginados y filtrables sobre el catálogo de 90 entidades, sus series temporales de telemetría, evaluaciones de SLAs e incidentes de servicio.
+Este módulo define la capa de servicios HTTP construida sobre el runtime **Bun** (ADR-0001). El backend se conecta **directamente a la base de datos PostgreSQL en Supabase** (SDD-MOD-006) donde la telemetría es alimentada de forma desacoplada por el colector diario (SDD-MOD-001). El backend NO realiza raspado web síncrono al atender usuarios; sirve datos precalculados y consolidados con altísima velocidad y orquesta el subsistema RAG (SDD-MOD-005) vía Server-Sent Events (SSE).
 
 ### 1.2. Alcance del Módulo
 
 #### A. QUÉ ESTÁ INCLUIDO (In-Scope)
-1. **Servidor HTTP Nativo en Bun:** Arquitectura liviana y de alto rendimiento utilizando `Bun.serve` o microframework compatible con tipado estricto.
-2. **Endpoints de Catálogo y Fichas Técnicas (RF-011):** Listado paginado de entidades con filtros por categoría y región, y detalle individual con metadatos.
-3. **Endpoints de Métricas y Series Temporales:** Consulta de telemetría histórica (`mediciones_crudas`) con rango de fechas y granularidad.
-4. **Endpoints de Rankings y Scores (RF-010):** Consulta del ranking general de entidades ordenado por `score_global` o por sub-scores específicos.
+1. **Servidor HTTP Nativo en Bun:** Arquitectura liviana y de alto rendimiento utilizando `Bun.serve` con tipado estricto y conexión a Supabase PostgreSQL.
+2. **Endpoints de Catálogo y Fichas Técnicas (RF-011):** Listado paginado de entidades con filtros por categoría y región, y detalle individual con metadatos y semáforo de calidad.
+3. **Endpoints de Métricas y Series Temporales:** Consulta directa a la base de datos de telemetría histórica (`mediciones_crudas`) con rango de fechas y agregaciones.
+4. **Endpoints de Rankings y Scores (RF-010):** Consulta del ranking general de 90 entidades ordenado por `score_global` o por sub-scores específicos.
 5. **Endpoints de SLAs e Incidentes ITIL v4 (RF-012):** Consulta del estado mensual de SLAs y registro de incidentes de disponibilidad.
-6. **Motor de Exportación de Reportes (RF-013, RNF-009):** Generación en streaming de archivos CSV y payloads JSON estructurados listos para descarga.
-7. **Seguridad y Control de Acceso (RNF-004):** Acceso público de solo lectura a endpoints analíticos y protección mediante API Key / Bearer Token para endpoints administrativos (ej. disparo manual de auditorías).
+6. **Motor de Exportación de Reportes (RF-013, RNF-009):** Generación en streaming de archivos CSV y payloads JSON estructurados listos para descarga masiva.
+7. **Endpoint de Chat Inteligente con RAG y Streaming SSE (RF-014, RNF-012):** Ruta `POST /api/v1/chat` que delega al motor RAG híbrido (SDD-MOD-005) y emite tokens y eventos de ejecución de herramientas mediante Server-Sent Events.
+8. **Seguridad y Control de Acceso (RNF-004):** Acceso público de solo lectura a endpoints analíticos y de chat; protección mediante API Key / Bearer Token para endpoints administrativos (ej. disparo manual de auditorías o reindexación vectorial).
 
 #### B. QUÉ QUEDA EXCLUIDO (Out-of-Scope)
 1. Renderizado de componentes HTML (responsabilidad del Frontend Astro SDD-MOD-004).
-2. Sondeo HTTP directo a sitios de terceros (responsabilidad del Collector SDD-MOD-001).
+2. Sondeo HTTP directo o auditorías síncronas a sitios de terceros al atender peticiones del dashboard (responsabilidad autónoma del Collector SDD-MOD-001 vía GitHub Actions).
+3. Lógica matemática interna del chunking y embeddings (encapsulada en SDD-MOD-005).
 
 ---
 
@@ -77,6 +79,23 @@ classDiagram
         +number uptimePorcentaje
         +string estadoSla
         +number totalCaidaMinutos
+    }
+
+    class ChatRequestDTO {
+        +string message
+        +string conversationId
+        +ChatMessageDTO[] history
+    }
+
+    class ChatMessageDTO {
+        +string role
+        +string content
+    }
+
+    class NormativeCitationDTO {
+        +string fuente
+        +string articulo
+        +string seccion
     }
 ```
 
@@ -229,7 +248,50 @@ En caso de error:
 
 ---
 
-#### Endpoint 6: Disparo Manual de Auditoría (Admin)
+#### Endpoint 6: Historial y Registro de Incidentes ITIL v4 (RF-012)
+* **Ruta:** `GET /api/v1/reports/incidents`
+* **Descripción:** Retorna la lista de incidentes de indisponibilidad y degradación severa (activos e históricos resueltos) registrados en la tabla `incidentes` de Supabase.
+* **Query Params:**
+  - `estado` (opcional): `'ABIERTO' | 'RESUELTO'`
+  - `entidadId` (opcional): Filtro por ID de entidad.
+  - `limit` (opcional, entero, defecto 50).
+  - `format` (opcional): `'csv' | 'json'`.
+* **Código HTTP:** `200 OK`.
+* **Ejemplo de Respuesta:**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "entidadId": 13,
+      "entidadNombre": "Gobierno Regional de Loreto",
+      "url": "https://www.regionloreto.gob.pe",
+      "tipoIncidente": "CAIDA_TOTAL",
+      "estado": "ABIERTO",
+      "severidad": "CRITICA",
+      "causaRaiz": "Tiempo de espera agotado (>10s) en gateway",
+      "timestampInicio": "2026-10-16T11:24:00Z",
+      "timestampResolucion": null,
+      "tiempoIndisponibilidadMinutos": 45
+    }
+  ]
+}
+```
+
+---
+
+#### Endpoint 7: Cumplimiento Mensual de SLAs ITIL v4 (RF-012)
+* **Ruta:** `GET /api/v1/reports/sla`
+* **Descripción:** Retorna el consolidado de cumplimiento de SLAs (uptime mensual contra meta de 99.5%) por entidad.
+* **Query Params:**
+  - `periodo` (opcional, formato 'YYYY-MM'): Mes a consultar (defecto: mes actual).
+  - `format` (opcional): `'csv' | 'json'`.
+* **Código HTTP:** `200 OK`.
+
+---
+
+#### Endpoint 8: Disparo Manual de Auditoría (Admin)
 * **Ruta:** `POST /api/v1/collector/trigger`
 * **Descripción:** Dispara una ejecución en segundo plano del colector de telemetría.
 * **Cabeceras:** `Authorization: Bearer <ADMIN_API_KEY>`
@@ -245,15 +307,57 @@ En caso de error:
 
 ---
 
+#### Endpoint 9: Asistente Conversacional RAG Streaming (RF-014, RNF-012)
+* **Ruta:** `POST /api/v1/chat`
+* **Descripción:** Procesa consultas ciudadanas o técnicas en lenguaje natural, combinando consultas SQL de telemetría en tiempo real y recuperación vectorial sobre normas peruanas e ITIL v4 (delegado a `SDD-MOD-005`). Emite la respuesta mediante Server-Sent Events (SSE).
+* **Cabeceras:** `Content-Type: application/json`, `Accept: text/event-stream`
+* **Cuerpo de Petición (Request Body):**
+```json
+{
+  "message": "¿Por qué el Ministerio de Salud tiene bajo puntaje de accesibilidad y qué norma vulnera?",
+  "conversationId": "550e8400-e29b-41d4-a716-446655440000",
+  "history": [
+    { "role": "user", "content": "Hola" },
+    { "role": "model", "content": "Hola. Soy el Auditor del Observatorio de Calidad Digital Pública." }
+  ]
+}
+```
+* **Códigos HTTP:** `200 OK` (Flujo SSE abierto), `400 Bad Request` (payload inválido), `429 Too Many Requests` (límite de cuota Google AI Studio).
+* **Estructura de Eventos SSE:**
+```text
+event: tool_start
+data: {"tool":"execute_telemetry_sql","input":"SELECT score_accesibilidad, violaciones_wcag FROM mediciones_crudas WHERE entidad_id = 5 ORDER BY fecha_captura DESC LIMIT 1;"}
+
+event: tool_end
+data: {"tool":"execute_telemetry_sql","status":"success"}
+
+event: token
+data: {"delta":"El Ministerio de Salud presenta un score de accesibilidad de 62/100 debido a "}
+
+event: token
+data: {"delta":"múltiples violaciones de contraste de color y ausencia de textos alternativos en imágenes."}
+
+event: done
+data: {"conversationId":"550e8400-e29b-41d4-a716-446655440000","modelUsed":"gemini-3.5-flash","citations":[{"fuente":"D.S. 029-2021-PCM","articulo":"Art. 14","criterio":"WCAG 2.1 AA 1.4.3 Contraste"}]}
+```
+
+---
+
 ## 4. ARQUITECTURA Y REGLAS DE NEGOCIO
 
 ### 4.1. Restricciones Técnicas
 1. **Rendimiento ≤ 500 ms (RNF-001):** Toda consulta a `/api/v1/rankings` y `/api/v1/entities` debe utilizar índices relacionales (`idx_mediciones_entidad_fecha`, `idx_entidades_categoria_region`) para garantizar tiempos de respuesta menores a 100 ms en el 95% de las llamadas.
 2. **Streaming en Exportación CSV:** Para exportaciones de grandes volúmenes históricos, el backend debe generar el CSV como un `ReadableStream` directamente desde el cursor de PostgreSQL, sin cargar todos los registros en memoria RAM.
 3. **CORS y Seguridad:**
-   - Cabeceras CORS configuradas con `Access-Control-Allow-Origin: *` para endpoints de solo lectura.
+   - Cabeceras CORS configuradas con `Access-Control-Allow-Origin: *` para endpoints de solo lectura y chat público.
    - Cabeceras de seguridad estrictas: `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`.
 4. **Validación de Parámetros:** Esquemas de validación estrictos mediante librerías tipadas (`Zod` o `TypeBox`) que rechacen entradas maliciosas o tipos inválidos con `400 Bad Request`.
+5. **Conexión Directa a Supabase PostgreSQL (SDD-MOD-006):**
+   - El backend gestiona un pool de conexiones persistentes hacia Supabase PostgreSQL mediante el cliente de Bun (`postgres` o SDK Supabase con tipado de esquema).
+   - El backend NO ejecuta procesos de recolección de telemetría en tiempo de petición del usuario; todas las lecturas se realizan sobre las tablas relacionales consolidadas por el cron del Collector (`SDD-MOD-001`).
+6. **Manejo de Conexiones SSE en Bun (RNF-001, RF-014):**
+   - El endpoint `/api/v1/chat` abre un flujo `ReadableStream` con cabeceras `Content-Type: text/event-stream`, `Cache-Control: no-cache` y `Connection: keep-alive`.
+   - Si el cliente interrumpe la conexión de red (abort signal), el backend cancela inmediatamente la inferencia activa en Google Gemini para evitar consumo innecesario de tokens.
 
 ---
 
@@ -278,3 +382,11 @@ En caso de error:
 * **Cuando** se realiza la petición sin la cabecera `Authorization`.
 * **Entonces** el servidor debe retornar inmediatamente código HTTP 401 Unauthorized.
 * **Y** no se debe iniciar ningún proceso de recolección en segundo plano.
+
+### Escenario 4: Flujo Conversacional RAG con Streaming SSE (RF-014, RNF-012)
+* **Dado que** el usuario envía una consulta técnica sobre una entidad ("¿Por qué MINSA tiene bajo score de accesibilidad?").
+* **Cuando** se invoca `POST /api/v1/chat` con un payload JSON válido.
+* **Entonces** la conexión HTTP debe responder de inmediato con `Content-Type: text/event-stream`.
+* **Y** se deben emitir eventos `tool_start` y `tool_end` registrando la ejecución de SQL y búsqueda vectorial.
+* **Y** se deben transmitir los tokens generados mediante eventos `token`.
+* **Y** el evento final `done` debe contener al menos una cita normativa oficial verificada (ej. D.S. 029-2021-PCM o WCAG 2.1).

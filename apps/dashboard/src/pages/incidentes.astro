@@ -1,0 +1,526 @@
+---
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+import BadgeStatus from '../components/ui/BadgeStatus.astro';
+import { getIncidents } from '../services/api';
+
+const incidents = await getIncidents();
+const activeIncidents = incidents.filter(i => i.estado === 'ABIERTO' || i.estado === 'INVESTIGANDO');
+const resolvedIncidents = incidents.filter(i => i.estado === 'RESUELTO');
+
+// Cálculo dinámico del MTTR a partir de los incidentes resueltos
+const totalResolvedDuration = resolvedIncidents.reduce((acc, i) => acc + (i.tiempoIndisponibilidadMinutos || 0), 0);
+const avgMttrMinutes = resolvedIncidents.length > 0 ? Math.round(totalResolvedDuration / resolvedIncidents.length) : null;
+const mttrDisplay = avgMttrMinutes !== null ? `${avgMttrMinutes} min` : 'N/D';
+
+// Identificación dinámica de la causa raíz prevalente
+const causeCounts = new Map<string, number>();
+for (const inc of incidents) {
+  const cause = (inc.causaRaiz || 'Fallo de conectividad').split('(')[0].trim();
+  causeCounts.set(cause, (causeCounts.get(cause) || 0) + 1);
+}
+let prevalentCause = 'Ninguna registrada';
+let maxCount = 0;
+for (const [cause, count] of causeCounts.entries()) {
+  if (count > maxCount) {
+    maxCount = count;
+    prevalentCause = cause;
+  }
+}
+const prevalentPct = incidents.length > 0 ? Math.round((maxCount / incidents.length) * 100) : 0;
+---
+
+<DashboardLayout title="Tablero de Incidentes ITIL v4" currentPath="/incidentes">
+  <div class="container incidents-page-container">
+    {/* Page Header */}
+    <div class="page-header">
+      <div>
+        <div class="breadcrumb">
+          <a href="/">Inicio</a> &bull; <span>Gestión de Incidentes</span>
+        </div>
+        <h1 class="page-title">Tablero de Incidentes ITIL v4</h1>
+        <p class="page-desc">
+          Monitoreo en tiempo real de caídas, degradaciones de servicio y análisis de causa raíz conforme a las prácticas de Gestión de Incidentes y Problemas de ITIL v4.
+        </p>
+      </div>
+
+      <div class="header-badges">
+        <span class={`m3-chip ${activeIncidents.length === 0 ? 'm3-chip-success' : 'm3-chip-danger'}`}>
+          {activeIncidents.length} Incidentes Activos
+        </span>
+      </div>
+    </div>
+
+    {/* ITIL Status KPI Cards */}
+    <section class="grid-cols-3" aria-label="Resumen de Gestión de Incidentes">
+      <div class="m3-card itil-kpi">
+        <span class="itil-kpi-title">Incidentes No Resueltos</span>
+        <span class="itil-kpi-val" style={`color: ${activeIncidents.length > 0 ? 'var(--color-status-danger)' : 'var(--color-status-success)'};`}>
+          {activeIncidents.length}
+        </span>
+        <p class="itil-kpi-desc">Afectación de servicios a la ciudadanía en curso</p>
+      </div>
+
+      <div class="m3-card itil-kpi">
+        <span class="itil-kpi-title">MTTR Promedio (Tiempo de Recuperación)</span>
+        <span class="itil-kpi-val" style="color: var(--md-sys-color-primary);">
+          {mttrDisplay}
+        </span>
+        <p class="itil-kpi-desc">{avgMttrMinutes !== null ? `Calculado sobre ${resolvedIncidents.length} eventos resueltos` : 'Sin eventos resueltos registrados'}</p>
+      </div>
+
+      <div class="m3-card itil-kpi">
+        <span class="itil-kpi-title">Causa Raíz Prevalente</span>
+        <span class="itil-kpi-val" style="font-size: var(--text-base); color: var(--color-status-warning); word-break: break-word;">
+          {prevalentCause}
+        </span>
+        <p class="itil-kpi-desc">{incidents.length > 0 ? `${prevalentPct}% de eventos registrados (${maxCount} incidentes)` : 'Sin incidentes registrados'}</p>
+      </div>
+    </section>
+
+    {/* Incident Interactive Filters */}
+    <div class="m3-card incident-filter-card" style="padding: var(--space-4);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-3);">
+        <div style="display: flex; flex-direction: column; gap: var(--space-1);">
+          <label for="incident-search" style="font-size: var(--text-xs); font-weight: 700; color: var(--md-sys-color-on-surface-variant);">
+            Filtrar por Entidad o Causa Raíz
+          </label>
+          <input
+            id="incident-search"
+            type="search"
+            class="m3-input"
+            placeholder="Ej. Loreto, DNS, TLS, timeout..."
+            aria-label="Buscar incidentes"
+          />
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-1);">
+          <label for="incident-filter-severity" style="font-size: var(--text-xs); font-weight: 700; color: var(--md-sys-color-on-surface-variant);">
+            Severidad ITIL
+          </label>
+          <select id="incident-filter-severity" class="m3-select">
+            <option value="ALL">Todas las Severidades</option>
+            <option value="CRITICA">Severidad CRÍTICA</option>
+            <option value="ALTA">Severidad ALTA</option>
+            <option value="MAYOR">Severidad MAYOR</option>
+            <option value="MEDIA">Severidad MEDIA</option>
+            <option value="MENOR">Severidad MENOR</option>
+          </select>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-1);">
+          <label for="incident-filter-status" style="font-size: var(--text-xs); font-weight: 700; color: var(--md-sys-color-on-surface-variant);">
+            Estado del Incidente
+          </label>
+          <select id="incident-filter-status" class="m3-select">
+            <option value="ALL">Todos los Estados</option>
+            <option value="ABIERTO">Activo: ABIERTO</option>
+            <option value="INVESTIGANDO">Activo: INVESTIGANDO</option>
+            <option value="RESUELTO">Histórico: RESUELTO</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-3); padding-top: var(--space-2); border-top: 1px solid var(--md-sys-color-outline-variant);">
+        <span id="incident-counter-text" style="font-size: var(--text-xs); color: var(--md-sys-color-on-surface-variant);">
+          Mostrando <strong>{incidents.length}</strong> de {incidents.length} incidentes registrados
+        </span>
+        <button
+          type="button"
+          id="incident-reset-btn"
+          class="m3-btn m3-btn-outlined"
+          style="min-height: 32px; padding: 2px 12px; font-size: var(--text-xs); display: none;"
+        >
+          Limpiar filtros
+        </button>
+      </div>
+    </div>
+
+    {/* Active Incidents Section */}
+    <section class="active-incidents-section" id="active-incidents-container" aria-labelledby="active-incidents-title">
+      <h2 id="active-incidents-title" class="section-title">
+        Incidentes Activos en Tiempo Real
+      </h2>
+
+      {activeIncidents.length === 0 ? (
+        <div class="m3-card" style="text-align: center; padding: var(--space-8);">
+          <span style="font-size: 32px; display: block; margin-bottom: var(--space-2);">✅</span>
+          <h3 style="margin: 0; color: var(--color-status-success);">Todos los sistemas están operando con normalidad</h3>
+          <p style="margin: var(--space-1) 0 0; font-size: var(--text-xs); color: var(--md-sys-color-on-surface-variant);">
+            No se registran caídas de servicio ni degradaciones críticas en los 90 portales supervisados.
+          </p>
+        </div>
+      ) : (
+        <div class="active-grid" id="active-incidents-grid">
+          {activeIncidents.map((inc) => (
+            <div
+              class="m3-card active-incident-card"
+              data-entity={inc.entidadNombre?.toLowerCase()}
+              data-severity={inc.severidad}
+              data-status={inc.estado}
+              data-cause={inc.causaRaiz?.toLowerCase()}
+            >
+              <div class="incident-card-top">
+                <span class={`m3-chip ${inc.severidad === 'CRITICA' ? 'm3-chip-danger' : 'm3-chip-warning'}`}>
+                  SEVERIDAD {inc.severidad}
+                </span>
+                <span class="incident-state-tag">
+                  {inc.estado === 'ABIERTO' ? '🔴 ABIERTO' : '🟡 INVESTIGANDO'}
+                </span>
+              </div>
+
+              <h3 class="incident-entity-name">
+                <a href={`/entidad/${inc.entidadId}`}>{inc.entidadNombre}</a>
+              </h3>
+
+              <div class="incident-detail-row">
+                <strong>Causa Raíz:</strong>
+                <p>{inc.causaRaiz}</p>
+              </div>
+
+              <div class="incident-meta-grid">
+                <div>
+                  <span class="meta-label">Inicio del Evento:</span>
+                  <span class="meta-value">{inc.timestampInicio}</span>
+                </div>
+                <div>
+                  <span class="meta-label">Tiempo de Indisponibilidad:</span>
+                  <span class="meta-value" style="color: var(--color-status-danger); font-weight: 800;">
+                    {inc.tiempoIndisponibilidadMinutos} minutos
+                  </span>
+                </div>
+              </div>
+
+              <div class="incident-card-footer">
+                <a href={`/entidad/${inc.entidadId}`} class="m3-btn m3-btn-outlined" style="min-height: 32px; font-size: 11px;">
+                  Ver ficha institucional &rarr;
+                </a>
+                <a href={`/auditor-ia?entidad=${inc.entidadId}`} class="m3-btn m3-btn-tonal" style="min-height: 32px; font-size: 11px;">
+                  Auditar con IA
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      <div id="no-active-matches" class="m3-card" style="display: none; text-align: center; padding: var(--space-6);">
+        <p style="margin: 0; font-size: var(--text-xs); color: var(--md-sys-color-on-surface-variant);">No hay incidentes activos que coincidan con los filtros.</p>
+      </div>
+    </section>
+
+    {/* Historical Incidents Table */}
+    <section class="historical-incidents-section" id="historical-incidents-section" aria-labelledby="history-incidents-title">
+      <h2 id="history-incidents-title" class="section-title">
+        Registro Histórico de Incidentes Resueltos (Últimos 30 Días)
+      </h2>
+
+      <div class="m3-table-wrapper">
+        <table class="m3-table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Entidad Afectada</th>
+              <th scope="col">Severidad</th>
+              <th scope="col">Causa Raíz y Diagnóstico ITIL</th>
+              <th scope="col">Fecha Inicio</th>
+              <th scope="col">Resolución</th>
+              <th scope="col" style="text-align: right;">Duración</th>
+            </tr>
+          </thead>
+          <tbody id="historical-incidents-tbody">
+            {resolvedIncidents.length === 0 ? (
+              <tr>
+                <td colspan="7" style="text-align: center; padding: var(--space-4); color: var(--md-sys-color-on-surface-variant);">
+                  No hay incidentes resueltos registrados en el período reciente.
+                </td>
+              </tr>
+            ) : (
+              resolvedIncidents.map((inc) => (
+                <tr
+                  class="historical-incident-row"
+                  data-entity={inc.entidadNombre?.toLowerCase()}
+                  data-severity={inc.severidad}
+                  data-status={inc.estado}
+                  data-cause={inc.causaRaiz?.toLowerCase()}
+                >
+                  <td style="font-weight: 700;">#{inc.id}</td>
+                  <td>
+                    <a href={`/entidad/${inc.entidadId}`} style="font-weight: 700; color: var(--md-sys-color-primary); text-decoration: none;">
+                      {inc.entidadNombre}
+                    </a>
+                  </td>
+                  <td>
+                    <span class={`m3-chip ${inc.severidad === 'CRITICA' ? 'm3-chip-danger' : inc.severidad === 'ALTA' ? 'm3-chip-warning' : 'm3-chip-info'}`} style="font-size: 10px;">
+                      {inc.severidad}
+                    </span>
+                  </td>
+                  <td style="font-size: var(--text-xs); max-width: 320px;">
+                    {inc.causaRaiz}
+                  </td>
+                  <td style="font-size: var(--text-xs); white-space: nowrap;">
+                    {inc.timestampInicio}
+                  </td>
+                  <td style="font-size: var(--text-xs); white-space: nowrap;">
+                    {inc.timestampResolucion || 'N/A'}
+                  </td>
+                  <td style="text-align: right; font-weight: 700; font-size: var(--text-xs);">
+                    {inc.tiempoIndisponibilidadMinutos} min
+                  </td>
+                </tr>
+              ))
+            )}
+            <tr id="no-historical-matches" style="display: none;">
+              <td colspan="7" style="text-align: center; padding: var(--space-4); color: var(--md-sys-color-on-surface-variant); font-size: var(--text-xs);">
+                No hay incidentes resueltos que coincidan con los filtros aplicados.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</DashboardLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('incident-search');
+    const severitySelect = document.getElementById('incident-filter-severity');
+    const statusSelect = document.getElementById('incident-filter-status');
+    const resetBtn = document.getElementById('incident-reset-btn');
+    const counterText = document.getElementById('incident-counter-text');
+
+    const activeContainer = document.getElementById('active-incidents-container');
+    const activeCards = document.querySelectorAll('.active-incident-card');
+    const noActiveMatches = document.getElementById('no-active-matches');
+
+    const histSection = document.getElementById('historical-incidents-section');
+    const histRows = document.querySelectorAll('.historical-incident-row');
+    const noHistMatches = document.getElementById('no-historical-matches');
+
+    const totalIncidents = activeCards.length + histRows.length;
+
+    function applyFilters() {
+      const q = (searchInput?.value || '').trim().toLowerCase();
+      const sev = severitySelect?.value || 'ALL';
+      const st = statusSelect?.value || 'ALL';
+
+      let visibleActive = 0;
+      let visibleHist = 0;
+
+      activeCards.forEach((card) => {
+        const ent = card.getAttribute('data-entity') || '';
+        const cause = card.getAttribute('data-cause') || '';
+        const cardSev = card.getAttribute('data-severity') || '';
+        const cardSt = card.getAttribute('data-status') || '';
+
+        const matchQ = !q || ent.includes(q) || cause.includes(q);
+        const matchSev = sev === 'ALL' || cardSev === sev;
+        const matchSt = st === 'ALL' || cardSt === st;
+
+        if (matchQ && matchSev && matchSt) {
+          card.style.display = '';
+          visibleActive++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      histRows.forEach((row) => {
+        const ent = row.getAttribute('data-entity') || '';
+        const cause = row.getAttribute('data-cause') || '';
+        const rowSev = row.getAttribute('data-severity') || '';
+        const rowSt = row.getAttribute('data-status') || '';
+
+        const matchQ = !q || ent.includes(q) || cause.includes(q);
+        const matchSev = sev === 'ALL' || rowSev === sev;
+        const matchSt = st === 'ALL' || rowSt === st;
+
+        if (matchQ && matchSev && matchSt) {
+          row.style.display = '';
+          visibleHist++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      if (noActiveMatches) {
+        noActiveMatches.style.display = (visibleActive === 0 && activeCards.length > 0) ? 'block' : 'none';
+      }
+      if (noHistMatches) {
+        noHistMatches.style.display = (visibleHist === 0 && histRows.length > 0) ? 'table-row' : 'none';
+      }
+
+      if (activeContainer) {
+        activeContainer.style.display = (st === 'RESUELTO') ? 'none' : '';
+      }
+      if (histSection) {
+        histSection.style.display = (st === 'ABIERTO' || st === 'INVESTIGANDO') ? 'none' : '';
+      }
+
+      const totalVisible = (st === 'RESUELTO' ? 0 : visibleActive) + ((st === 'ABIERTO' || st === 'INVESTIGANDO') ? 0 : visibleHist);
+
+      if (counterText) {
+        counterText.innerHTML = `Mostrando <strong>${totalVisible}</strong> de ${totalIncidents} incidentes registrados`;
+      }
+
+      if (resetBtn) {
+        const hasFilters = q !== '' || sev !== 'ALL' || st !== 'ALL';
+        resetBtn.style.display = hasFilters ? 'inline-flex' : 'none';
+      }
+    }
+
+    searchInput?.addEventListener('input', applyFilters);
+    severitySelect?.addEventListener('change', applyFilters);
+    statusSelect?.addEventListener('change', applyFilters);
+
+    resetBtn?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      if (severitySelect) severitySelect.value = 'ALL';
+      if (statusSelect) statusSelect.value = 'ALL';
+      applyFilters();
+    });
+  });
+</script>
+
+<style>
+  .incidents-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .breadcrumb {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: var(--space-1);
+  }
+
+  .breadcrumb a {
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+  }
+
+  .page-title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    margin: 0 0 var(--space-2);
+  }
+
+  .page-desc {
+    font-size: var(--text-sm);
+    color: var(--md-sys-color-on-surface-variant);
+    max-width: 700px;
+    margin: 0;
+  }
+
+  .section-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ITIL KPIs */
+  .itil-kpi {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .itil-kpi-title {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .itil-kpi-val {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .itil-kpi-desc {
+    font-size: 11px;
+    color: var(--md-sys-color-on-surface-variant);
+    margin: 0;
+  }
+
+  /* Active Incidents */
+  .active-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .active-incident-card {
+    border-left: 4px solid var(--color-status-danger);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .incident-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .incident-state-tag {
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .incident-entity-name a {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface);
+    text-decoration: none;
+  }
+
+  .incident-entity-name a:hover {
+    color: var(--md-sys-color-primary);
+  }
+
+  .incident-detail-row {
+    font-size: var(--text-xs);
+  }
+
+  .incident-detail-row p {
+    margin: 2px 0 0;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .incident-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+    background-color: var(--md-sys-color-surface-container);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--md-shape-sm);
+  }
+
+  .meta-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .meta-value {
+    font-size: var(--text-xs);
+  }
+
+  .incident-card-footer {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+</style>

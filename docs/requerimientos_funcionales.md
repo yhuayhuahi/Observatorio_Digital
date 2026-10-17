@@ -17,6 +17,7 @@ Los RF se organizan en las siguientes categorías, cada una con un enfoque claro
 | **Visualización y Dashboard**    | Presentación de datos en un panel interactivo.                      |
 | **Gestión de Calidad (ITIL v4)** | Integración de marcos de gestión de servicios TI.                   |
 | **Reportes**                     | Generación de reportes con métricas de desempeño.                   |
+| **Auditoría Inteligente (RAG)**  | Asistencia conversacional y diagnóstico prescriptivo con IA.        |
 
 ## **3. Requerimientos Funcionales Detallados**
 
@@ -69,16 +70,26 @@ Los RF se organizan en las siguientes categorías, cada una con un enfoque claro
 | ------ | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | RF-013 | Generar reportes periódicos con métricas de desempeño | Crear **reportes automáticos** (diarios, semanales, mensuales) en **CSV/JSON** con todas las métricas clave (disponibilidad, velocidad, accesibilidad). | Alta          |
 
+---
+
+### 3.6. Auditoría Inteligente Asistida por IA (RAG)
+
+| **ID** | **Requerimiento**                                    | **Descripción**                                                                                                                                                                                                                                                                                                               | **Prioridad** |
+| ------ | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| RF-014 | Asistente conversacional de auditoría y remediación  | Permitir consultas en **lenguaje natural** sobre la telemetría de las 90 entidades mediante consultas directas a la base de datos (**Text-to-SQL**) y búsqueda semántica en la normativa peruana (**D.L. 1412, D.S. 029-2021-PCM**) y pautas **WCAG 2.1**, emitiendo diagnósticos y recomendaciones técnicas de remediación. | Alta          |
+
 ## **4. Resumen de Requerimientos Funcionales**
 
 
-| **Prioridad** | **Cantidad** | **Requerimientos**                      |
-| ------------- | ------------ | --------------------------------------- |
-| **Alta**      | 10           | RF-001 a RF-008, RF-010, RF-012, RF-013 |
-| **Media**     | 2            | RF-009, RF-011                          |
+| **Prioridad** | **Cantidad** | **Requerimientos**                               |
+| ------------- | ------------ | ------------------------------------------------ |
+| **Alta**      | 12           | RF-001 a RF-008, RF-010, RF-012, RF-013, RF-014 |
+| **Media**     | 2            | RF-009, RF-011                                   |
+| **Total**     | **14**       |                                                  |
 
-## **7. Anexos**
 
-- **Requerimientos No Funcionales**: [requerimientos\_no\_funcionales.md](https://github.com/yhuayhuahi/Observatorio_Digital/blob/main/docs/requerimientos_no_funcionales.md).
-- **Estado del Arte**
-- **Proceso de Obtención de URLs**: [proceso\_obtencion\_urls.md](https://github.com/yhuayhuahi/Observatorio_Digital/blob/main/docs/proceso_obtencion_urls.md).
+
+## **5. Anexos**
+
+- **Requerimientos No Funcionales**: [requerimientos_no_funcionales.md](./requerimientos_no_funcionales.md).
+- **Proceso de Obtención de URLs**: [proceso_obtencion_urls.md](./proceso_obtencion_urls.md).

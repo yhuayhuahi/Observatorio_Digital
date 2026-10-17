@@ -1,0 +1,101 @@
+---
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+import DynamicRankingTable from '../islands/DynamicRankingTable';
+import { getRankings, getGlobalStats } from '../services/api';
+
+const rankings = await getRankings();
+const stats = await getGlobalStats();
+---
+
+<DashboardLayout title="Ranking Nacional de Calidad Digital" currentPath="/ranking">
+  <div class="container ranking-page-container">
+    {/* Page Header */}
+    <div class="page-header">
+      <div>
+        <div class="breadcrumb">
+          <a href="/">Inicio</a> &bull; <span>Ranking Nacional</span>
+        </div>
+        <h1 class="page-title">Ranking Nacional de Calidad Digital</h1>
+        <p class="page-desc">
+          Evaluación integral de <strong>{rankings.length} portales públicos</strong> del Perú. Ordenados por Score Global según la Directiva R.SGTD N° 001-2025-PCM/SGTD.
+        </p>
+      </div>
+
+      <div class="formula-box m3-card">
+        <span class="formula-title">Ponderación Oficial del Score Global:</span>
+        <div class="formula-tags">
+          <span class="m3-chip m3-chip-info">40% Disponibilidad (Uptime)</span>
+          <span class="m3-chip m3-chip-info">30% Core Web Vitals</span>
+          <span class="m3-chip m3-chip-info">30% WCAG 2.1 AA</span>
+        </div>
+      </div>
+    </div>
+
+    {/* Interactive React Island */}
+    <DynamicRankingTable
+      client:idle
+      initialEntities={rankings}
+      lastUpdated={stats.lastUpdated}
+    />
+  </div>
+</DashboardLayout>
+
+<style>
+  .ranking-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .breadcrumb {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: var(--space-1);
+  }
+
+  .breadcrumb a {
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+  }
+
+  .page-title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    margin: 0 0 var(--space-2);
+  }
+
+  .page-desc {
+    font-size: var(--text-sm);
+    color: var(--md-sys-color-on-surface-variant);
+    max-width: 700px;
+    margin: 0;
+  }
+
+  .formula-box {
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--md-sys-color-surface-container);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .formula-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .formula-tags {
+    display: flex;
+    gap: var(--space-1);
+    flex-wrap: wrap;
+  }
+</style>

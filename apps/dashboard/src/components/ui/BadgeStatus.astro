@@ -1,0 +1,31 @@
+---
+export interface Props {
+  status: 'ONLINE' | 'OFFLINE' | 'DEGRADED' | 'CUMPLE' | 'EN_RIESGO' | 'INCUMPLE';
+  label?: string;
+}
+
+const { status, label } = Astro.props;
+
+const config = {
+  ONLINE: { class: 'm3-chip-success', text: label || 'OPERATIVO', dot: '#16A34A' },
+  CUMPLE: { class: 'm3-chip-success', text: label || 'CUMPLE SLA', dot: '#16A34A' },
+  DEGRADED: { class: 'm3-chip-warning', text: label || 'DEGRADADO', dot: '#D97706' },
+  EN_RIESGO: { class: 'm3-chip-warning', text: label || 'EN RIESGO', dot: '#D97706' },
+  OFFLINE: { class: 'm3-chip-danger', text: label || 'CAÍDO', dot: '#DC2626' },
+  INCUMPLE: { class: 'm3-chip-danger', text: label || 'INCUMPLE SLA', dot: '#DC2626' }
+}[status] || { class: 'm3-chip-info', text: label || status, dot: '#2563EB' };
+---
+
+<span class={`m3-chip ${config.class}`} role="status">
+  <span class="status-dot" style={`background-color: ${config.dot};`} aria-hidden="true"></span>
+  <span>{config.text}</span>
+</span>
+
+<style>
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+</style>

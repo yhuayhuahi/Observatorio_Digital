@@ -1,0 +1,349 @@
+---
+import '../styles/tokens.css';
+import ThemeToggle from '../components/ui/ThemeToggle.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const {
+  title = 'Observatorio de Calidad Digital del Estado Peruano',
+  description = 'Monitoreo continuo de disponibilidad, velocidad Core Web Vitals y accesibilidad WCAG 2.1 AA en portales del Estado Peruano.',
+  currentPath = Astro.url.pathname
+} = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Resumen Ejecutivo' },
+  { href: '/ranking', label: 'Ranking Nacional' },
+  { href: '/incidentes', label: 'Incidentes ITIL' },
+  { href: '/reportes', label: 'Descargas' },
+  { href: '/auditor-ia', label: 'Auditor IA (RAG)', isAi: true }
+];
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#004D84" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23004D84'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
+  <title>{title} | Observatorio de Calidad Digital</title>
+
+  <!-- Google Fonts CDN: Google Sans Flex & Google Sans Code (Used in Google Dart & Flutter docs) + Roboto fallbacks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..72,400..700&family=Google+Sans+Code:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&family=Roboto+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Prevent Dark Mode FOUC (Flash of Unstyled Content) -->
+  <script is:inline>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <!-- WCAG 2.1 AA Mandatory Skip Link -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- Main M3 Navigation Header -->
+  <header class="app-header">
+    <div class="container header-container">
+      <div class="brand-group">
+        <a href="/" class="brand-link" aria-label="Ir a la portada del Observatorio de Calidad Digital">
+          <div class="brand-badge">OCD</div>
+          <div class="brand-text">
+            <span class="brand-title">Observatorio de Calidad Digital</span>
+            <span class="brand-subtitle">Monitoreo de Disponibilidad, Desempeño y Accesibilidad Web</span>
+          </div>
+        </a>
+      </div>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          {navLinks.map((link) => {
+            const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+            return (
+              <li class="nav-item">
+                <a
+                  href={link.href}
+                  class={`nav-link ${isActive ? 'active' : ''} ${link.isAi ? 'nav-ai-link' : ''}`}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {link.isAi && (
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                    </svg>
+                  )}
+                  <span>{link.label}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <ThemeToggle />
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main id="main-content" class="main-content" tabindex="-1">
+    <slot />
+  </main>
+
+  <!-- M3 Footer with Technical Attribution -->
+  <footer class="app-footer" role="contentinfo">
+    <div class="container footer-content">
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="footer-logo">
+            <span class="footer-badge">OBSERVATORIO DIGITAL</span>
+            <span class="footer-title">Proyecto de Investigación de Calidad Web</span>
+          </div>
+          <p class="footer-desc">
+            Iniciativa de investigación para el análisis técnico, telemetría y evaluación del cumplimiento de accesibilidad universal en portales web del sector público en el Perú.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Marco Normativo de Referencia</h4>
+          <ul class="footer-links">
+            <li><a href="https://www.gob.pe" target="_blank" rel="noopener noreferrer">D.L. N° 1412 - Ley de Gobierno Digital</a></li>
+            <li><a href="https://www.gob.pe" target="_blank" rel="noopener noreferrer">D.S. N° 029-2021-PCM - Reglamento</a></li>
+            <li><a href="https://www.gob.pe" target="_blank" rel="noopener noreferrer">R.SGTD N° 001-2025-PCM/SGTD - Directiva Técnica</a></li>
+            <li><a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener noreferrer">Estándar W3C WCAG 2.1 Nivel AA</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Métricas de Ingeniería</h4>
+          <p class="footer-stat">Frecuencia de Muestreo: <strong>Cada 5 minutos</strong></p>
+          <p class="footer-stat">Meta de SLA Referencial: <strong>99.5% Uptime</strong></p>
+          <p class="footer-stat">Modelo IA: <strong>Gemini Flash-Lite + RAG 768d</strong></p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>Proyecto de investigación académica universitaria &bull; Datos y métricas obtenidos para fines de análisis, investigación y evaluación técnica.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  /* Header */
+  .app-header {
+    background-color: var(--md-sys-color-surface-container-lowest);
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--md-sys-elevation-1);
+    backdrop-filter: blur(8px);
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    gap: var(--space-4);
+  }
+
+  .brand-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .brand-badge {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    font-weight: 800;
+    font-size: var(--text-sm);
+    padding: 6px 10px;
+    border-radius: var(--md-shape-sm);
+    letter-spacing: 0.05em;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-title {
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface);
+    line-height: 1.2;
+  }
+
+  .brand-subtitle {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  /* Nav */
+  .main-nav {
+    display: flex;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: var(--space-1);
+    align-items: center;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none;
+    border-radius: var(--md-shape-full);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    background-color: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .nav-link.active {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+  }
+
+  .nav-ai-link {
+    border: 1px dashed var(--md-sys-color-primary);
+    color: var(--md-sys-color-primary);
+  }
+
+  .nav-ai-link.active {
+    border-style: solid;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  /* Footer */
+  .app-footer {
+    background-color: var(--md-sys-color-surface-container);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+    padding: var(--space-8) 0 var(--space-4);
+    margin-top: auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr;
+    gap: var(--space-8);
+    margin-bottom: var(--space-8);
+  }
+
+  .footer-badge {
+    background-color: var(--color-brand-red);
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: var(--text-xs);
+    padding: 3px 8px;
+    border-radius: var(--md-shape-xs);
+    margin-right: var(--space-2);
+  }
+
+  .footer-title {
+    font-weight: 700;
+    font-size: var(--text-sm);
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .footer-desc {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+    margin-top: var(--space-2);
+    line-height: 1.6;
+  }
+
+  .footer-heading {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer-links a {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: var(--md-sys-color-primary);
+    text-decoration: underline;
+  }
+
+  .footer-stat {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: var(--space-2);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+    padding-top: var(--space-4);
+    text-align: center;
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  @media (max-width: 900px) {
+    .header-container {
+      flex-wrap: wrap;
+      height: auto;
+      padding: var(--space-3) var(--space-4);
+    }
+    .main-nav {
+      order: 3;
+      width: 100%;
+      overflow-x: auto;
+      padding-top: var(--space-2);
+    }
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+</style>

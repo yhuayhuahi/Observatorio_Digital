@@ -1,6 +1,6 @@
 # Architectural Decision Records (ADRs) - Observatorio de Calidad Digital Pública
 
-Este directorio contiene el registro formal de las decisiones arquitectónicas y tecnológicas adoptadas para el desarrollo del **Observatorio de Calidad Digital Pública**, alineadas con los [Requerimientos Funcionales](../requerimientos_funcionales.md), los [Requerimientos No Funcionales](../requerimientos_no_funcionales.md) y el [Contexto Técnico](../contexto.md).
+Este directorio contiene el registro formal de las decisiones arquitectónicas y tecnológicas adoptadas para el desarrollo del **Observatorio de Calidad Digital Pública**, alineadas con los [Requerimientos Funcionales](../requerimientos_funcionales.md), los [Requerimientos No Funcionales](../requerimientos_no_funcionales.md) y el [Contexto Técnico](../contexto2.md).
 
 ## Índice de Decisiones Arquitectónicas
 
@@ -13,3 +13,6 @@ Este directorio contiene el registro formal de las decisiones arquitectónicas y
 | [ADR-0005](./ADR-0005-uso-de-github-actions.md) | **Uso de GitHub Actions para CI/CD y Recolección Automatizada** | Aceptado | 2026-09-27 | Automatización CI/CD, tareas programadas (cron), costo cero. |
 | [ADR-0006](./ADR-0006-uso-de-apis-de-google.md) | **Uso de APIs de Google (PageSpeed y Lighthouse)** | Aceptado | 2026-09-27 | Auditorías estandarizadas, Core Web Vitals, evaluación WCAG 2.1 AA. |
 | [ADR-0007](./ADR-0007-uso-de-docker.md) | **Uso de Docker para Homogeneidad y Fijación de Versiones** | Aceptado | 2026-09-27 | Contenedorización, paridad dev/prod, reproducibilidad del stack. |
+| [ADR-0008](./ADR-0008-uso-de-pgvector-en-supabase.md) | **Uso de pgvector en Supabase para Base Normativa y Técnica** | Aceptado | 2026-10-16 | Base de datos vectorial, embeddings de leyes y WCAG, costo cero. |
+| [ADR-0009](./ADR-0009-seleccion-modelo-gemini-rag.md) | **Selección de Modelos Google Gemini (3.5 Flash-Lite y 3.5 Flash) y Embeddings para RAG** | Aceptado | 2026-10-16 | Estrategia bi-modelo: Flash-Lite (evaluación paper) y Flash (producción), gemini-embedding-001. |
+

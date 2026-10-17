@@ -1,0 +1,209 @@
+---
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout title="Centro de Descargas y Reportes Oficiales" currentPath="/reportes">
+  <div class="container reports-page-container">
+    {/* Page Header */}
+    <div class="page-header">
+      <div>
+        <div class="breadcrumb">
+          <a href="/">Inicio</a> &bull; <span>Centro de Descargas</span>
+        </div>
+        <h1 class="page-title">Centro de Descargas y Datos Abiertos</h1>
+        <p class="page-desc">
+          Exportación de datasets oficiales sobre disponibilidad, telemetría y accesibilidad de los portales del Estado Peruano en formatos interoperables (CSV, JSON), alineados a la Plataforma Nacional de Datos Abiertos (datosabiertos.gob.pe).
+        </p>
+      </div>
+    </div>
+
+    {/* Export Options Grid */}
+    <div class="grid-cols-2">
+      {/* Report 1: National Ranking */}
+      <div class="m3-card report-card">
+        <div class="report-icon-box">📊</div>
+        <div class="report-content">
+          <h3 class="report-title">Ranking Nacional de Calidad Digital</h3>
+          <p class="report-desc">
+            Puntajes ponderados, clasificación institucional, mediciones de uptime y velocidad para los 90 portales supervisados.
+          </p>
+          <div class="report-meta">
+            <span class="m3-chip m3-chip-info">Actualizado Diariamente</span>
+            <span class="m3-chip m3-chip-info">90 Entidades</span>
+          </div>
+        </div>
+        <div class="report-actions">
+          <a href="/api/v1/rankings?format=csv" download="ranking_nacional_calidad_digital.csv" class="m3-btn m3-btn-primary">
+            Descargar CSV
+          </a>
+          <a href="/api/v1/rankings" target="_blank" class="m3-btn m3-btn-outlined">
+            Ver JSON API
+          </a>
+        </div>
+      </div>
+
+      {/* Report 2: SLA Evaluations */}
+      <div class="m3-card report-card">
+        <div class="report-icon-box">⏱️</div>
+        <div class="report-content">
+          <h3 class="report-title">Cumplimiento Mensual de SLA (99.5%)</h3>
+          <p class="report-desc">
+            Registro acumulado de disponibilidad mensual, tiempos de indisponibilidad permitidos vs consumidos y estado de cumplimiento normativo.
+          </p>
+          <div class="report-meta">
+            <span class="m3-chip m3-chip-info">R.SGTD 001-2025</span>
+            <span class="m3-chip m3-chip-info">Corte Mensual</span>
+          </div>
+        </div>
+        <div class="report-actions">
+          <a href="/api/v1/reports/sla?format=csv" download="reporte_sla_portales.csv" class="m3-btn m3-btn-primary">
+            Descargar CSV
+          </a>
+          <a href="/api/v1/reports/sla" target="_blank" class="m3-btn m3-btn-outlined">
+            Ver JSON API
+          </a>
+        </div>
+      </div>
+
+      {/* Report 3: Incidents Log */}
+      <div class="m3-card report-card">
+        <div class="report-icon-box">🚨</div>
+        <div class="report-content">
+          <h3 class="report-title">Historial de Incidentes e Indisponibilidad</h3>
+          <p class="report-desc">
+            Detalle cronológico de caídas, causas raíz investigadas, severidades y cálculo del MTTR (Mean Time to Resolution) bajo ITIL v4.
+          </p>
+          <div class="report-meta">
+            <span class="m3-chip m3-chip-info">ITIL v4</span>
+            <span class="m3-chip m3-chip-info">Telemetría Cruda</span>
+          </div>
+        </div>
+        <div class="report-actions">
+          <a href="/api/v1/reports/incidents?format=csv" download="incidentes_itil_portales.csv" class="m3-btn m3-btn-primary">
+            Descargar CSV
+          </a>
+          <a href="/api/v1/reports/incidents" target="_blank" class="m3-btn m3-btn-outlined">
+            Ver JSON API
+          </a>
+        </div>
+      </div>
+
+      {/* Report 4: WCAG 2.1 AA Audits */}
+      <div class="m3-card report-card">
+        <div class="report-icon-box">♿</div>
+        <div class="report-content">
+          <h3 class="report-title">Auditorías de Accesibilidad WCAG 2.1 AA</h3>
+          <p class="report-desc">
+            Inventario consolidado de hallazgos técnicos: contrastes deficientes, ausencia de textos alternativos, violaciones de marcado semántico y criterios de foco.
+          </p>
+          <div class="report-meta">
+            <span class="m3-chip m3-chip-info">D.S. 029-2021-PCM</span>
+            <span class="m3-chip m3-chip-info">W3C WCAG 2.1</span>
+          </div>
+        </div>
+        <div class="report-actions">
+          <a href="/api/v1/reports/accessibility?format=csv" download="auditoria_accesibilidad_wcag.csv" class="m3-btn m3-btn-primary">
+            Descargar CSV
+          </a>
+          <a href="/api/v1/reports/accessibility" target="_blank" class="m3-btn m3-btn-outlined">
+            Ver JSON API
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {/* Open Data Policy Callout */}
+    <div class="m3-card open-data-notice">
+      <h4>Condiciones de Uso de Datos Abiertos (Licencia Pública Abierta)</h4>
+      <p>
+        Los datos aquí recopilados se comparten con fines de investigación académica y análisis técnico conforme al marco de datos abiertos. Se autoriza su reutilización para fines de estudio, citando como referencia al <em>Observatorio de Calidad Digital</em>.
+      </p>
+    </div>
+  </div>
+</DashboardLayout>
+
+<style>
+  .reports-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .breadcrumb {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: var(--space-1);
+  }
+
+  .breadcrumb a {
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+  }
+
+  .page-title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    margin: 0 0 var(--space-2);
+  }
+
+  .page-desc {
+    font-size: var(--text-sm);
+    color: var(--md-sys-color-on-surface-variant);
+    max-width: 750px;
+    margin: 0;
+  }
+
+  .report-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .report-icon-box {
+    font-size: 32px;
+  }
+
+  .report-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+  }
+
+  .report-desc {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+    line-height: 1.5;
+    margin-bottom: var(--space-3);
+  }
+
+  .report-meta {
+    display: flex;
+    gap: var(--space-1);
+    flex-wrap: wrap;
+  }
+
+  .report-actions {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  .open-data-notice {
+    background-color: var(--md-sys-color-surface-container);
+    border-left: 4px solid var(--md-sys-color-primary);
+  }
+
+  .open-data-notice h4 {
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-2);
+  }
+
+  .open-data-notice p {
+    font-size: var(--text-xs);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

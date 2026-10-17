@@ -1,0 +1,253 @@
+---
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+import AuditChatWidget from '../islands/AuditChatWidget';
+
+const entityIdParam = Astro.url.searchParams.get('entidad');
+const entityNameParam = Astro.url.searchParams.get('nombre') || undefined;
+const initialContextEntityId = entityIdParam ? Number(entityIdParam) : undefined;
+---
+
+<DashboardLayout title="Auditor Inteligente con IA y RAG" currentPath="/auditor-ia">
+  <div class="container auditor-page-container">
+    {/* Page Header */}
+    <div class="page-header">
+      <div>
+        <div class="breadcrumb">
+          <a href="/">Inicio</a> &bull; <span>Auditor Inteligente</span>
+        </div>
+        <h1 class="page-title">Auditor Inteligente del Estado Peruano</h1>
+        <p class="page-desc">
+          Asistente conversacional con recuperación aumentada (RAG). Analiza telemetría en vivo de PostgreSQL, audita el cumplimiento del marco jurídico peruano y prescribe soluciones técnicas de código.
+        </p>
+      </div>
+
+      <div class="model-badge m3-card">
+        <span class="badge-label">Motor Cognitivo</span>
+        <span class="badge-val">Gemini Flash-Lite &bull; RAG 768d</span>
+      </div>
+    </div>
+
+    {/* Layout: Main Chat Widget + Side Knowledge Reference */}
+    <div class="auditor-grid">
+      <div class="chat-main-column">
+        <AuditChatWidget
+          client:load
+          initialContextEntityId={initialContextEntityId}
+          initialEntityName={entityNameParam}
+        />
+      </div>
+
+      <aside class="sidebar-column" aria-label="Base de Conocimiento Normativa">
+        <div class="m3-card sidebar-card">
+          <h3 class="sidebar-title">Corpus Normativo Oficial Indexado</h3>
+          <p class="sidebar-desc">
+            El asistente contrasta sus respuestas contra los 33 fragmentos oficiales vectorizados en Supabase:
+          </p>
+
+          <ul class="normative-list">
+            <li>
+              <strong>D.L. N° 1412</strong>
+              <span>Ley de Gobierno Digital. Principios de equivalencia funcional y continuidad.</span>
+            </li>
+            <li>
+              <strong>D.S. N° 029-2021-PCM</strong>
+              <span>Reglamento. Disposiciones de accesibilidad universal en portales públicos.</span>
+            </li>
+            <li>
+              <strong>R.SGTD N° 001-2025</strong>
+              <span>Directiva Técnica. Meta de disponibilidad mensual del 99.5% y Core Web Vitals.</span>
+            </li>
+            <li>
+              <strong>W3C WCAG 2.1 Nivel AA</strong>
+              <span>Pautas de accesibilidad para la Web. Criterios de contraste, foco y semántica.</span>
+            </li>
+            <li>
+              <strong>ITIL v4</strong>
+              <span>Gestión de Incidentes, análisis de causa raíz y cálculo de MTTR.</span>
+            </li>
+          </ul>
+
+          <div class="transparency-note">
+            <span class="transparency-icon">🛡️</span>
+            <div>
+              <strong>Rigor Metodológico</strong>
+              <p>Las respuestas del agente incorporan citas normativas auditables y consultas SQL parametrizadas sin riesgo de inyección.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</DashboardLayout>
+
+<style>
+  .auditor-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .breadcrumb {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: var(--space-1);
+  }
+
+  .breadcrumb a {
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+  }
+
+  .page-title {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    margin: 0 0 var(--space-2);
+  }
+
+  .page-desc {
+    font-size: var(--text-sm);
+    color: var(--md-sys-color-on-surface-variant);
+    max-width: 700px;
+    margin: 0;
+  }
+
+  .model-badge {
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--md-sys-color-surface-container);
+    text-align: right;
+  }
+
+  .badge-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .badge-val {
+    font-size: var(--text-sm);
+    font-weight: 800;
+    color: var(--md-sys-color-primary);
+  }
+
+  .auditor-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: start;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .chat-main-column {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .sidebar-column {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .sidebar-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    height: 600px;
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+    box-sizing: border-box;
+    width: 100%;
+    scrollbar-width: thin;
+  }
+
+  .sidebar-title {
+    font-size: var(--text-base);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .sidebar-desc {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .normative-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .normative-list li {
+    font-size: var(--text-xs);
+    border-left: 2px solid var(--md-sys-color-primary);
+    padding-left: var(--space-2);
+  }
+
+  .normative-list li strong {
+    display: block;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .normative-list li span {
+    color: var(--md-sys-color-on-surface-variant);
+    line-height: 1.4;
+  }
+
+  .transparency-note {
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+    background-color: var(--md-sys-color-surface-container-high);
+    padding: var(--space-3);
+    border-radius: var(--md-shape-sm);
+    font-size: 11px;
+    margin-top: var(--space-2);
+  }
+
+  .transparency-icon {
+    font-size: 18px;
+  }
+
+  .transparency-note strong {
+    display: block;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .transparency-note p {
+    margin: 2px 0 0;
+    color: var(--md-sys-color-on-surface-variant);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 950px) {
+    .auditor-grid {
+      grid-template-columns: 1fr;
+    }
+    .sidebar-card {
+      height: auto;
+      max-height: none;
+    }
+  }
+</style>

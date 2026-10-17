@@ -1,0 +1,16 @@
+{
+  "name": "gsti-project",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:api": "bun --cwd apps/api dev",
+    "dev:dashboard": "bun --cwd apps/dashboard dev",
+    "build:dashboard": "bun --cwd apps/dashboard build",
+    "test:api": "bun --cwd apps/api test",
+    "test:dashboard": "bun --cwd apps/dashboard test",
+    "test": "bun --cwd apps/api test && bun --cwd apps/dashboard test"
+  }
+}

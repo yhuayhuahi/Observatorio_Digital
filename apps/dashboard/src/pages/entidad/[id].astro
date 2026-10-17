@@ -1,0 +1,491 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import BadgeStatus from '../../components/ui/BadgeStatus.astro';
+import WcagComplianceBar from '../../components/ui/WcagComplianceBar.astro';
+import HistoricalMetricsChart from '../../islands/HistoricalMetricsChart';
+import { getRankings, getEntityById } from '../../services/api';
+
+export async function getStaticPaths() {
+  const rankings = await getRankings();
+  return rankings.map((e) => ({
+    params: { id: String(e.id) }
+  }));
+}
+
+const { id } = Astro.params;
+const entity = await getEntityById(Number(id));
+---
+
+<DashboardLayout title={`Ficha Técnica: ${entity.nombre}`} currentPath="/ranking">
+  <div class="container entity-sheet-container">
+    {/* Breadcrumb & Navigation */}
+    <div class="breadcrumb">
+      <a href="/">Inicio</a> &bull; <a href="/ranking">Ranking Nacional</a> &bull; <span>Ficha Institucional</span>
+    </div>
+
+    {/* Institutional Header Card */}
+    <section class="m3-card entity-header-card" aria-labelledby="entity-name">
+      <div class="header-main-info">
+        <div class="header-meta">
+          <span class="m3-chip m3-chip-info">{entity.categoria}</span>
+          {entity.region && <span class="m3-chip m3-chip-info">Región: {entity.region}</span>}
+          <span class="sync-time">Último chequeo: {entity.lastChecked}</span>
+        </div>
+
+        <h1 id="entity-name" class="entity-title">{entity.nombre}</h1>
+
+        <div class="entity-url-wrapper">
+          <a href={entity.url} target="_blank" rel="noopener noreferrer" class="entity-portal-link">
+            <span>Visitar portal institucional ({entity.url})</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="header-status-side">
+        <div class="score-box">
+          <span class="score-label">Score Global</span>
+          <span class="score-number">{entity.scoreGlobal.toFixed(1)}</span>
+          <span class="score-max">/100 pts</span>
+        </div>
+        <div class="sla-badge-wrapper">
+          <BadgeStatus status={entity.estadoSla} />
+        </div>
+      </div>
+    </section>
+
+    {/* SLA & Core Web Vitals Key Metrics Grid */}
+    <section class="metrics-grid-section" aria-label="Métricas Técnicas y de Cumplimiento">
+      <div class="grid-cols-4">
+        {/* SLA Compliance */}
+        <div class="m3-card metric-card">
+          <span class="metric-card-title">Disponibilidad SLA</span>
+          <div class="metric-card-value-box">
+            <span class="metric-card-value">{entity.disponibilidadMensual.toFixed(1)}%</span>
+            <span class="metric-target">Meta: &ge; {entity.slaMeta}%</span>
+          </div>
+          <p class="metric-card-desc">SLA fijado por Directiva R.SGTD N° 001-2025-PCM/SGTD</p>
+        </div>
+
+        {/* LCP (Core Web Vitals) */}
+        <div class="m3-card metric-card">
+          <span class="metric-card-title">Largest Contentful Paint (LCP)</span>
+          <div class="metric-card-value-box">
+            <span class="metric-card-value">{entity.metrics.lcp}s</span>
+            <span class={`metric-target ${entity.metrics.lcp <= 2.5 ? 'target-pass' : 'target-fail'}`}>
+              {entity.metrics.lcp <= 2.5 ? 'Bueno (&le; 2.5s)' : 'Pobre (> 2.5s)'}
+            </span>
+          </div>
+          <p class="metric-card-desc">Tiempo de renderizado del contenido principal visible</p>
+        </div>
+
+        {/* CLS */}
+        <div class="m3-card metric-card">
+          <span class="metric-card-title">Cumulative Layout Shift (CLS)</span>
+          <div class="metric-card-value-box">
+            <span class="metric-card-value">{entity.metrics.cls}</span>
+            <span class="metric-target target-pass">Bueno (&le; 0.1)</span>
+          </div>
+          <p class="metric-card-desc">Estabilidad visual y desplazamientos no intencionales</p>
+        </div>
+
+        {/* Accessibility WCAG */}
+        <div class="m3-card metric-card">
+          <span class="metric-card-title">Accesibilidad WCAG 2.1 AA</span>
+          <div class="metric-card-value-box">
+            <span class="metric-card-value">{entity.scoreAccesibilidad}%</span>
+            <span class={`metric-target ${entity.scoreAccesibilidad >= 80 ? 'target-pass' : 'target-fail'}`}>
+              {entity.scoreAccesibilidad >= 80 ? 'Conforme' : 'Con Observaciones'}
+            </span>
+          </div>
+          <WcagComplianceBar score={entity.scoreAccesibilidad} showDetails={false} />
+        </div>
+      </div>
+    </section>
+
+    {/* Historical Interactive Chart */}
+    <section class="historical-section" aria-label="Histórico de Mediciones">
+      <HistoricalMetricsChart client:visible data={entity.historical} />
+    </section>
+
+    {/* WCAG 2.1 AA Violations & Remediation Section */}
+    <section class="violations-section m3-card" aria-labelledby="wcag-title">
+      <div class="violations-header">
+        <div>
+          <h2 id="wcag-title" class="violations-title">Auditoría de Accesibilidad Web (WCAG 2.1 AA)</h2>
+          <p class="violations-desc">
+            Diagnóstico de barreras de acceso para ciudadanos con discapacidad y recomendaciones técnicas de remediación.
+          </p>
+        </div>
+        {entity.violations.length > 0 ? (
+          <span class="m3-chip m3-chip-warning">
+            {entity.violations.length} Observaciones Detectadas
+          </span>
+        ) : (
+          <span class="m3-chip m3-chip-success">
+            ✓ Conforme (0 Infracciones)
+          </span>
+        )}
+      </div>
+
+      {entity.violations.length > 0 ? (
+        <div class="violations-list">
+          {entity.violations.map((v) => (
+            <div class="violation-item">
+              <div class="violation-item-top">
+                <span class={`m3-chip ${v.impact === 'critical' ? 'm3-chip-danger' : v.impact === 'serious' ? 'm3-chip-warning' : 'm3-chip-info'}`}>
+                  {v.impact.toUpperCase()}
+                </span>
+                <span class="violation-code">{v.code}</span>
+                <span class="violation-legal">&bull; {v.legalRef}</span>
+              </div>
+
+              <p class="violation-text"><strong>Problema:</strong> {v.description}</p>
+              <div class="violation-selector">
+                <code>Selector DOM afectado: {v.selector}</code>
+              </div>
+
+              <div class="violation-advice">
+                <strong>Solución recomendada (Remediación de Código):</strong>
+                <p>{v.remediationAdvice}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="violations-empty-box">
+          <span class="empty-badge">✓</span>
+          <div>
+            <strong>Sin infracciones de accesibilidad críticas registradas</strong>
+            <p>La auditoría automatizada en base de datos no detectó violaciones severas a WCAG 2.1 AA en el portal evaluado.</p>
+          </div>
+        </div>
+      )}
+    </section>
+
+    {/* CTA to Consult Auditor IA */}
+    <section class="ai-cta-card m3-card" aria-label="Auditar con Inteligencia Artificial">
+      <div class="ai-cta-content">
+        <div class="ai-cta-badge">RAG ASISTIDO</div>
+        <h3>¿Necesitas subsanar estos hallazgos técnicos en {entity.nombre}?</h3>
+        <p>
+          El Auditor IA puede redactar el informe técnico oficial de sustentación, explicar la fundamentación jurídica (D.L. 1412 / D.S. 029-2021) o generar fragmentos de código CSS/HTML corregidos para tu equipo de desarrollo.
+        </p>
+      </div>
+      <a
+        href={`/auditor-ia?entidad=${entity.id}&nombre=${encodeURIComponent(entity.nombre)}`}
+        class="m3-btn m3-btn-primary"
+      >
+        <span>Abrir Auditor IA para {entity.nombre} &rarr;</span>
+      </a>
+    </section>
+  </div>
+</DashboardLayout>
+
+<style>
+  .entity-sheet-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .breadcrumb {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .breadcrumb a {
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+  }
+
+  /* Header Card */
+  .entity-header-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    background: linear-gradient(135deg, var(--md-sys-color-surface-container-lowest) 0%, var(--md-sys-color-surface-container-low) 100%);
+  }
+
+  .header-main-info {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .sync-time {
+    font-size: 11px;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .entity-title {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    margin: 0 0 var(--space-2);
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .entity-portal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+  }
+
+  .entity-portal-link:hover {
+    text-decoration: underline;
+  }
+
+  .header-status-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-2);
+  }
+
+  .score-box {
+    text-align: right;
+    background-color: var(--md-sys-color-surface-container);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--md-shape-md);
+    border: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  .score-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface-variant);
+    text-transform: uppercase;
+  }
+
+  .score-number {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: var(--md-sys-color-primary);
+  }
+
+  .score-max {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  /* Metric Cards */
+  .metric-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .metric-card-title {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .metric-card-value-box {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .metric-card-value {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .metric-target {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: var(--md-shape-xs);
+  }
+
+  .target-pass {
+    background-color: var(--color-status-success-container);
+    color: var(--color-status-success);
+  }
+
+  .target-fail {
+    background-color: var(--color-status-danger-container);
+    color: var(--color-status-danger);
+  }
+
+  .metric-card-desc {
+    font-size: 11px;
+    color: var(--md-sys-color-on-surface-variant);
+    margin: 0;
+  }
+
+  /* Violations Section */
+  .violations-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-4);
+  }
+
+  .violations-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .violations-desc {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+    margin: 2px 0 0;
+  }
+
+  .violations-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .violations-empty-box {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background-color: var(--color-status-success-container);
+    border: 1px solid var(--color-status-success);
+    border-radius: var(--md-shape-sm);
+  }
+
+  .violations-empty-box .empty-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--color-status-success);
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: var(--text-base);
+  }
+
+  .violations-empty-box strong {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--color-status-success-on-container);
+    margin-bottom: 2px;
+  }
+
+  .violations-empty-box p {
+    font-size: var(--text-xs);
+    color: var(--color-status-success-on-container);
+    margin: 0;
+  }
+
+  .violation-item {
+    padding: var(--space-4);
+    background-color: var(--md-sys-color-surface-container-low);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-shape-sm);
+  }
+
+  .violation-item-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .violation-code {
+    font-weight: 700;
+    font-size: var(--text-xs);
+  }
+
+  .violation-legal {
+    font-size: var(--text-xs);
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  .violation-text {
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-2);
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .violation-selector {
+    background-color: var(--md-sys-color-surface-container-highest);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--md-shape-xs);
+    margin-bottom: var(--space-2);
+  }
+
+  .violation-selector code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .violation-advice {
+    font-size: var(--text-xs);
+    color: var(--color-status-success-on-container);
+    background-color: var(--color-status-success-container);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--md-shape-xs);
+    line-height: 1.5;
+  }
+
+  /* AI CTA Card */
+  .ai-cta-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    background: linear-gradient(135deg, var(--md-sys-color-primary-container) 0%, var(--md-sys-color-secondary-container) 100%);
+    border: 1px solid var(--md-sys-color-primary);
+  }
+
+  .ai-cta-badge {
+    display: inline-block;
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: var(--md-shape-full);
+    margin-bottom: var(--space-2);
+  }
+
+  .ai-cta-content h3 {
+    color: var(--md-sys-color-on-primary-container);
+    margin-bottom: var(--space-2);
+  }
+
+  .ai-cta-content p {
+    color: var(--md-sys-color-on-primary-container);
+    max-width: 650px;
+    margin: 0;
+    font-size: var(--text-sm);
+  }
+
+  @media (max-width: 800px) {
+    .header-status-side {
+      align-items: flex-start;
+      width: 100%;
+    }
+  }
+</style>
