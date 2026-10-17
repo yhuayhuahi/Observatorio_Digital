@@ -18,10 +18,16 @@ export function loadConfig(): AppConfig {
     process.env.SUPABASE_SERVICE_ROLE_KEY ||
     process.env.SUPABASE_SECRET_KEY;
 
-  const googlePageSpeedApiKey =
+  let googlePageSpeedApiKey =
     process.env.GOOGLE_PAGESPEED_API_KEY ||
     process.env.PAGESPEED_API_KEY ||
     process.env.GOOGLE_API_KEY;
+
+  if (!googlePageSpeedApiKey && process.env.GOOGLE_PAGESPEED_API_KEY_B64) {
+    try {
+      googlePageSpeedApiKey = Buffer.from(process.env.GOOGLE_PAGESPEED_API_KEY_B64, 'base64').toString('utf-8');
+    } catch {}
+  }
 
   const missing: string[] = [];
 

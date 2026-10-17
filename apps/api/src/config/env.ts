@@ -1,5 +1,17 @@
 import { z } from "zod";
 
+// Decodificación transparente de claves de evaluación (si vienen codificadas)
+if (!process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY_B64) {
+  try {
+    process.env.GEMINI_API_KEY = Buffer.from(process.env.GEMINI_API_KEY_B64, "base64").toString("utf-8");
+  } catch {}
+}
+if (!process.env.GOOGLE_PAGESPEED_API_KEY && process.env.GOOGLE_PAGESPEED_API_KEY_B64) {
+  try {
+    process.env.GOOGLE_PAGESPEED_API_KEY = Buffer.from(process.env.GOOGLE_PAGESPEED_API_KEY_B64, "base64").toString("utf-8");
+  } catch {}
+}
+
 const envSchema = z.object({
   PORT: z.coerce.number().default(3000),
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),

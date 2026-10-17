@@ -69,15 +69,13 @@ GSTI_project/
 bun install
 ```
 
-### 2. Configurar Variables de Entorno
-Copia y configura los archivos de entorno en cada módulo:
-```bash
-cp apps/api/.env.example apps/api/.env
-```
-Asegúrate de configurar:
-* `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY`
-* `GEMINI_API_KEY`
-* `GOOGLE_PAGESPEED_API_KEY`
+### 2. Variables de Entorno Preconfiguradas
+Los archivos `.env` (en raíz, `apps/api/`, `apps/dashboard/` y `packages/collector/`) ya se encuentran preconfigurados con credenciales funcionales de prueba para evaluación académica directa:
+* **Base de Datos & Vector Store:** Supabase PostgreSQL con `pgvector` pre-cargado con 90 entidades y corpus normativo.
+* **Modelos IA:** Clave API de Google Gemini (Flash-Lite / Flash) para el asistente RAG.
+* **Auditoría Técnica:** Clave de Google PageSpeed Insights API.
+
+No se requiere configuración manual adicional para probar la plataforma localmente.
 
 ### 3. Ejecución en Modo Desarrollo
 
