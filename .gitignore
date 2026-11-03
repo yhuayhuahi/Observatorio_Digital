@@ -24,3 +24,10 @@ scraping/.envrc
 .obsidian/
 **/.agents/
 
+# Documentos locales de diagnostico y notas privadas
+hallazgos_menores.md
+**/hallazgos_menores.md
+
+# Plantilla y recursos locales de diapositivas
+slide-template/
+

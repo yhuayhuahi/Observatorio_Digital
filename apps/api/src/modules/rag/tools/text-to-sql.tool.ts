@@ -19,7 +19,11 @@ export class TextToSqlTool {
         query: {
           type: "STRING",
           description:
-            "Sentencia SELECT parametrizada en PostgreSQL sobre las tablas entidades, mediciones_crudas, incidentes o evaluaciones_sla.",
+            "Sentencia SELECT parametrizada en PostgreSQL sobre las tablas: " +
+            "entidades(id, nombre, url, categoria, region, activa), " +
+            "evaluaciones_sla(id, entidad_id, periodo, uptime_porcentaje, latencia_promedio_ms, total_incidentes, total_caida_minutos, estado_sla, fecha_calculo), " +
+            "incidentes(id, entidad_id, tipo_incidente, estado, severidad, fecha_inicio, fecha_resolucion, duracion_minutos, intentos_fallidos_consecutivos, causa_raiz_aparente), " +
+            "mediciones_crudas(id, entidad_id, fecha_captura, status_code, tiempo_respuesta_ms, disponible, error_conexion, lcp_segundos, fid_ms, cls_score, fcp_segundos, ttfb_ms, score_desempeno, score_accesibilidad, errores_accesibilidad).",
         },
       },
       required: ["query"],
@@ -46,9 +50,9 @@ export class TextToSqlTool {
       }
     }
 
-    // Asegurar límite de filas (máximo 20)
-    let sanitizedSql = rawSql;
-    if (!sanitizedSql.toUpperCase().includes("LIMIT")) {
+    // Asegurar límite de filas (máximo 20) y remover punto y coma terminal si existiera
+    let sanitizedSql = rawSql.replace(/;+\s*$/, "");
+    if (!/\bLIMIT\b/i.test(sanitizedSql)) {
       sanitizedSql += " LIMIT 20";
     }
 

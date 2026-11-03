@@ -1,6 +1,6 @@
 # Architectural Decision Records (ADRs) - Observatorio de Calidad Digital Pública
 
-Este directorio contiene el registro formal de las decisiones arquitectónicas y tecnológicas adoptadas para el desarrollo del **Observatorio de Calidad Digital Pública**, alineadas con los [Requerimientos Funcionales](../requerimientos_funcionales.md), los [Requerimientos No Funcionales](../requerimientos_no_funcionales.md) y el [Contexto Técnico](../contexto2.md).
+Este directorio contiene el registro formal de las decisiones arquitectónicas y tecnológicas adoptadas para el desarrollo del **Observatorio de Calidad Digital Pública**, alineadas con los [Requerimientos Funcionales](../requerimientos_funcionales.md), los [Requerimientos No Funcionales](../requerimientos_no_funcionales.md).
 
 ## Índice de Decisiones Arquitectónicas
 

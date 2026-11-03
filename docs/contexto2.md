@@ -13,14 +13,7 @@
 ## 1. Planteamiento del Problema y Justificación
 
 ### 1.1 La realidad de los servicios web del Estado Peruano
-Los portales web constituyen el canal prioritario de interacción entre la ciudadanía y el Estado para la consulta de información, realización de trámites y acceso a mesas de partes virtuales. No obstante, las mediciones empíricas preliminares ejecutadas sobre 90 entidades del Estado evidencian **deficiencias persistentes y reproducibles** que afectan la disponibilidad, el rendimiento y la accesibilidad:
-
-- **Fallas críticas de resolución de nombres (`ENOTFOUND`):** Dominios institucionales que no resuelven DNS (p. ej. portales de los Gobiernos Regionales de Tacna, Ayacucho y Arequipa).
-- **Vulnerabilidades de seguridad en transporte (TLS/SSL):** Certificados digitales expirados (p. ej. GORE Piura), que exponen al ciudadano a alertas de navegación y riesgos de interceptación.
-- **Bloqueos de acceso no controlados:** Respuestas HTTP 403 ante solicitudes legítimas (p. ej. GORE Callao).
-- **Latencias críticas de conexión (>10 s):** Timeouts reiterados en entidades de alto impacto (GORE Loreto, Ica, Ucayali, Amazonas, Lambayeque; SUNAFIL).
-- **Rendimiento deficiente en carga:** Portales con puntajes Lighthouse entre 12 y 16 sobre 100 y tiempos de renderizado de contenido principal (LCP) superiores a 13 segundos (p. ej. Huancavelica).
-- **Barreras severas de accesibilidad:** Puntuaciones promedio de 56/100 frente a las directivas de accesibilidad obligatorias (WCAG 2.1 AA), excluyendo sistemáticamente a personas con discapacidad visual y motriz.
+Los portales web constituyen el canal prioritario de interacción entre la ciudadanía y el Estado para la consulta de información, realización de trámites y acceso a mesas de partes virtuales. No obstante, las mediciones empíricas preliminares ejecutadas sobre 90 entidades del Estado evidencian **deficiencias persistentes y reproducibles** que afectan la disponibilidad, el rendimiento y la accesibilidad
 
 ### 1.2 La brecha de decisión e interpretación: Por qué un dashboard no es suficiente
 Tradicionalmente, las iniciativas de evaluación digital se han limitado a mediciones puntuales o a tableros de control (*dashboards*) estáticos. Este enfoque presenta limitaciones estructurales:
@@ -50,7 +43,7 @@ El valor que aporta el proyecto se estructura en tres dimensiones complementaria
  ├─ Panel longitudinal diario     ├─ ITIL v4 aplicado a la         ├─ Cumplimiento D.L. 1412 /
  │  (no fotos transversales)         calidad externa del servicio     D.S. 029-2021-PCM
  ├─ Telemetría reproducible       ├─ SLAs de cara al ciudadano     ├─ Inclusión digital medible
- │  (90 entidades a costo cero)   ├─ Gestión formal de eventos        (WCAG 2.1 AA personas
+ │  (90 entidades)                ├─ Gestión formal de eventos        (WCAG 2.1 AA personas
  └─ Auditoría automatizada           e incidentes de TI               con discapacidad)
 ```
 
@@ -223,8 +216,6 @@ El estándar Core Web Vitals cuantifica la experiencia de carga del usuario en t
 - **FID / INP (First Input Delay / Interaction to Next Paint):** Responsividad ante la interacción del usuario (umbral óptimo: ≤ 100 ms).
 - **CLS (Cumulative Layout Shift):** Estabilidad visual para evitar desplazamientos inesperados de contenido (umbral óptimo: ≤ 0.1).
 - **FCP y TTFB:** Métricas de soporte que evalúan el primer renderizado y la latencia del servidor de alojamiento.
-
-*Fundamento de laboratorio:* PageSpeed Insights evalúa en un entorno controlado (Chrome emulado, red y CPU estandarizadas), asegurando que las comparaciones entre las 90 entidades sean justas, reproducibles e invariantes a la calidad de la conexión de un usuario individual.
 
 ### 8.4 Accesibilidad Web: WCAG 2.1 y Principios POUR
 Las pautas W3C WCAG 2.1 se estructuran en los cuatro principios fundamentales:

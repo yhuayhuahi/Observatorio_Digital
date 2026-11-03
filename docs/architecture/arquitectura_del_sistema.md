@@ -1,6 +1,6 @@
 # Arquitectura del Sistema - Observatorio de Calidad Digital Pública
 
-* **Documento:** Especificación Arquitectónica en 3 Niveles (Actualizado con Sistema Inteligente RAG)
+* **Documento:** Especificación Arquitectónica en 3 Niveles 
 * **Fecha:** 2026-10-16
 * **Estado:** Aprobado
 * **Relación con ADRs:** ADR-0001 (Bun), ADR-0002 (Astro), ADR-0003 (PostgreSQL/Supabase), ADR-0004 (CSS Puro), ADR-0005 (GitHub Actions), ADR-0006 (Google APIs PageSpeed), ADR-0007 (Docker), ADR-0008 (pgvector en Supabase), ADR-0009 (Google Gemini 3.5 Flash-Lite / Flash para RAG).
